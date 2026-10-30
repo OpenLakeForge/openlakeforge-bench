@@ -154,6 +154,54 @@ def incremental_command(
     )
 
 
+@app.command("many-tables")
+def many_tables_command(
+    tables: int = typer.Option(100, "--tables", min=1, help="Silver tables to generate and load."),
+    domains: int = typer.Option(4, "--domains", min=1, help="Domains, and product jobs, to spread them over."),
+    rows: int = typer.Option(1000, "--rows", min=1, help="Rows per table."),
+    seed: int = typer.Option(328, "--seed", help="Seed of the generated project."),
+    runs: int = typer.Option(2, "--runs", min=1, help="Runs of every product job: the first is cold."),
+    existing: bool = typer.Option(
+        False, "--existing", help="Deploy onto the running DEV-only Slim platform instead of installing one."
+    ),
+    sample_interval: float = typer.Option(2.0, "--sample-interval", help="Seconds between node usage samples."),
+    job_timeout_seconds: int = typer.Option(3600, "--job-timeout-seconds", help="Limit for one product job."),
+    output: str = typer.Option("", "--output", help=_OUTPUT_HELP),
+    project_root: str = typer.Option("", "--project-root", help="Project root; defaults to the current directory."),
+    cluster_name: str = typer.Option("openlakeforge-local", "--cluster-name", help="Local kind cluster name."),
+) -> None:
+    """Scenario C: a generated project of many tables, deployed and run; per-table and per-Floe-Job costs."""
+    import olf_bench as bench
+
+    if tables < domains:
+        raise typer.Exit(code=fail("--tables must be at least --domains: every domain needs a table."))
+    _run(
+        f"many-tables-t{tables}",
+        project_root,
+        cluster_name,
+        output,
+        lambda record, target, session: bench.many_tables(
+            record,
+            target,
+            session=session,
+            tables=tables,
+            domains=domains,
+            rows=rows,
+            seed=seed,
+            runs=runs,
+            sample_interval=sample_interval,
+            install=not existing,
+        ),
+        job_timeout_seconds=job_timeout_seconds,
+        tables=tables,
+        domains=domains,
+        rows=rows,
+        seed=seed,
+        runs=runs,
+        existing=existing,
+    )
+
+
 @app.command("many-tables-project")
 def many_tables_project_command(
     output: Path = typer.Option(..., "--output", help="Project root to write; replaced if it exists."),  # noqa: B008

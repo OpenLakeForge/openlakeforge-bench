@@ -48,3 +48,41 @@ def test_table_cells_cannot_break_the_markdown_table(tmp_path: Path) -> None:
     assert "| deploy | failed | 1.0 s |" in result.output
     assert "a \\| b" in result.output
     assert "second" not in result.output
+
+
+def test_a_many_tables_run_shows_its_floe_jobs_and_table_reads(tmp_path: Path) -> None:
+    stats = {"count": 4, "min": 1.0, "median": 6.0, "max": 9.5, "total": 24.0}
+    path = tmp_path / "result.json"
+    path.write_text(
+        json.dumps(
+            {
+                "scenario": "many-tables-t100",
+                "status": "ok",
+                "measurements": [
+                    {
+                        "name": "run_1_profile_01",
+                        "status": "ok",
+                        "seconds": 90.0,
+                        "detail": {"floe_jobs": {"count": 1, "succeeded": 1, "start_seconds": stats}},
+                    },
+                    {
+                        "name": "run_1_tables",
+                        "status": "ok",
+                        "seconds": 40.0,
+                        "detail": {
+                            "silver_tables": 100,
+                            "silver_rows": 100000,
+                            "data_files": 100,
+                            "read_seconds": {**stats, "median": 0.4, "max": 1.2},
+                        },
+                    },
+                ],
+            }
+        )
+    )
+
+    result = runner.invoke(app, ["summarize", str(path)])
+
+    assert result.exit_code == 0, result.output
+    assert "1/1 Floe Jobs, pod start 6.0 s median / 9.5 s max" in result.output
+    assert "100 tables, 100,000 rows, 100 files, read 0.4 s median / 1.2 s max" in result.output
