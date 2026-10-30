@@ -27,7 +27,7 @@ from typing import Any
 
 from olf.infra.e2e._shell import E2EConfig, kubectl
 from olf.infra.e2e._trino import stage_catalog_name
-from openlakeforge_domain import FULL_REFRESH_TAG
+from openlakeforge_domain import full_refresh_tags
 from openlakeforge_domain.inventory import Domain, Product, Source
 
 from olf_bench import _pipeline, _resources
@@ -174,12 +174,13 @@ def incremental(
             # A run killed after dlt committed its load leaves that slice in Bronze for the retry to merge too.
             state = probe.check(record, "retry_tables", state, expected=[r * 2 for r in slice_] + slice_)
         if full_refresh:
-            _run(
-                record, target, cfg, sampler, product, f"full_refresh_{full_refresh}", {FULL_REFRESH_TAG: full_refresh}
-            )
-            # A Bronze refresh restarts the bounded cursor at the first slice, which Silver already holds.
-            expected = [0] if full_refresh == "bronze" and rows_per_run else slice_
-            probe.check(record, f"full_refresh_{full_refresh}_tables", state, expected=expected)
+            _run(record, target, cfg, sampler, product, f"full_refresh_{full_refresh}", full_refresh_tags(full_refresh))
+            if full_refresh == "bronze":
+                # Bronze restarts its cursor and Silver is rebuilt from that extract alone
+                # (OpenLakeForge/openlakeforge#651): a bounded source leaves Silver at its first slice.
+                probe.check(record, "full_refresh_bronze_tables", probe.empty(), expected=slice_)
+            else:
+                probe.check(record, f"full_refresh_{full_refresh}_tables", state, expected=slice_)
 
 
 class _Probe:
