@@ -41,7 +41,7 @@ def test_floe_jobs_times_each_pod_from_creation_to_start_and_from_start_to_finis
     assert [job["job"] for job in summary["jobs"]] == ["floe-synth-01-a", "floe-synth-02-b", "floe-synth-03-c"]
     assert summary["start_seconds"] == {"count": 3, "min": 4.0, "median": 8.0, "max": 12.0, "total": 24.0}
     # A pod still running has no run time yet, and is left out of the run-time figures.
-    assert summary["run_seconds"] == {"count": 2, "min": 30.0, "median": 60.0, "max": 60.0, "total": 90.0}
+    assert summary["run_seconds"] == {"count": 2, "min": 30.0, "median": 45.0, "max": 60.0, "total": 90.0}
 
 
 def test_floe_jobs_without_pods_reports_nothing() -> None:

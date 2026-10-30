@@ -15,6 +15,7 @@ one), deploys it, runs every product job `runs` times, and records per run:
 from __future__ import annotations
 
 import json
+import statistics
 import time
 from collections.abc import Mapping, Sequence
 from datetime import datetime
@@ -184,7 +185,7 @@ def _stats(values: Any) -> dict[str, float | int | None]:
     return {
         "count": len(present),
         "min": present[0],
-        "median": present[len(present) // 2],
+        "median": round(statistics.median(present), 3),
         "max": present[-1],
         "total": round(sum(present), 3),
     }
