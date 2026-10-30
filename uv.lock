@@ -778,7 +778,7 @@ wheels = [
 [[package]]
 name = "openlakeforge"
 version = "0.5.0a1"
-source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=tools%2Folf&rev=3b589981a12b6fb9ae07aaca534eed36d9bf7433#3b589981a12b6fb9ae07aaca534eed36d9bf7433" }
+source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=tools%2Folf&rev=5a6496dbd7ec9058000f8079abafee19c19c1119#5a6496dbd7ec9058000f8079abafee19c19c1119" }
 dependencies = [
     { name = "azure-identity" },
     { name = "azure-mgmt-containerservice" },
@@ -787,6 +787,7 @@ dependencies = [
     { name = "cryptography" },
     { name = "jsonschema" },
     { name = "openlakeforge-domain-model" },
+    { name = "openlakeforge-lakehouse-services" },
     { name = "python-hcl2" },
     { name = "pyyaml" },
     { name = "requests" },
@@ -800,6 +801,7 @@ source = { editable = "." }
 dependencies = [
     { name = "openlakeforge" },
     { name = "openlakeforge-domain-model" },
+    { name = "openlakeforge-lakehouse-services" },
 ]
 
 [package.dev-dependencies]
@@ -812,8 +814,9 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "openlakeforge", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=tools%2Folf&rev=3b589981a12b6fb9ae07aaca534eed36d9bf7433" },
-    { name = "openlakeforge-domain-model", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Fdomain-model&rev=3b589981a12b6fb9ae07aaca534eed36d9bf7433" },
+    { name = "openlakeforge", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=tools%2Folf&rev=5a6496dbd7ec9058000f8079abafee19c19c1119" },
+    { name = "openlakeforge-domain-model", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Fdomain-model&rev=5a6496dbd7ec9058000f8079abafee19c19c1119" },
+    { name = "openlakeforge-lakehouse-services", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Flakehouse-services&rev=5a6496dbd7ec9058000f8079abafee19c19c1119" },
 ]
 
 [package.metadata.requires-dev]
@@ -827,9 +830,17 @@ dev = [
 [[package]]
 name = "openlakeforge-domain-model"
 version = "0.5.0a1"
-source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Fdomain-model&rev=3b589981a12b6fb9ae07aaca534eed36d9bf7433#3b589981a12b6fb9ae07aaca534eed36d9bf7433" }
+source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Fdomain-model&rev=5a6496dbd7ec9058000f8079abafee19c19c1119#5a6496dbd7ec9058000f8079abafee19c19c1119" }
 dependencies = [
     { name = "pyyaml" },
+]
+
+[[package]]
+name = "openlakeforge-lakehouse-services"
+version = "0.5.0a1"
+source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Flakehouse-services&rev=5a6496dbd7ec9058000f8079abafee19c19c1119#5a6496dbd7ec9058000f8079abafee19c19c1119" }
+dependencies = [
+    { name = "requests" },
 ]
 
 [[package]]

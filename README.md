@@ -13,7 +13,7 @@ carry.
 
 | Command | Scenario | Measures |
 | --- | --- | --- |
-| `footprint [--clean\|--existing]` | A: install and idle | Each `olf deploy` phase (skipped with `--existing`, which measures the running deployment), time to the first Trino query, the first product pipeline and its Gold rows, pods per namespace, node storage, and CPU/RAM installed versus after `--settle-seconds` and over `--idle-seconds` |
+| `footprint [--clean\|--existing]` | A: install and idle | Each `olf infra deploy` phase (skipped with `--existing`, which measures the running deployment), time to the first Trino query, the first product pipeline and its Gold rows, pods per namespace, node storage, and CPU/RAM installed versus after `--settle-seconds` and over `--idle-seconds` |
 | `etl --scale N [--delta D]` | B: end-to-end ETL | The CSV fixtures replicated N times through every product job, a no-change rerun, then a reload at N+D replicas: wall clock per run and per layer, cluster CPU/RAM per layer, rows, checksums, Iceberg data files, bytes and snapshots |
 | `many-tables --tables N` | C: many tables | A generated project of N tables over `--domains` product jobs, run twice: Floe Jobs started and their pod start and run times, per-layer times, cluster CPU/RAM, every table's rows, files and snapshots against `expected.json` |
 | `incremental --project P --product X` | D: incremental loads | An external project installed from its own profile, one product run `--runs` times, then a run killed `--kill-after-seconds` into Bronze and its retry, then a `--full-refresh`: per-run layer times as Silver and Gold grow, rows added per run, key uniqueness, Gold-to-Silver row parity |
@@ -150,7 +150,7 @@ time, so the workflow only starts by hand.
 
 | Quantity | Source |
 | --- | --- |
-| Phase times | `olf deploy --phase foundation\|prefetch\|platform\|artifacts`, each a timed subprocess |
+| Phase times | `olf infra deploy --phase foundation\|prefetch\|platform\|artifacts`, each a timed subprocess |
 | CPU and memory | `docker stats` of the kind node containers, summed and sampled every `--sample-interval` seconds; this includes the kubelet, containerd and control plane, as the host pays them |
 | Storage | `du` of `/var/lib/containerd` and `/var/local-path-provisioner` inside every node; kind keeps a copy of each image per node |
 | Layer times | Dagster step stats: `<source>_bronze_resources` is Bronze, `<product>_dbt_gold_assets` is Gold, and the Floe domain steps are Silver. A layer's time is its wall-clock span |

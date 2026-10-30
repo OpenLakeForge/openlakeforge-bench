@@ -6,11 +6,11 @@ import os
 from collections.abc import Iterator
 from contextlib import contextmanager
 
-from olf.common.clients.dagster import DagsterClient
 from olf.infra import access, k8s
 from olf.infra.contracts import CONTRACT_STAGE_ENV
 from olf.infra.e2e._dagster import DAGSTER_WEBSERVER_SERVICE_NAME, expected_repository_location_names
 from olf.infra.e2e._shell import E2EConfig, E2EError
+from openlakeforge_services.dagster import DagsterClient
 
 
 @contextmanager
