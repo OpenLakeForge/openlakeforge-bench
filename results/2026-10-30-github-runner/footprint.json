@@ -1,0 +1,325 @@
+{
+  "environment": {
+    "cluster_config_override": null,
+    "component_catalog_sha256": "0980790d3cae5f625deb6de6f36a6d9dbe60e14afb1c205e919bba213af9deb8",
+    "docker_server_version": "29.4.2",
+    "git_commit": "061f5d15da493a501b37d2c892339b57af766005",
+    "git_modified": [],
+    "host": {
+      "cgroup": "v2",
+      "cpus": 4,
+      "kernel": "7.0.0-1017-azure",
+      "machine": "x86_64",
+      "memory_bytes": 16759443456
+    },
+    "image_overrides": {},
+    "olf_version": "0.5.0a1",
+    "parameters": {
+      "clean": false,
+      "cluster_name": "openlakeforge-local",
+      "existing": false,
+      "preset": "slim"
+    }
+  },
+  "measurements": [
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_foundation",
+      "seconds": 122.042,
+      "started_at": 1793349770.2158766,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 3.782,
+          "cpu_cores_mean": 1.597,
+          "cpu_cores_p95": 3.603,
+          "memory_bytes_max": 1616799334,
+          "memory_bytes_mean": 1342806424,
+          "memory_bytes_p95": 1601175551,
+          "samples": 19
+        }
+      },
+      "error": null,
+      "name": "deploy_prefetch",
+      "seconds": 134.287,
+      "started_at": 1793349892.2577748,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 3.672,
+          "cpu_cores_mean": 0.882,
+          "cpu_cores_p95": 2.511,
+          "memory_bytes_max": 3291740109,
+          "memory_bytes_mean": 2202490037,
+          "memory_bytes_p95": 3131211512,
+          "samples": 22
+        }
+      },
+      "error": null,
+      "name": "deploy_platform",
+      "seconds": 149.581,
+      "started_at": 1793350026.5446556,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 3.629,
+          "cpu_cores_mean": 0.898,
+          "cpu_cores_p95": 3.545,
+          "memory_bytes_max": 4335769483,
+          "memory_bytes_mean": 3503340882,
+          "memory_bytes_p95": 4262755040,
+          "samples": 27
+        }
+      },
+      "error": null,
+      "name": "deploy_artifacts",
+      "seconds": 192.143,
+      "started_at": 1793350176.1260202,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "seconds": 598.053
+      },
+      "error": null,
+      "name": "install_total",
+      "seconds": null,
+      "started_at": 1793350368.2688313,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "attempts": 1
+      },
+      "error": null,
+      "name": "time_to_first_query",
+      "seconds": 3.536,
+      "started_at": 1793350368.7124527,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 4.13,
+          "cpu_cores_mean": 1.375,
+          "cpu_cores_p95": 2.49,
+          "memory_bytes_max": 5040144120,
+          "memory_bytes_mean": 4711377795,
+          "memory_bytes_p95": 5033701669,
+          "samples": 16
+        },
+        "end": 1793350477.939455,
+        "job": "order_revenue_pipeline",
+        "layers": {
+          "bronze": {
+            "end": 1793350388.313605,
+            "seconds": 1.589,
+            "start": 1793350386.7244463,
+            "steps": 1
+          },
+          "gold": {
+            "end": 1793350476.8790548,
+            "seconds": 28.548,
+            "start": 1793350448.33116,
+            "steps": 1
+          },
+          "silver": {
+            "end": 1793350441.6461012,
+            "seconds": 46.438,
+            "start": 1793350395.207885,
+            "steps": 1
+          }
+        },
+        "product": "order_revenue",
+        "run_id": "82b2ccb0-25d5-4887-89ea-e0511d6c6c26",
+        "seconds": 97.087,
+        "start": 1793350380.852036,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793350388.313605,
+            "layer": "bronze",
+            "seconds": 1.589,
+            "start": 1793350386.7244463,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793350441.6461012,
+            "layer": "silver",
+            "seconds": 46.438,
+            "start": 1793350395.207885,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          },
+          {
+            "end": 1793350476.8790548,
+            "layer": "gold",
+            "seconds": 28.548,
+            "start": 1793350448.33116,
+            "status": "SUCCESS",
+            "step": "order_revenue_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "first_pipeline",
+      "seconds": 111.511,
+      "started_at": 1793350372.2481995,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "order_revenue_gold.mart_order_revenue_by_account_segment": {
+            "checksum": "8F7AD3E8AB1FE491",
+            "data_file_bytes": 830,
+            "data_files": 1,
+            "rows": 6,
+            "snapshots": 1
+          },
+          "order_revenue_gold.mart_order_revenue_by_channel": {
+            "checksum": "75D35EE532C0493F",
+            "data_file_bytes": 1563,
+            "data_files": 1,
+            "rows": 11,
+            "snapshots": 1
+          },
+          "order_revenue_gold.mart_order_revenue_by_day": {
+            "checksum": "DC2A71DA91BA76D6",
+            "data_file_bytes": 1500,
+            "data_files": 1,
+            "rows": 12,
+            "snapshots": 1
+          },
+          "order_revenue_gold.mart_order_revenue_margin_by_product": {
+            "checksum": "B3A959DD9B69A440",
+            "data_file_bytes": 1681,
+            "data_files": 1,
+            "rows": 8,
+            "snapshots": 1
+          }
+        },
+        "product": "order_revenue"
+      },
+      "error": null,
+      "name": "first_pipeline_tables",
+      "seconds": 35.039,
+      "started_at": 1793350483.758993,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "pods": {
+          "by_namespace": {
+            "kube-system": 12,
+            "local-path-storage": 1,
+            "olf-dev": 5,
+            "olf-system": 24
+          },
+          "by_phase": {
+            "Running": 28,
+            "Succeeded": 14
+          },
+          "pods": 42,
+          "running_containers": 28
+        },
+        "storage": {
+          "bytes_by_path": {
+            "/var/lib/containerd": 21021009269,
+            "/var/local-path-provisioner": 76398173
+          },
+          "bytes_total": 21097407442,
+          "nodes": 3
+        },
+        "usage_now": {
+          "at": 1793350521.674646,
+          "cpu_cores": 0.21,
+          "memory_bytes": 4491462048
+        }
+      },
+      "error": null,
+      "name": "installed_footprint",
+      "seconds": null,
+      "started_at": 1793350521.6747475,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "seconds_requested": 120
+      },
+      "error": null,
+      "name": "settle",
+      "seconds": 120.0,
+      "started_at": 1793350521.6747637,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 1.504,
+          "cpu_cores_mean": 0.421,
+          "cpu_cores_p95": 0.929,
+          "memory_bytes_max": 4497904500,
+          "memory_bytes_mean": 4463493630,
+          "memory_bytes_p95": 4491462048,
+          "samples": 42
+        },
+        "sampler_errors": 0,
+        "seconds_requested": 300
+      },
+      "error": null,
+      "name": "idle_window",
+      "seconds": 300.0,
+      "started_at": 1793350641.6748903,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "pods": {
+          "by_namespace": {
+            "kube-system": 12,
+            "local-path-storage": 1,
+            "olf-dev": 6,
+            "olf-system": 24
+          },
+          "by_phase": {
+            "Running": 28,
+            "Succeeded": 15
+          },
+          "pods": 43,
+          "running_containers": 28
+        },
+        "storage": {
+          "bytes_by_path": {
+            "/var/lib/containerd": 21021040950,
+            "/var/local-path-provisioner": 76419235
+          },
+          "bytes_total": 21097460185,
+          "nodes": 3
+        },
+        "usage_now": {
+          "at": 1793350944.4216802,
+          "cpu_cores": 0.33,
+          "memory_bytes": 4452807343
+        }
+      },
+      "error": null,
+      "name": "steady_state_footprint",
+      "seconds": null,
+      "started_at": 1793350944.421795,
+      "status": "ok"
+    }
+  ],
+  "scenario": "footprint",
+  "schema_version": 1,
+  "started_at": 1793349770.2158415,
+  "status": "ok"
+}
