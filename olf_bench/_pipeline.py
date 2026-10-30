@@ -5,8 +5,8 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping, Sequence
 from typing import Any
 
-from olf.common.clients.base import ServiceClientError
-from olf.common.clients.dagster import DagsterClient
+from openlakeforge_services.base import ServiceClientError
+from openlakeforge_services.dagster import DagsterClient
 
 from olf_bench._record import BenchError
 

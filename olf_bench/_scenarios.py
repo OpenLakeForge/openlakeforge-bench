@@ -47,6 +47,8 @@ def olf_command(target: Target, args: Sequence[str], *, project_root: Path, log_
         sys.executable,
         "-m",
         "olf.cli",
+        # Lifecycle commands live under `olf infra` (OpenLakeForge/openlakeforge#642).
+        "infra",
         *args,
         "--provider",
         "local",

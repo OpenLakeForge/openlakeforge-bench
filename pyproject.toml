@@ -10,11 +10,13 @@ requires-python = ">=3.12"
 dependencies = [
   "openlakeforge",
   "openlakeforge-domain-model",
+  "openlakeforge-lakehouse-services",
 ]
 
 [tool.uv.sources]
-openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "3b589981a12b6fb9ae07aaca534eed36d9bf7433", subdirectory = "tools/olf" }
-openlakeforge-domain-model = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "3b589981a12b6fb9ae07aaca534eed36d9bf7433", subdirectory = "packages/domain-model" }
+openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "5a6496dbd7ec9058000f8079abafee19c19c1119", subdirectory = "tools/olf" }
+openlakeforge-domain-model = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "5a6496dbd7ec9058000f8079abafee19c19c1119", subdirectory = "packages/domain-model" }
+openlakeforge-lakehouse-services = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "5a6496dbd7ec9058000f8079abafee19c19c1119", subdirectory = "packages/lakehouse-services" }
 
 [project.scripts]
 olf-bench = "olf_bench.cli:main"
@@ -51,7 +53,7 @@ warn_unreachable = true
 # olf ships no py.typed marker; follow it anyway so the harness is checked
 # against olf's real signatures, without reporting olf's own errors here.
 [[tool.mypy.overrides]]
-module = ["olf", "olf.*", "openlakeforge_domain", "openlakeforge_domain.*"]
+module = ["olf", "olf.*", "openlakeforge_domain", "openlakeforge_domain.*", "openlakeforge_services", "openlakeforge_services.*"]
 follow_untyped_imports = true
 follow_imports = "silent"
 

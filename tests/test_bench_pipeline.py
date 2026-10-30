@@ -4,7 +4,7 @@ from collections.abc import Mapping
 from typing import Any
 
 import pytest
-from olf.common.clients.base import ServiceClientError
+from openlakeforge_services.base import ServiceClientError
 
 from olf_bench import BenchError
 from olf_bench._pipeline import column_expression, layer_of, run_job, summarize_run, table_facts

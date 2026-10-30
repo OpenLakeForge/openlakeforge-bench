@@ -28,9 +28,11 @@ on:
         description: Space-separated table counts for scenario C, run in order on one cluster; empty skips it
         default: "100"
         required: false
+      # Empty by default: the workflow API replaces an empty input with its
+      # default, so a default here could not be switched off from the API.
       incremental_project:
-        description: Repository of the project scenario D loads incrementally; empty skips it
-        default: OpenLakeForge/acme-lakehouse
+        description: Repository of the project scenario D loads incrementally (OpenLakeForge/acme-lakehouse); empty skips it
+        default: ""
         required: false
       incremental_project_ref:
         description: Branch, tag or commit of that project
