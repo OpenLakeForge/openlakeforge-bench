@@ -81,6 +81,16 @@ def etl_command(
     )
 
 
+@app.command("summarize")
+def summarize_command(
+    results: list[Path] = typer.Argument(..., help="result.json files, in the order to show them."),  # noqa: B008
+) -> None:
+    """Print a Markdown digest of benchmark results, for a CI job summary or an issue comment."""
+    from olf_bench._summary import summarize
+
+    typer.echo(summarize(results))
+
+
 def _run(
     scenario: str,
     project_root: str,
