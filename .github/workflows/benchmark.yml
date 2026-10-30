@@ -28,6 +28,10 @@ on:
         description: Space-separated table counts for scenario C, run in order on one cluster; empty skips it
         default: "100"
         required: false
+      many_tables_domains:
+        description: Domains, and product jobs, scenario C spreads each table count over
+        default: "4"
+        required: false
       # Empty by default: the workflow API replaces an empty input with its
       # default, so a default here could not be switched off from the API.
       incremental_project:
@@ -168,7 +172,7 @@ jobs:
   # Scenario C: a generated project of many tables installs the platform from
   # its own DEV-only Slim profile; each further table count redeploys onto it.
   many_tables:
-    name: Scenario C with ${{ inputs.many_tables }} tables
+    name: Scenario C with ${{ inputs.many_tables }} tables over ${{ inputs.many_tables_domains }} domains
     if: ${{ inputs.many_tables != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 300
@@ -220,8 +224,9 @@ jobs:
       - name: Validate inputs
         env:
           MANY_TABLES: ${{ inputs.many_tables }}
+          MANY_TABLES_DOMAINS: ${{ inputs.many_tables_domains }}
         run: |
-          for value in $MANY_TABLES; do
+          for value in $MANY_TABLES $MANY_TABLES_DOMAINS; do
             [[ "$value" =~ ^[1-9][0-9]*$ ]] || { echo "::error::not a positive integer: $value"; exit 1; }
           done
 
@@ -230,12 +235,14 @@ jobs:
       - name: "Scenario C: many tables"
         env:
           MANY_TABLES: ${{ inputs.many_tables }}
+          MANY_TABLES_DOMAINS: ${{ inputs.many_tables_domains }}
         run: |
           status=0
           existing=()
           for tables in $MANY_TABLES; do
             uv run --project tools/olf --locked python -m olf_bench many-tables \
-              --tables "$tables" "${existing[@]}" --output "$RESULTS/many-tables-t$tables" || status=1
+              --tables "$tables" --domains "$MANY_TABLES_DOMAINS" "${existing[@]}" \
+              --output "$RESULTS/many-tables-t$tables" || status=1
             existing=(--existing)
           done
           exit "$status"
