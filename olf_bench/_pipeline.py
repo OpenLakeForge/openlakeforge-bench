@@ -67,7 +67,8 @@ def summarize_run(stats: Mapping[str, Any]) -> dict[str, Any]:
         # Steps of one layer can overlap (two sources load at once): report the layer's wall-clock span.
         start = min(step["start"] for step in members)
         ends = [step["end"] for step in members if step["end"] is not None]
-        end = max(ends) if ends else None
+        # A layer has ended only once every one of its started steps has.
+        end = max(ends) if len(ends) == len(members) else None
         layers[layer] = {"start": start, "end": end, "seconds": _span(start, end), "steps": len(members)}
     return {
         "status": stats.get("status"),

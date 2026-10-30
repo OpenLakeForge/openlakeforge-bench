@@ -199,6 +199,9 @@ def _run(
         body(record, target, _session(cluster_name, context.paths.kubeconfig_path))
     except Exception as exc:  # noqa: BLE001 - every failure is recorded before the run exits non-zero
         log.error(f"{scenario}: {exc}")
+        # A check outside any timed step (an unknown product, say) would otherwise leave the run "ok".
+        if record.status == "ok":
+            record.fail(scenario, str(exc) or type(exc).__name__)
     finally:
         path = record.write(target.output_dir / "result.json")
         for item in record.measurements:
