@@ -336,8 +336,15 @@ jobs:
       - name: Validate inputs
         env:
           INCREMENTAL_RUNS: ${{ inputs.incremental_runs }}
+          # Only whether they are set is checked, before the platform install.
+          HAS_RNACENTRAL_USERNAME: ${{ secrets.RNACENTRAL_USERNAME != '' }}
+          HAS_RNACENTRAL_PASSWORD: ${{ secrets.RNACENTRAL_PASSWORD != '' }}
         run: |
           [[ "$INCREMENTAL_RUNS" =~ ^[1-9][0-9]*$ ]] || { echo "::error::not a positive integer: $INCREMENTAL_RUNS"; exit 1; }
+          for name in USERNAME PASSWORD; do
+            has="HAS_RNACENTRAL_$name"
+            [[ "${!has}" == true ]] || { echo "::error::repository secret RNACENTRAL_$name is not set"; exit 1; }
+          done
 
       - name: "Scenario D: incremental RNAcentral"
         env:

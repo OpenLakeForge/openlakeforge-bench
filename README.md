@@ -66,13 +66,14 @@ PYTHONPATH=~/src/openlakeforge-bench uv run --project tools/olf --locked python 
 
 Every run must add exactly `--rows-per-run` rows to each Silver entity that
 reads an incremental resource, and keep its primary key unique. Each
-`--gold-mirror` Gold table must hold as many rows as its Silver table. The
-killed run must add nothing. Its retry may add one slice or two, because a
-kill after dlt committed its load leaves that slice in Bronze. A Bronze full
-refresh restarts a bounded cursor at the first slice, which Silver already
-holds, so it adds nothing either. A `--live-check` product runs once against
-its live source, untimed, and its outcome is recorded without failing the run.
-Run it on a stage that has never run the product.
+`--gold-mirror` Gold table must hold as many rows as its Silver table. The killed run
+must add nothing. Its retry may add one slice or two, because a kill after dlt
+committed its load leaves that slice in Bronze. A Bronze full refresh carries
+both run tags `olf infra product run --full-refresh bronze` sets, so Floe
+rebuilds Silver from the new extract: with a bounded cursor, Silver then holds
+the first slice alone, and Gold still mirrors it. A `--live-check` product
+runs once against its live source, untimed, and its outcome is recorded
+without failing the run. Run it on a stage that has never run the product.
 
 Scenario C measures what each table costs (Floe Jobs, catalog calls,
 memory) on a project that no external service can slow down or break.
