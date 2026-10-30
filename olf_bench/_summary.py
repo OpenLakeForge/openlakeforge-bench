@@ -59,6 +59,19 @@ def _peak_memory(detail: Mapping[str, Any]) -> int | None:
 def _note(item: Mapping[str, Any], detail: Mapping[str, Any]) -> str:
     if item.get("error"):
         return _cell(str(item["error"]).strip().splitlines()[0])
+    floe = detail.get("floe_jobs")
+    if isinstance(floe, Mapping) and floe.get("count"):
+        start = floe["start_seconds"]
+        return (
+            f"{floe['succeeded']}/{floe['count']} Floe Jobs, pod start {_seconds(start['median'])} median"
+            f" / {_seconds(start['max'])} max"
+        )
+    if "silver_tables" in detail:
+        reads = detail["read_seconds"]
+        return (
+            f"{detail['silver_tables']} tables, {detail['silver_rows']:,} rows, {detail['data_files']} files,"
+            f" read {_seconds(reads['median'])} median / {_seconds(reads['max'])} max"
+        )
     if "rows" in detail and "bytes" in detail:
         return f"{detail['rows']:,} rows, {detail['bytes'] / 1e6:.1f} MB"
     silver = detail.get("silver")

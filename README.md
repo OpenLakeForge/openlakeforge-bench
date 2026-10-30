@@ -15,6 +15,7 @@ carry.
 | --- | --- | --- |
 | `footprint [--clean\|--existing]` | A: install and idle | Each `olf deploy` phase (skipped with `--existing`, which measures the running deployment), time to the first Trino query, the first product pipeline and its Gold rows, pods per namespace, node storage, and CPU/RAM installed versus after `--settle-seconds` and over `--idle-seconds` |
 | `etl --scale N [--delta D]` | B: end-to-end ETL | The CSV fixtures replicated N times through every product job, a no-change rerun, then a reload at N+D replicas: wall clock per run and per layer, cluster CPU/RAM per layer, rows, checksums, Iceberg data files, bytes and snapshots |
+| `many-tables --tables N` | C: many tables | A generated project of N tables over `--domains` product jobs, run twice: Floe Jobs started and their pod start and run times, per-layer times, cluster CPU/RAM, every table's rows, files and snapshots against `expected.json` |
 | `incremental --project P --product X` | D: incremental loads | An external project installed from its own profile, one product run `--runs` times, then a run killed `--kill-after-seconds` into Bronze and its retry, then a `--full-refresh`: per-run layer times as Silver and Gold grow, rows added per run, key uniqueness, Gold-to-Silver row parity |
 
 Each run writes `result.json`, plus one log per `olf` subprocess, under
@@ -90,8 +91,21 @@ uv run --locked python -m olf_bench many-tables-project --tables 100 --domains 4
 The project has a DEV-only Slim profile, like the reference installation.
 `expected.json` records each table's rows, columns and CSV SHA-256, and each
 Gold table's row count. The same arguments always write byte-identical files;
-`--seed` (default 328) changes the data. The command that deploys and
-measures it is still to come.
+`--seed` (default 328) changes the data.
+
+```bash
+PYTHONPATH=~/src/openlakeforge-bench uv run --project tools/olf --locked python -m olf_bench many-tables --tables 100
+```
+
+`many-tables` generates that project under `--output`, installs the platform
+from its profile (`--existing` deploys onto a running DEV-only Slim platform
+instead), and runs every product job `--runs` times (default 2: one cold run,
+one repeat). Each run records the Dagster run and its layer split, and every
+Floe Kubernetes Job it started: the seconds from pod creation to container
+start, and the container's run time. After each run, every Silver table must
+hold the generated rows and every `mart_table_rows` must list its domain's
+tables with their row counts; the time Trino took to read each table's rows
+and metadata is recorded with its data files and snapshots.
 
 `python -m olf_bench summarize <result.json>...` prints a Markdown table of one
 or more results: every step's status and time, the Dagster run time and
@@ -102,7 +116,8 @@ any error.
 
 The [benchmark workflow](.github/workflows/benchmark.yml) runs scenarios A and
 B on one GitHub-hosted runner (4 vCPU, 16 GB, cgroup v2), the host the
-platform's local sizing is written for, and scenario D on another. Start it from the Actions tab, or:
+platform's local sizing is written for, and scenarios C and D on one
+runner each. Start it from the Actions tab, or:
 
 ```bash
 gh workflow run benchmark.yml -R OpenLakeForge/openlakeforge-bench -f openlakeforge_ref=main -f etl_scales="100 10000"
@@ -114,6 +129,7 @@ gh workflow run benchmark.yml -R OpenLakeForge/openlakeforge-bench -f openlakefo
 | `etl_scales` | `100 10000` | Fixture replica counts for scenario B, run in order; each reloads at +10%. Empty skips scenario B |
 | `idle_seconds` | `300` | Scenario A's steady-state window |
 | `footprint_and_etl` | `true` | Run scenarios A and B |
+| `many_tables` | `100` | Table counts for scenario C, run in order on one cluster; empty skips scenario C |
 | `incremental_project` | `OpenLakeForge/acme-lakehouse` | Project scenario D installs and loads; empty skips scenario D |
 | `incremental_project_ref` | `main` | Its branch, tag or commit |
 | `incremental_runs` | `5` | Scenario D's incremental runs of `rna_catalog` |
@@ -166,7 +182,7 @@ Docker version, and any kind-config or image override in effect.
   includes everything else the cluster did at the same time.
 - Scenario D covers one kill-and-retry case, a run terminated during Bronze.
   Platform restarts and the other failure cases (OpenLakeForge/openlakeforge#343,
-  #533 and #53) and the ~100-table scenario C are not covered yet.
+  #533 and #53) are not covered yet.
 - Scenario D reads RNAcentral's shared public database, so its Bronze times
   include that service's latency and load.
 
