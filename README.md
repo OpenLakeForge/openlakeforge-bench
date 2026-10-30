@@ -48,6 +48,34 @@ second `olf` over the checkout's. Hardware: the
 (4 CPUs, 16 GB of memory for Docker); the Slim preset on three kind nodes held
 about 20 GB of images, so leave at least 40 GB of disk free.
 
+`python -m olf_bench summarize <result.json>...` prints a Markdown table of one
+or more results: every step's status and time, the Dagster run time and
+per-layer split of each product job, peak cluster memory, and the first line of
+any error.
+
+## Run on GitHub
+
+The [benchmark workflow](.github/workflows/benchmark.yml) runs both scenarios
+on a GitHub-hosted runner (4 vCPU, 16 GB, cgroup v2), the host the platform's
+local sizing is written for. Start it from the Actions tab, or:
+
+```bash
+gh workflow run benchmark.yml -R OpenLakeForge/openlakeforge-bench -f openlakeforge_ref=main -f etl_scales="100 10000"
+```
+
+| Input | Default | Meaning |
+| --- | --- | --- |
+| `openlakeforge_ref` | `main` | OpenLakeForge branch, tag or commit to measure |
+| `etl_scales` | `100 10000` | Fixture replica counts for scenario B, run in order; each reloads at +10%. Empty skips scenario B |
+| `idle_seconds` | `300` | Scenario A's steady-state window |
+
+The job frees disk, installs Slim through scenario A, then runs scenario B at
+each scale on the same cluster. A failed scale is recorded and the next still
+runs. The run page shows the `summarize` table, and the `benchmark-<run id>`
+artifact keeps every `result.json` and `olf` log for 90 days, plus kind
+diagnostics when a step failed. One run takes one to three hours of runner
+time, so the workflow only starts by hand.
+
 ## How the numbers are taken
 
 | Quantity | Source |
