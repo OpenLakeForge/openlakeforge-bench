@@ -73,6 +73,26 @@ holds, so it adds nothing either. A `--live-check` product runs once against
 its live source, untimed, and its outcome is recorded without failing the run.
 Run it on a stage that has never run the product.
 
+Scenario C measures what each table costs (Floe Jobs, catalog calls,
+memory) on a project that no external service can slow down or break.
+`many-tables-project` writes one:
+
+```bash
+uv run --locked python -m olf_bench many-tables-project --tables 100 --domains 4 --rows 1000 --output .tmp/many-tables
+```
+
+| Generated | Per domain |
+| --- | --- |
+| A CSV source `feed_NN`, loaded by the platform's CSV loader (`libs.bronze_csv`) | one |
+| Silver tables `tNNN`: an `id` key and 3 to 10 seeded columns of the reference contracts' types | `--tables / --domains` |
+| A Gold product `profile_NN` whose `mart_table_rows` counts every Silver table of the domain, and its Dagster job | one |
+
+The project has a DEV-only Slim profile, like the reference installation.
+`expected.json` records each table's rows, columns and CSV SHA-256, and each
+Gold table's row count. The same arguments always write byte-identical files;
+`--seed` (default 328) changes the data. The command that deploys and
+measures it is still to come.
+
 `python -m olf_bench summarize <result.json>...` prints a Markdown table of one
 or more results: every step's status and time, the Dagster run time and
 per-layer split of each product job, peak cluster memory, and the first line of
