@@ -1,0 +1,777 @@
+{
+  "environment": {
+    "cluster_config_override": {
+      "path": "/tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/kind-cluster-cgroupv1.yaml",
+      "sha256": "5b4ee64004a84a379aafe44820108ef0457ec2c4aefa20cbdf6e1b3915aeccaf"
+    },
+    "component_catalog_sha256": "ee32e3d555b11ca2a20d3906770de51fa15910599e301d09a7f9ee2abc6dab51",
+    "docker_server_version": "29.9.2",
+    "git_commit": "2f0ea3b8c790e674a914d8ae04fb4c8e18e04279",
+    "git_modified": [],
+    "host": {
+      "cgroup": "v1",
+      "cpus": 4,
+      "kernel": "6.18.44-fc-v185",
+      "machine": "x86_64",
+      "memory_bytes": 16872808448
+    },
+    "image_overrides": {
+      "PROJECT_CODE_PYTHON_BASE_IMAGE": "localhost:5000/olf-bench/python-proxy-ca:3.12-slim"
+    },
+    "olf_version": "0.5.0a1",
+    "parameters": {
+      "cluster_name": "openlakeforge-local",
+      "delta": 1000,
+      "preset": "slim",
+      "scale": 10000
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "bytes": 78626998,
+        "rows": 1380000,
+        "scale": 10000,
+        "tables": [
+          {
+            "bytes": 4841151,
+            "resource": "accounts",
+            "rows": 80000,
+            "sha256": "392548a54fc61e84d2593e6b1d99aff5a1f6d8a3d25064e8d60b666162305914",
+            "source": "crm"
+          },
+          {
+            "bytes": 1166698,
+            "resource": "channels",
+            "rows": 30000,
+            "sha256": "082ad0928cb31837d28be985a53d8cbfefeb665ca2821874703279f0bd230800",
+            "source": "crm"
+          },
+          {
+            "bytes": 3897783,
+            "resource": "nps_responses",
+            "rows": 100000,
+            "sha256": "9afcb35187d172fc00e408e65833351accbc2b850f08e57046f9923c1ade23d3",
+            "source": "crm"
+          },
+          {
+            "bytes": 10989945,
+            "resource": "order_lines",
+            "rows": 210000,
+            "sha256": "71760d253cc2dcaa022812e48f8fbfe932d43a4f02687971427c1426c69372e2",
+            "source": "crm"
+          },
+          {
+            "bytes": 9070002,
+            "resource": "orders",
+            "rows": 120000,
+            "sha256": "1f2ff577446256aee62897c1f4d192d236ae478cb992f3efe75a294f9af3d334",
+            "source": "crm"
+          },
+          {
+            "bytes": 3061139,
+            "resource": "products",
+            "rows": 80000,
+            "sha256": "d161576262624986197754bc781fb56581f507ceeb2ad7ae90b482a48a138061",
+            "source": "crm"
+          },
+          {
+            "bytes": 1545590,
+            "resource": "promotions",
+            "rows": 40000,
+            "sha256": "3ec8b9380533c3318a3b6b8974fdf18c4a6e6953e170f0a85681cb7d3e460a36",
+            "source": "crm"
+          },
+          {
+            "bytes": 5732286,
+            "resource": "subscriptions",
+            "rows": 80000,
+            "sha256": "3af05f076191ee94f636e87e86a02e6624f7d84cde78fbed52bdb3445f6fa7ee",
+            "source": "crm"
+          },
+          {
+            "bytes": 6003355,
+            "resource": "support_tickets",
+            "rows": 120000,
+            "sha256": "3e17fe053c46676aa6fb6899d67e99678f42c7e150e4e104b84e5eed82cf3bdc",
+            "source": "crm"
+          },
+          {
+            "bytes": 9560009,
+            "resource": "inventory_snapshots",
+            "rows": 150000,
+            "sha256": "fe12fed32d4796524c3f6d32a613c023f58d28cce2b1950b0014772a64298f59",
+            "source": "erp"
+          },
+          {
+            "bytes": 8075573,
+            "resource": "purchase_orders",
+            "rows": 100000,
+            "sha256": "e5af9e4e3ad7a272478238e9c0198990568194d34f781621907897303404d3b0",
+            "source": "erp"
+          },
+          {
+            "bytes": 5477810,
+            "resource": "shipments",
+            "rows": 100000,
+            "sha256": "69e3eadf239e3ad402916acf8b970f13364574c9c37bd6b6caa7707cd26b0354",
+            "source": "erp"
+          },
+          {
+            "bytes": 4846693,
+            "resource": "stockout_events",
+            "rows": 70000,
+            "sha256": "d67373f676bad940badb520051c2f5c5cb87d664fe6f85597c6344e0d1fcbcf6",
+            "source": "erp"
+          },
+          {
+            "bytes": 2334479,
+            "resource": "suppliers",
+            "rows": 50000,
+            "sha256": "5e46bbef05bf469602f8747f8a4c23a6de3a9895ac1c1defc5d70bd1bd17a1b8",
+            "source": "erp"
+          },
+          {
+            "bytes": 2024485,
+            "resource": "warehouses",
+            "rows": 50000,
+            "sha256": "d3b0c549bd5619ea60d027d64623b21b909851e42733aa982918ba2c90134e21",
+            "source": "erp"
+          }
+        ]
+      },
+      "error": null,
+      "name": "generate_dataset",
+      "seconds": 4.277,
+      "started_at": 1793312258.9400573,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "scale": 10000
+      },
+      "error": null,
+      "name": "deploy_artifacts",
+      "seconds": 73.786,
+      "started_at": 1793312263.2173173,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793312482.064685,
+        "job": "order_revenue_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.003,
+              "cpu_cores_mean": 1.708,
+              "cpu_cores_p95": 2.003,
+              "memory_bytes_max": 8342973971,
+              "memory_bytes_mean": 8293044976,
+              "memory_bytes_p95": 8342973971,
+              "samples": 8
+            },
+            "end": 1793312420.6291351,
+            "seconds": 32.887,
+            "start": 1793312387.7421846,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.586,
+              "cpu_cores_mean": 2.175,
+              "cpu_cores_p95": 2.586,
+              "memory_bytes_max": 8539468725,
+              "memory_bytes_mean": 8438322244,
+              "memory_bytes_p95": 8539468725,
+              "samples": 5
+            },
+            "end": 1793312480.3913996,
+            "seconds": 21.721,
+            "start": 1793312458.6700225,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.839,
+              "cpu_cores_mean": 1.763,
+              "cpu_cores_p95": 1.839,
+              "memory_bytes_max": 8682276387,
+              "memory_bytes_mean": 8492224084,
+              "memory_bytes_p95": 8682276387,
+              "samples": 5
+            },
+            "end": 1793312450.5049398,
+            "seconds": 21.577,
+            "start": 1793312428.927652,
+            "steps": 1
+          }
+        },
+        "product": "order_revenue",
+        "run_id": "105ec700-5870-4f8d-bd7d-8df165176e3f",
+        "scale": 10000,
+        "seconds": 101.128,
+        "start": 1793312380.936831,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793312420.6291351,
+            "layer": "bronze",
+            "seconds": 32.887,
+            "start": 1793312387.7421846,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793312450.5049398,
+            "layer": "silver",
+            "seconds": 21.577,
+            "start": 1793312428.927652,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          },
+          {
+            "end": 1793312480.3913996,
+            "layer": "gold",
+            "seconds": 21.721,
+            "start": 1793312458.6700225,
+            "status": "SUCCESS",
+            "step": "order_revenue_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "initial_order_revenue",
+      "seconds": 145.123,
+      "started_at": 1793312337.6212583,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793312576.405506,
+        "job": "customer_health_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.64,
+              "cpu_cores_mean": 1.721,
+              "cpu_cores_p95": 2.64,
+              "memory_bytes_max": 8519067629,
+              "memory_bytes_mean": 8454822077,
+              "memory_bytes_p95": 8519067629,
+              "samples": 6
+            },
+            "end": 1793312521.6049778,
+            "seconds": 21.689,
+            "start": 1793312499.9158459,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.854,
+              "cpu_cores_mean": 2.208,
+              "cpu_cores_p95": 2.854,
+              "memory_bytes_max": 8632884263,
+              "memory_bytes_mean": 8570338802,
+              "memory_bytes_p95": 8632884263,
+              "samples": 4
+            },
+            "end": 1793312574.6129787,
+            "seconds": 18.041,
+            "start": 1793312556.5719335,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.379,
+              "cpu_cores_mean": 1.688,
+              "cpu_cores_p95": 2.379,
+              "memory_bytes_max": 8745627155,
+              "memory_bytes_mean": 8527442816,
+              "memory_bytes_p95": 8745627155,
+              "samples": 5
+            },
+            "end": 1793312548.6529098,
+            "seconds": 19.422,
+            "start": 1793312529.2314022,
+            "steps": 1
+          }
+        },
+        "product": "customer_health",
+        "run_id": "9d97f868-1652-4965-b3f7-3a12d363202d",
+        "scale": 10000,
+        "seconds": 83.346,
+        "start": 1793312493.059196,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793312521.6049778,
+            "layer": "bronze",
+            "seconds": 21.689,
+            "start": 1793312499.9158459,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793312548.6529098,
+            "layer": "silver",
+            "seconds": 19.422,
+            "start": 1793312529.2314022,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          },
+          {
+            "end": 1793312574.6129787,
+            "layer": "gold",
+            "seconds": 18.041,
+            "start": 1793312556.5719335,
+            "status": "SUCCESS",
+            "step": "customer_health_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "initial_customer_health",
+      "seconds": 101.699,
+      "started_at": 1793312482.744433,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793312687.893645,
+        "job": "inventory_reliability_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.51,
+              "cpu_cores_mean": 1.736,
+              "cpu_cores_p95": 2.51,
+              "memory_bytes_max": 8558796078,
+              "memory_bytes_mean": 8524973210,
+              "memory_bytes_p95": 8558796078,
+              "samples": 8
+            },
+            "end": 1793312630.159685,
+            "seconds": 29.016,
+            "start": 1793312601.1432767,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.867,
+              "cpu_cores_mean": 1.917,
+              "cpu_cores_p95": 2.867,
+              "memory_bytes_max": 8702677481,
+              "memory_bytes_mean": 8630199908,
+              "memory_bytes_p95": 8702677481,
+              "samples": 4
+            },
+            "end": 1793312686.0062041,
+            "seconds": 19.304,
+            "start": 1793312666.7022533,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.686,
+              "cpu_cores_mean": 1.683,
+              "cpu_cores_p95": 2.686,
+              "memory_bytes_max": 8892729785,
+              "memory_bytes_mean": 8640400456,
+              "memory_bytes_p95": 8892729785,
+              "samples": 5
+            },
+            "end": 1793312658.7444165,
+            "seconds": 20.944,
+            "start": 1793312637.8006055,
+            "steps": 1
+          }
+        },
+        "product": "inventory_reliability",
+        "run_id": "202f4cf5-4160-4e57-a4d6-4cf0bb822094",
+        "scale": 10000,
+        "seconds": 93.226,
+        "start": 1793312594.667948,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793312630.159685,
+            "layer": "bronze",
+            "seconds": 29.016,
+            "start": 1793312601.1432767,
+            "status": "SUCCESS",
+            "step": "erp_bronze_resources"
+          },
+          {
+            "end": 1793312658.7444165,
+            "layer": "silver",
+            "seconds": 20.944,
+            "start": 1793312637.8006055,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__supply_chain__default_77995f20"
+          },
+          {
+            "end": 1793312686.0062041,
+            "layer": "gold",
+            "seconds": 19.304,
+            "start": 1793312666.7022533,
+            "status": "SUCCESS",
+            "step": "inventory_reliability_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "initial_inventory_reliability",
+      "seconds": 111.927,
+      "started_at": 1793312584.4437633,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "customer_health_gold.mart_churn_risk_by_segment": {
+            "checksum": "0F2219156DA78083",
+            "data_file_bytes": 1203,
+            "data_files": 1,
+            "rows": 6,
+            "snapshots": 6
+          },
+          "customer_health_gold.mart_customer_health_score": {
+            "checksum": "9DF227378219AA4A",
+            "data_file_bytes": 56095,
+            "data_files": 1,
+            "rows": 80000,
+            "snapshots": 6
+          },
+          "customer_health_gold.mart_support_sla_by_customer": {
+            "checksum": "2EBDF44555E07D15",
+            "data_file_bytes": 492326,
+            "data_files": 1,
+            "rows": 120000,
+            "snapshots": 6
+          },
+          "inventory_reliability_gold.mart_inventory_position": {
+            "checksum": "EE3A38F58C487A8E",
+            "data_file_bytes": 665835,
+            "data_files": 1,
+            "rows": 70000,
+            "snapshots": 5
+          },
+          "inventory_reliability_gold.mart_stockout_risk": {
+            "checksum": "617A75766F839C99",
+            "data_file_bytes": 652548,
+            "data_files": 1,
+            "rows": 70000,
+            "snapshots": 5
+          },
+          "inventory_reliability_gold.mart_supplier_delivery_reliability": {
+            "checksum": "4A76E1E4CDB46D5A",
+            "data_file_bytes": 202524,
+            "data_files": 1,
+            "rows": 50000,
+            "snapshots": 5
+          },
+          "order_revenue_gold.mart_order_revenue_by_account_segment": {
+            "checksum": "70FD01B926E0BD3D",
+            "data_file_bytes": 834,
+            "data_files": 1,
+            "rows": 6,
+            "snapshots": 7
+          },
+          "order_revenue_gold.mart_order_revenue_by_channel": {
+            "checksum": "43A7B03114C6000C",
+            "data_file_bytes": 1601,
+            "data_files": 1,
+            "rows": 11,
+            "snapshots": 7
+          },
+          "order_revenue_gold.mart_order_revenue_by_day": {
+            "checksum": "9FB0B9198A79D993",
+            "data_file_bytes": 1569,
+            "data_files": 1,
+            "rows": 12,
+            "snapshots": 7
+          },
+          "order_revenue_gold.mart_order_revenue_margin_by_product": {
+            "checksum": "39C873CDC25AD655",
+            "data_file_bytes": 315576,
+            "data_files": 1,
+            "rows": 80000,
+            "snapshots": 7
+          }
+        },
+        "scale": 10000,
+        "silver": {
+          "sales_silver.accounts": {
+            "checksum": "D4FA29207882979E",
+            "data_file_bytes": 208082,
+            "data_files": 1,
+            "expected_rows": 80000,
+            "rows": 80000,
+            "snapshots": 14
+          },
+          "sales_silver.channels": {
+            "checksum": "62C6A28AD2CCFF84",
+            "data_file_bytes": 77185,
+            "data_files": 1,
+            "expected_rows": 30000,
+            "rows": 30000,
+            "snapshots": 8
+          },
+          "sales_silver.nps_responses": {
+            "checksum": "6E66D55CAA6CE714",
+            "data_file_bytes": 489622,
+            "data_files": 1,
+            "expected_rows": 100000,
+            "rows": 100000,
+            "snapshots": 6
+          },
+          "sales_silver.order_lines": {
+            "checksum": "A3A19E52C6906400",
+            "data_file_bytes": 1240019,
+            "data_files": 1,
+            "expected_rows": 210000,
+            "rows": 210000,
+            "snapshots": 8
+          },
+          "sales_silver.orders": {
+            "checksum": "F0D89B7021F7C019",
+            "data_file_bytes": 708151,
+            "data_files": 1,
+            "expected_rows": 120000,
+            "rows": 120000,
+            "snapshots": 8
+          },
+          "sales_silver.products": {
+            "checksum": "24944AB0493D87D3",
+            "data_file_bytes": 206908,
+            "data_files": 1,
+            "expected_rows": 80000,
+            "rows": 80000,
+            "snapshots": 8
+          },
+          "sales_silver.promotions": {
+            "checksum": "A0355AD50E595458",
+            "data_file_bytes": 107031,
+            "data_files": 1,
+            "expected_rows": 40000,
+            "rows": 40000,
+            "snapshots": 8
+          },
+          "sales_silver.subscriptions": {
+            "checksum": "E0DC093121C513EB",
+            "data_file_bytes": 410416,
+            "data_files": 1,
+            "expected_rows": 80000,
+            "rows": 80000,
+            "snapshots": 6
+          },
+          "sales_silver.support_tickets": {
+            "checksum": "34517A80D67AC124",
+            "data_file_bytes": 546395,
+            "data_files": 1,
+            "expected_rows": 120000,
+            "rows": 120000,
+            "snapshots": 6
+          },
+          "supply_chain_silver.inventory_snapshots": {
+            "checksum": "1365CF561035E29A",
+            "data_file_bytes": 815110,
+            "data_files": 1,
+            "expected_rows": 150000,
+            "rows": 150000,
+            "snapshots": 5
+          },
+          "supply_chain_silver.purchase_orders": {
+            "checksum": "B06F5BA1E9121AAA",
+            "data_file_bytes": 793887,
+            "data_files": 1,
+            "expected_rows": 100000,
+            "rows": 100000,
+            "snapshots": 5
+          },
+          "supply_chain_silver.shipments": {
+            "checksum": "F71EA0FCC9B57A6A",
+            "data_file_bytes": 518341,
+            "data_files": 1,
+            "expected_rows": 100000,
+            "rows": 100000,
+            "snapshots": 5
+          },
+          "supply_chain_silver.stockout_events": {
+            "checksum": "2D311AE133C0E081",
+            "data_file_bytes": 498019,
+            "data_files": 1,
+            "expected_rows": 70000,
+            "rows": 70000,
+            "snapshots": 5
+          },
+          "supply_chain_silver.suppliers": {
+            "checksum": "6CC9FAE9929936DB",
+            "data_file_bytes": 132503,
+            "data_files": 1,
+            "expected_rows": 50000,
+            "rows": 50000,
+            "snapshots": 5
+          },
+          "supply_chain_silver.warehouses": {
+            "checksum": "59E7EDE04E45C619",
+            "data_file_bytes": 130400,
+            "data_files": 1,
+            "expected_rows": 50000,
+            "rows": 50000,
+            "snapshots": 5
+          }
+        }
+      },
+      "error": null,
+      "name": "initial_tables",
+      "seconds": 239.638,
+      "started_at": 1793312696.371236,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793313044.370219,
+        "job": "order_revenue_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.092,
+              "cpu_cores_mean": 1.739,
+              "cpu_cores_p95": 2.092,
+              "memory_bytes_max": 8674760195,
+              "memory_bytes_mean": 8563091045,
+              "memory_bytes_p95": 8674760195,
+              "samples": 8
+            },
+            "end": 1793312986.416843,
+            "seconds": 33.088,
+            "start": 1793312953.3284464,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.409,
+              "cpu_cores_mean": 1.973,
+              "cpu_cores_p95": 2.409,
+              "memory_bytes_max": 8783208119,
+              "memory_bytes_mean": 8675404439,
+              "memory_bytes_p95": 8783208119,
+              "samples": 5
+            },
+            "end": 1793313042.6180367,
+            "seconds": 20.45,
+            "start": 1793313022.168333,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.505,
+              "cpu_cores_mean": 1.92,
+              "cpu_cores_p95": 3.505,
+              "memory_bytes_max": 9055938542,
+              "memory_bytes_mean": 8743264922,
+              "memory_bytes_p95": 9055938542,
+              "samples": 5
+            },
+            "end": 1793313014.666657,
+            "seconds": 20.798,
+            "start": 1793312993.868879,
+            "steps": 1
+          }
+        },
+        "product": "order_revenue",
+        "run_id": "efc627df-3d1d-462b-84de-fe3c384b1fdb",
+        "scale": 10000,
+        "seconds": 97.57,
+        "start": 1793312946.800504,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793312986.416843,
+            "layer": "bronze",
+            "seconds": 33.088,
+            "start": 1793312953.3284464,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793313014.666657,
+            "layer": "silver",
+            "seconds": 20.798,
+            "start": 1793312993.868879,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          },
+          {
+            "end": 1793313042.6180367,
+            "layer": "gold",
+            "seconds": 20.45,
+            "start": 1793313022.168333,
+            "status": "SUCCESS",
+            "step": "order_revenue_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "repeat_order_revenue",
+      "seconds": 112.386,
+      "started_at": 1793312936.009158,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793313117.273725,
+        "job": "customer_health_pipeline",
+        "layers": {
+          "bronze": {
+            "end": 1793313088.2237835,
+            "seconds": 22.803,
+            "start": 1793313065.4209442,
+            "steps": 1
+          },
+          "silver": {
+            "end": 1793313114.1852298,
+            "seconds": 18.329,
+            "start": 1793313095.8565037,
+            "steps": 1
+          }
+        },
+        "product": "customer_health",
+        "run_id": "c1d51c28-e9f2-4d56-b3e4-65cbde57cd2b",
+        "scale": 10000,
+        "seconds": 58.496,
+        "start": 1793313058.777772,
+        "status": "FAILURE",
+        "steps": [
+          {
+            "end": 1793313088.2237835,
+            "layer": "bronze",
+            "seconds": 22.803,
+            "start": 1793313065.4209442,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793313114.1852298,
+            "layer": "silver",
+            "seconds": 18.329,
+            "start": 1793313095.8565037,
+            "status": "FAILURE",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          }
+        ]
+      },
+      "error": "customer_health_pipeline run c1d51c28-e9f2-4d56-b3e4-65cbde57cd2b ended with FAILURE\n  floe_openlakeforge__sales__default_6223f6dc: dagster._core.definitions.events.Failure: floe run failed for entities sales.accounts, sales.nps_responses, sales.subscriptions, sales.support_tickets",
+      "name": "repeat_customer_health",
+      "seconds": 71.522,
+      "started_at": 1793313048.395485,
+      "status": "failed"
+    }
+  ],
+  "scenario": "etl-x10000",
+  "schema_version": 1,
+  "started_at": 1793312258.8706279,
+  "status": "failed"
+}

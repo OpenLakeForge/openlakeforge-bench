@@ -1,0 +1,53 @@
+# Benchmark-host deviation from infra/kind/local/kind-cluster.yaml: this VM runs
+# cgroup v1, drops CAP_SYS_RESOURCE, and reaches the internet only through a
+# TLS-intercepting proxy whose CA the nodes must trust.
+# docker.io pulls go through mirror.gcr.io: the shared egress IP hits Docker Hub's anonymous limit.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: openlakeforge-local
+nodes:
+- role: control-plane
+  labels:
+    ingress-ready: 'true'
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 80
+    listenAddress: 127.0.0.1
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    listenAddress: 127.0.0.1
+    protocol: TCP
+  extraMounts:
+  - hostPath: /root/.ccr/ca-bundle.crt
+    containerPath: /etc/ssl/certs/ca-certificates.crt
+    readOnly: true
+  - hostPath: /tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/certs.d
+    containerPath: /etc/containerd/certs.d
+    readOnly: true
+- role: worker
+  extraMounts:
+  - hostPath: /root/.ccr/ca-bundle.crt
+    containerPath: /etc/ssl/certs/ca-certificates.crt
+    readOnly: true
+  - hostPath: /tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/certs.d
+    containerPath: /etc/containerd/certs.d
+    readOnly: true
+- role: worker
+  extraMounts:
+  - hostPath: /root/.ccr/ca-bundle.crt
+    containerPath: /etc/ssl/certs/ca-certificates.crt
+    readOnly: true
+  - hostPath: /tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/certs.d
+    containerPath: /etc/containerd/certs.d
+    readOnly: true
+kubeadmConfigPatches:
+- 'kind: KubeletConfiguration
+
+  failCgroupV1: false
+
+  '
+containerdConfigPatches:
+- "[plugins.\"io.containerd.cri.v1.runtime\"]\n  restrict_oom_score_adj = true\n"
+- "[plugins.\"io.containerd.grpc.v1.cri\".registry]\n  config_path = \"/etc/containerd/certs.d\"\
+  \n"

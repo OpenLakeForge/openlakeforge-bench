@@ -1,0 +1,101 @@
+{
+  "environment": {
+    "cluster_config_override": {
+      "path": "/tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/kind-cluster-cgroupv1.yaml",
+      "sha256": "5b4ee64004a84a379aafe44820108ef0457ec2c4aefa20cbdf6e1b3915aeccaf"
+    },
+    "component_catalog_sha256": "ee32e3d555b11ca2a20d3906770de51fa15910599e301d09a7f9ee2abc6dab51",
+    "docker_server_version": "29.9.2",
+    "git_commit": "a8c99cdb6006246dd772eaa66a5b45b9e88afaa8",
+    "git_modified": [
+      "tools/olf/README.md",
+      "tools/olf/olf/bench/_record.py",
+      "tools/olf/olf/deployment/local/provider.py",
+      "tools/olf/tests/test_bench_record.py"
+    ],
+    "host": {
+      "cgroup": "v1",
+      "cpus": 4,
+      "kernel": "6.18.44-fc-v185",
+      "machine": "x86_64",
+      "memory_bytes": 16872808448
+    },
+    "image_overrides": {
+      "PROJECT_CODE_PYTHON_BASE_IMAGE": "olf-bench/python-proxy-ca:3.12-slim"
+    },
+    "olf_version": "0.5.0a1",
+    "parameters": {
+      "clean": true,
+      "cluster_name": "openlakeforge-local",
+      "preset": "slim"
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "excluded_from_install": true
+      },
+      "error": null,
+      "name": "destroy_before_install",
+      "seconds": 93.05,
+      "started_at": 1793304764.751252,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_foundation",
+      "seconds": 36.698,
+      "started_at": 1793304857.8012514,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 2.82,
+          "cpu_cores_mean": 1.258,
+          "cpu_cores_p95": 2.378,
+          "memory_bytes_max": 1626026802,
+          "memory_bytes_mean": 1185207142,
+          "memory_bytes_p95": 1565523967,
+          "samples": 62
+        }
+      },
+      "error": null,
+      "name": "deploy_prefetch",
+      "seconds": 434.843,
+      "started_at": 1793304894.4991038,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 3.283,
+          "cpu_cores_mean": 1.118,
+          "cpu_cores_p95": 2.607,
+          "memory_bytes_max": 3745530248,
+          "memory_bytes_mean": 2463001029,
+          "memory_bytes_p95": 3437320207,
+          "samples": 34
+        }
+      },
+      "error": null,
+      "name": "deploy_platform",
+      "seconds": 240.791,
+      "started_at": 1793305329.3420007,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": "olf deploy --phase artifacts exited 1; see /tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/results/footprint-4/logs/artifacts.log",
+      "name": "deploy_artifacts",
+      "seconds": 27.505,
+      "started_at": 1793305570.1326973,
+      "status": "failed"
+    }
+  ],
+  "scenario": "footprint",
+  "schema_version": 1,
+  "started_at": 1793304764.7511954,
+  "status": "failed"
+}

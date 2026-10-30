@@ -1,0 +1,250 @@
+{
+  "environment": {
+    "cluster_config_override": {
+      "path": "/tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/kind-cluster-cgroupv1.yaml",
+      "sha256": "5b4ee64004a84a379aafe44820108ef0457ec2c4aefa20cbdf6e1b3915aeccaf"
+    },
+    "component_catalog_sha256": "ee32e3d555b11ca2a20d3906770de51fa15910599e301d09a7f9ee2abc6dab51",
+    "docker_server_version": "29.9.2",
+    "git_commit": "f091809461fef4eda20f5b6a1844ed875e4f31d3",
+    "git_modified": [],
+    "host": {
+      "cgroup": "v1",
+      "cpus": 4,
+      "kernel": "6.18.44-fc-v185",
+      "machine": "x86_64",
+      "memory_bytes": 16872808448
+    },
+    "image_overrides": {
+      "PROJECT_CODE_PYTHON_BASE_IMAGE": "localhost:5000/olf-bench/python-proxy-ca:3.12-slim"
+    },
+    "olf_version": "0.5.0a1",
+    "parameters": {
+      "clean": false,
+      "cluster_name": "openlakeforge-local",
+      "existing": true,
+      "preset": "slim"
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "attempts": 1
+      },
+      "error": null,
+      "name": "time_to_first_query",
+      "seconds": 2.513,
+      "started_at": 1793308768.0629666,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 3.143,
+          "cpu_cores_mean": 1.802,
+          "cpu_cores_p95": 2.558,
+          "memory_bytes_max": 6870873930,
+          "memory_bytes_mean": 6424858095,
+          "memory_bytes_p95": 6748467363,
+          "samples": 13
+        },
+        "end": 1793308857.410403,
+        "gold": {
+          "order_revenue_gold.mart_order_revenue_by_account_segment": {
+            "checksum": "8F7AD3E8AB1FE491",
+            "data_file_bytes": 831,
+            "data_files": 1,
+            "rows": 6,
+            "snapshots": 1
+          },
+          "order_revenue_gold.mart_order_revenue_by_channel": {
+            "checksum": "75D35EE532C0493F",
+            "data_file_bytes": 1566,
+            "data_files": 1,
+            "rows": 11,
+            "snapshots": 1
+          },
+          "order_revenue_gold.mart_order_revenue_by_day": {
+            "checksum": "DC2A71DA91BA76D6",
+            "data_file_bytes": 1495,
+            "data_files": 1,
+            "rows": 12,
+            "snapshots": 1
+          },
+          "order_revenue_gold.mart_order_revenue_margin_by_product": {
+            "checksum": "B3A959DD9B69A440",
+            "data_file_bytes": 1676,
+            "data_files": 1,
+            "rows": 8,
+            "snapshots": 1
+          }
+        },
+        "job": "order_revenue_pipeline",
+        "layers": {
+          "bronze": {
+            "end": 1793308792.996343,
+            "seconds": 1.558,
+            "start": 1793308791.4385276,
+            "steps": 1
+          },
+          "gold": {
+            "end": 1793308855.400964,
+            "seconds": 24.413,
+            "start": 1793308830.9878676,
+            "steps": 1
+          },
+          "silver": {
+            "end": 1793308823.039741,
+            "seconds": 21.524,
+            "start": 1793308801.5158901,
+            "steps": 1
+          }
+        },
+        "product": "order_revenue",
+        "run_id": "b960e9dd-8518-4226-a269-44f8742c8387",
+        "seconds": 73.597,
+        "start": 1793308783.813783,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793308792.996343,
+            "layer": "bronze",
+            "seconds": 1.558,
+            "start": 1793308791.4385276,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793308823.039741,
+            "layer": "silver",
+            "seconds": 21.524,
+            "start": 1793308801.5158901,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          },
+          {
+            "end": 1793308855.400964,
+            "layer": "gold",
+            "seconds": 24.413,
+            "start": 1793308830.9878676,
+            "status": "SUCCESS",
+            "step": "order_revenue_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "first_pipeline",
+      "seconds": 138.133,
+      "started_at": 1793308770.5759637,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "pods": {
+          "by_namespace": {
+            "kube-system": 12,
+            "local-path-storage": 1,
+            "olf-dev": 8,
+            "olf-system": 23
+          },
+          "by_phase": {
+            "Failed": 1,
+            "Running": 28,
+            "Succeeded": 15
+          },
+          "pods": 44,
+          "running_containers": 28
+        },
+        "storage": {
+          "bytes_by_path": {
+            "/var/lib/containerd": 19925434406,
+            "/var/local-path-provisioner": 77199297
+          },
+          "bytes_total": 20002633703,
+          "nodes": 3
+        },
+        "usage_now": {
+          "at": 1793308911.7870703,
+          "cpu_cores": 0.535,
+          "memory_bytes": 6218038900
+        }
+      },
+      "error": null,
+      "name": "installed_footprint",
+      "seconds": null,
+      "started_at": 1793308911.7871368,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "seconds_requested": 120
+      },
+      "error": null,
+      "name": "settle",
+      "seconds": 120.0,
+      "started_at": 1793308911.787165,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 1.569,
+          "cpu_cores_mean": 0.681,
+          "cpu_cores_p95": 1.152,
+          "memory_bytes_max": 6233071287,
+          "memory_bytes_mean": 6181199330,
+          "memory_bytes_p95": 6204080257,
+          "samples": 42
+        },
+        "sampler_errors": 0,
+        "seconds_requested": 300
+      },
+      "error": null,
+      "name": "idle_window",
+      "seconds": 300.0,
+      "started_at": 1793309031.7873871,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "pods": {
+          "by_namespace": {
+            "kube-system": 12,
+            "local-path-storage": 1,
+            "olf-dev": 8,
+            "olf-system": 23
+          },
+          "by_phase": {
+            "Failed": 1,
+            "Running": 28,
+            "Succeeded": 15
+          },
+          "pods": 44,
+          "running_containers": 28
+        },
+        "storage": {
+          "bytes_by_path": {
+            "/var/lib/containerd": 19925464594,
+            "/var/local-path-provisioner": 77199874
+          },
+          "bytes_total": 20002664468,
+          "nodes": 3
+        },
+        "usage_now": {
+          "at": 1793309335.0393233,
+          "cpu_cores": 1.5,
+          "memory_bytes": 6209448966
+        }
+      },
+      "error": null,
+      "name": "steady_state_footprint",
+      "seconds": null,
+      "started_at": 1793309335.0393574,
+      "status": "ok"
+    }
+  ],
+  "scenario": "footprint",
+  "schema_version": 1,
+  "started_at": 1793308767.2835057,
+  "status": "ok"
+}

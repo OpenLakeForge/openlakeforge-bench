@@ -1,0 +1,63 @@
+[project]
+name = "openlakeforge-bench"
+version = "0.1.0"
+description = "Reproducible benchmarks of OpenLakeForge deployments (OpenLakeForge/openlakeforge#328)."
+requires-python = ">=3.12"
+# The harness drives olf's deploy, e2e and Trino helpers, which are not a
+# public API, so CI tests against one pinned commit of OpenLakeForge main.
+# A benchmark of another checkout runs inside that checkout's own olf
+# environment instead (README, "Run"); this pin never decides what is measured.
+dependencies = [
+  "openlakeforge",
+  "openlakeforge-domain-model",
+]
+
+[tool.uv.sources]
+openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "04b7368981118d0dabe72605600b71d2a9e0ffe9", subdirectory = "tools/olf" }
+openlakeforge-domain-model = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "04b7368981118d0dabe72605600b71d2a9e0ffe9", subdirectory = "packages/domain-model" }
+
+[project.scripts]
+olf-bench = "olf_bench.cli:main"
+
+[dependency-groups]
+dev = [
+  "mypy>=1.13",
+  "pytest>=8.3",
+  "ruff>=0.8",
+  "types-pyyaml>=6.0.12",
+]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["olf_bench*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["olf_bench"]
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unreachable = true
+
+# olf ships no py.typed marker; follow it anyway so the harness is checked
+# against olf's real signatures, without reporting olf's own errors here.
+[[tool.mypy.overrides]]
+module = ["olf", "olf.*", "openlakeforge_domain", "openlakeforge_domain.*"]
+follow_untyped_imports = true
+follow_imports = "silent"
+
+[[tool.mypy.overrides]]
+module = ["dagster.*", "dlt", "dlt.*", "floe_dagster.*", "lakehouse_code.*", "libs.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

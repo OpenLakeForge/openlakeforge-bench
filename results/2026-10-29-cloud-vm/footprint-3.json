@@ -1,0 +1,93 @@
+{
+  "environment": {
+    "cluster_config_override": {
+      "path": "/tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/kind-cluster-cgroupv1.yaml",
+      "sha256": "5b4ee64004a84a379aafe44820108ef0457ec2c4aefa20cbdf6e1b3915aeccaf"
+    },
+    "component_catalog_sha256": "ee32e3d555b11ca2a20d3906770de51fa15910599e301d09a7f9ee2abc6dab51",
+    "docker_server_version": "29.9.2",
+    "git_commit": "a8c99cdb6006246dd772eaa66a5b45b9e88afaa8",
+    "git_dirty": true,
+    "host": {
+      "cgroup": "v1",
+      "cpus": 4,
+      "kernel": "6.18.44-fc-v185",
+      "machine": "x86_64",
+      "memory_bytes": 16872808448
+    },
+    "olf_version": "0.5.0a1",
+    "parameters": {
+      "clean": true,
+      "cluster_name": "openlakeforge-local",
+      "preset": "slim"
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "excluded_from_install": true
+      },
+      "error": null,
+      "name": "destroy_before_install",
+      "seconds": 13.778,
+      "started_at": 1793303884.8489885,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_foundation",
+      "seconds": 38.455,
+      "started_at": 1793303898.6272619,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 2.477,
+          "cpu_cores_mean": 1.242,
+          "cpu_cores_p95": 2.326,
+          "memory_bytes_max": 1600965835,
+          "memory_bytes_mean": 1187546749,
+          "memory_bytes_p95": 1556715929,
+          "samples": 67
+        }
+      },
+      "error": null,
+      "name": "deploy_prefetch",
+      "seconds": 471.28,
+      "started_at": 1793303937.0823104,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "cluster_usage": {
+          "cpu_cores_max": 3.261,
+          "cpu_cores_mean": 1.074,
+          "cpu_cores_p95": 2.919,
+          "memory_bytes_max": 3840229244,
+          "memory_bytes_mean": 2436290278,
+          "memory_bytes_p95": 3774730992,
+          "samples": 30
+        }
+      },
+      "error": null,
+      "name": "deploy_platform",
+      "seconds": 212.474,
+      "started_at": 1793304408.362553,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": "olf deploy --phase artifacts exited 1; see /tmp/claude-0/-home-user-openlakeforge/6180c9d7-b88d-5b6e-98b5-23aeb1855019/scratchpad/results/footprint-3/logs/artifacts.log",
+      "name": "deploy_artifacts",
+      "seconds": 61.615,
+      "started_at": 1793304620.8367121,
+      "status": "failed"
+    }
+  ],
+  "scenario": "footprint",
+  "schema_version": 1,
+  "started_at": 1793303884.848932,
+  "status": "failed"
+}

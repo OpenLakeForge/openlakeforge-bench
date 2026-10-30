@@ -1,0 +1,15 @@
+{
+ "nodes": [
+  "openlakeforge-local-control-plane",
+  "openlakeforge-local-worker",
+  "openlakeforge-local-worker2"
+ ],
+ "storage": {
+  "nodes": 3,
+  "bytes_by_path": {
+   "/var/lib/containerd": 20614601422,
+   "/var/local-path-provisioner": 74751262
+  },
+  "bytes_total": 20689352684
+ }
+}
