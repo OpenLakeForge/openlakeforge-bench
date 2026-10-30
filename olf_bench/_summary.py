@@ -86,7 +86,8 @@ def _note(item: Mapping[str, Any], detail: Mapping[str, Any]) -> str:
 
 
 def _cell(text: str, limit: int = 140) -> str:
-    text = text.replace("|", "\\|")
+    # A line break would end the table row; a multi-line error reads as one line.
+    text = " ".join(text.split()).replace("|", "\\|")
     return text if len(text) <= limit else text[: limit - 1] + "…"
 
 

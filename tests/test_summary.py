@@ -112,4 +112,5 @@ def test_a_failed_step_shows_its_own_error(tmp_path: Path) -> None:
 
     result = runner.invoke(app, ["summarize", str(path)])
 
-    assert "profile_01_dbt_gold_assets: dbt failed / caused by: too many stages" in result.output
+    row = next(line for line in result.output.splitlines() if line.startswith("| run_1_profile_01 "))
+    assert row.endswith("| profile_01_dbt_gold_assets: dbt failed / caused by: too many stages |")

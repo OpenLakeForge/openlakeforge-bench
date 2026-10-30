@@ -151,7 +151,7 @@ jobs:
       - name: Collect kind diagnostics
         if: ${{ failure() }}
         run: |
-          KUBECONFIG=$(find "$RESULTS" .tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
+          KUBECONFIG=$(find "$RESULTS" ./.tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
           export KUBECONFIG
           echo "kubeconfig: ${KUBECONFIG:-none found}"
           uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
@@ -256,7 +256,7 @@ jobs:
       - name: Collect kind diagnostics
         if: ${{ failure() }}
         run: |
-          KUBECONFIG=$(find "$RESULTS" .tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
+          KUBECONFIG=$(find "$RESULTS" ./.tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
           export KUBECONFIG
           echo "kubeconfig: ${KUBECONFIG:-none found}"
           uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
@@ -372,7 +372,7 @@ jobs:
       - name: Collect kind diagnostics
         if: ${{ failure() }}
         run: |
-          KUBECONFIG=$(find "$RESULTS" .tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
+          KUBECONFIG=$(find "$RESULTS" ./.tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
           export KUBECONFIG
           echo "kubeconfig: ${KUBECONFIG:-none found}"
           uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
