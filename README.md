@@ -130,7 +130,7 @@ gh workflow run benchmark.yml -R OpenLakeForge/openlakeforge-bench -f openlakefo
 | `idle_seconds` | `300` | Scenario A's steady-state window |
 | `footprint_and_etl` | `true` | Run scenarios A and B |
 | `many_tables` | `100` | Table counts for scenario C, run in order on one cluster; empty skips scenario C |
-| `incremental_project` | `OpenLakeForge/acme-lakehouse` | Project scenario D installs and loads; empty skips scenario D |
+| `incremental_project` | empty | Project scenario D installs and loads, such as `OpenLakeForge/acme-lakehouse`; empty skips scenario D |
 | `incremental_project_ref` | `main` | Its branch, tag or commit |
 | `incremental_runs` | `5` | Scenario D's incremental runs of `rna_catalog` |
 
