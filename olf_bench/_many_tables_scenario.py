@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import json
 import time
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from datetime import datetime
 from typing import Any
 
@@ -61,14 +61,28 @@ def many_tables(
         for run in range(1, runs + 1):
             for product in cfg.inventory.products:
                 with record.timed(f"run_{run}_{product.id}", product=product.id) as detail:
-                    with dagster_client(cfg) as client:
-                        _pipeline.run_job(client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds)
-                    for layer in detail.get("layers", {}).values():
-                        if layer.get("end") is not None:
-                            layer["cluster_usage"] = sampler.window(layer["start"], layer["end"])
-                    detail["floe_jobs"] = floe_jobs(_floe_pods(cfg, detail["run_id"]))
+                    try:
+                        with dagster_client(cfg) as client:
+                            _pipeline.run_job(
+                                client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds
+                            )
+                    finally:
+                        # A failed run is where the Floe Jobs matter most: record them before the error propagates.
+                        _record_run(cfg, sampler, detail)
             with record.timed(f"run_{run}_tables", tables=tables) as detail:
                 detail.update(_check_tables(cfg, expected))
+
+
+def _record_run(cfg: E2EConfig, sampler: _resources.Sampler, detail: dict[str, Any]) -> None:
+    for layer in detail.get("layers", {}).values():
+        if layer.get("end") is not None:
+            layer["cluster_usage"] = sampler.window(layer["start"], layer["end"])
+    if "run_id" not in detail:
+        return
+    try:
+        detail["floe_jobs"] = floe_jobs(_floe_pods(cfg, detail["run_id"]))
+    except Exception as exc:  # noqa: BLE001 - never hide the run's own error behind this one
+        detail["floe_jobs_error"] = str(exc) or type(exc).__name__
 
 
 def floe_jobs(pods: Mapping[str, Any]) -> dict[str, Any]:
@@ -101,13 +115,17 @@ def floe_jobs(pods: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
-def check_gold(rows_by_table: Mapping[str, int], expected: Mapping[str, Any], *, product: str) -> None:
+def check_gold(rows: Sequence[tuple[str, int]], expected: Mapping[str, Any], *, product: str) -> None:
     """`mart_table_rows` must list every table of the domain once, each with the generated row count."""
     domain_tables = {
         name.split(".", 1)[1] for name, table in expected["tables"].items() if _product_of(table["source"]) == product
     }
     want = {table: expected["rows_per_table"] for table in domain_tables}
-    if dict(rows_by_table) != want:
+    repeated = sorted({table for table, _ in rows if sum(other == table for other, _ in rows) > 1})
+    if repeated:
+        raise BenchError(f"{product}_gold.mart_table_rows lists {repeated} more than once")
+    rows_by_table = dict(rows)
+    if rows_by_table != want:
         missing = sorted(set(want) - set(rows_by_table))
         wrong = sorted(t for t in rows_by_table if want.get(t) != rows_by_table[t])
         raise BenchError(f"{product}_gold.mart_table_rows: missing {missing or 'none'}, wrong {wrong or 'none'}")
@@ -132,9 +150,9 @@ def _check_tables(cfg: E2EConfig, expected: Mapping[str, Any]) -> dict[str, Any]
     for name in sorted(expected["gold"]):
         schema, table = name.split(".", 1)
         output = trino_query(cfg, f'SELECT table_name, row_count FROM {catalog}.{schema}."{table}"')
-        counted = {row.split(",", 1)[0]: int(row.split(",", 1)[1]) for row in output.splitlines() if row.strip()}
-        check_gold(counted, expected, product=schema.removesuffix("_gold"))
-        gold[name] = {"rows": len(counted)}
+        pairs = [row.split(",", 1) for row in output.splitlines() if row.strip()]
+        check_gold([(table, int(count)) for table, count in pairs], expected, product=schema.removesuffix("_gold"))
+        gold[name] = {"rows": len(pairs)}
     return {
         "silver_tables": len(silver),
         "silver_rows": sum(facts["rows"] for facts in silver.values()),
