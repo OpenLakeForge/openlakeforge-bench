@@ -15,6 +15,7 @@ carry.
 | --- | --- | --- |
 | `footprint [--clean\|--existing]` | A: install and idle | Each `olf deploy` phase (skipped with `--existing`, which measures the running deployment), time to the first Trino query, the first product pipeline and its Gold rows, pods per namespace, node storage, and CPU/RAM installed versus after `--settle-seconds` and over `--idle-seconds` |
 | `etl --scale N [--delta D]` | B: end-to-end ETL | The CSV fixtures replicated N times through every product job, a no-change rerun, then a reload at N+D replicas: wall clock per run and per layer, cluster CPU/RAM per layer, rows, checksums, Iceberg data files, bytes and snapshots |
+| `incremental --project P --product X` | D: incremental loads | An external project installed from its own profile, one product run `--runs` times, then a run killed `--kill-after-seconds` into Bronze and its retry, then a `--full-refresh`: per-run layer times as Silver and Gold grow, rows added per run, key uniqueness, Gold-to-Silver row parity |
 
 Each run writes `result.json`, plus one log per `olf` subprocess, under
 `--output` (default `<project-root>/.tmp/bench/<scenario>-<UTC time>`). A step
@@ -48,6 +49,30 @@ second `olf` over the checkout's. Hardware: the
 (4 CPUs, 16 GB of memory for Docker); the Slim preset on three kind nodes held
 about 20 GB of images, so leave at least 40 GB of disk free.
 
+Scenario D measures a project outside this checkout, such as
+[acme-lakehouse](https://github.com/OpenLakeForge/acme-lakehouse), on a
+cluster of its own: it installs the platform from that project's
+`openlakeforge.yaml`, then binds the stage's sources before the artifacts
+phase activates them. Each binding value comes from the variable the loader
+itself reads, `SOURCES__<SOURCE>__<KEY>`; the result names the ConfigMaps and
+Secrets it applied, never their values.
+
+```bash
+PYTHONPATH=~/src/openlakeforge-bench uv run --project tools/olf --locked python -m olf_bench incremental \
+  --project ~/src/acme-lakehouse --product rna_catalog --runs 5 --rows-per-run 100000 \
+  --gold-mirror mart_sequence_index=sequences --live-check food_quality
+```
+
+Every run must add exactly `--rows-per-run` rows to each Silver entity that
+reads an incremental resource, and keep its primary key unique. Each
+`--gold-mirror` Gold table must hold as many rows as its Silver table. The
+killed run must add nothing. Its retry may add one slice or two, because a
+kill after dlt committed its load leaves that slice in Bronze. A Bronze full
+refresh restarts a bounded cursor at the first slice, which Silver already
+holds, so it adds nothing either. A `--live-check` product runs once against
+its live source, untimed, and its outcome is recorded without failing the run.
+Run it on a stage that has never run the product.
+
 `python -m olf_bench summarize <result.json>...` prints a Markdown table of one
 or more results: every step's status and time, the Dagster run time and
 per-layer split of each product job, peak cluster memory, and the first line of
@@ -55,9 +80,9 @@ any error.
 
 ## Run on GitHub
 
-The [benchmark workflow](.github/workflows/benchmark.yml) runs both scenarios
-on a GitHub-hosted runner (4 vCPU, 16 GB, cgroup v2), the host the platform's
-local sizing is written for. Start it from the Actions tab, or:
+The [benchmark workflow](.github/workflows/benchmark.yml) runs scenarios A and
+B on one GitHub-hosted runner (4 vCPU, 16 GB, cgroup v2), the host the
+platform's local sizing is written for, and scenario D on another. Start it from the Actions tab, or:
 
 ```bash
 gh workflow run benchmark.yml -R OpenLakeForge/openlakeforge-bench -f openlakeforge_ref=main -f etl_scales="100 10000"
@@ -68,6 +93,15 @@ gh workflow run benchmark.yml -R OpenLakeForge/openlakeforge-bench -f openlakefo
 | `openlakeforge_ref` | `main` | OpenLakeForge branch, tag or commit to measure |
 | `etl_scales` | `100 10000` | Fixture replica counts for scenario B, run in order; each reloads at +10%. Empty skips scenario B |
 | `idle_seconds` | `300` | Scenario A's steady-state window |
+| `footprint_and_etl` | `true` | Run scenarios A and B |
+| `incremental_project` | `OpenLakeForge/acme-lakehouse` | Project scenario D installs and loads; empty skips scenario D |
+| `incremental_project_ref` | `main` | Its branch, tag or commit |
+| `incremental_runs` | `5` | Scenario D's incremental runs of `rna_catalog` |
+
+Scenario D binds acme's sources: RNAcentral's public database, and the Open
+Food Facts staging API for the `food_quality` live check. RNAcentral publishes
+its read-only login, but the workflow still reads it from the repository
+secrets `RNACENTRAL_USERNAME` and `RNACENTRAL_PASSWORD`, like any credential.
 
 The job frees disk, installs Slim through scenario A, then runs scenario B at
 each scale on the same cluster. A failed scale is recorded and the next still
@@ -109,8 +143,11 @@ Docker version, and any kind-config or image override in effect.
   an incremental merge.
 - CPU and memory are cluster totals per window, not per pod: a layer's peak
   includes everything else the cluster did at the same time.
-- Restart, failure and retry cases (OpenLakeForge/openlakeforge#343, #533 and
-  #53) and the ~100-table scenario C are not covered yet.
+- Scenario D covers one kill-and-retry case, a run terminated during Bronze.
+  Platform restarts and the other failure cases (OpenLakeForge/openlakeforge#343,
+  #533 and #53) and the ~100-table scenario C are not covered yet.
+- Scenario D reads RNAcentral's shared public database, so its Bronze times
+  include that service's latency and load.
 
 ## Development
 

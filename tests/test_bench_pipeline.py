@@ -44,7 +44,7 @@ class _Client:
     def __init__(self, *, fail: bool) -> None:
         self.fail = fail
 
-    def launch(self, job: str) -> str:
+    def launch(self, job: str, *, tags: Mapping[str, str] | None = None) -> str:
         return f"run-{job}"
 
     def poll(self, job: str, run_id: str, *, timeout_seconds: int) -> None:
