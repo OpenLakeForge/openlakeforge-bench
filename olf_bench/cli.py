@@ -154,6 +154,23 @@ def incremental_command(
     )
 
 
+@app.command("many-tables-project")
+def many_tables_project_command(
+    output: Path = typer.Option(..., "--output", help="Project root to write; replaced if it exists."),  # noqa: B008
+    tables: int = typer.Option(100, "--tables", min=1, help="Silver tables to generate."),
+    domains: int = typer.Option(4, "--domains", min=1, help="Domains, and products, to spread them over."),
+    rows: int = typer.Option(1000, "--rows", min=1, help="Rows per table."),
+    seed: int = typer.Option(328, "--seed", help="Changes the generated data; the same seed writes the same files."),
+) -> None:
+    """Write scenario C's synthetic project of many tables, with expected.json to validate it against."""
+    from olf_bench._many_tables import generate
+
+    if tables < domains:
+        raise typer.Exit(code=fail("--tables must be at least --domains: every domain needs a table."))
+    expected = generate(output, tables=tables, domains=domains, rows=rows, seed=seed)
+    log.info(f"{len(expected['tables'])} tables in {expected['domains']} domains written to {output}")
+
+
 @app.command("summarize")
 def summarize_command(
     results: list[Path] = typer.Argument(..., help="result.json files, in the order to show them."),  # noqa: B008
