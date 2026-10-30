@@ -7,7 +7,7 @@ import pytest
 from openlakeforge_services.base import ServiceClientError
 
 from olf_bench import BenchError
-from olf_bench._pipeline import column_expression, layer_of, run_job, summarize_run, table_facts
+from olf_bench._pipeline import column_expression, layer_of, run_job, step_errors, summarize_run, table_facts
 
 
 def test_layer_of_follows_the_product_definition_step_names() -> None:
@@ -50,9 +50,31 @@ def test_a_layer_with_a_running_step_has_not_ended() -> None:
     assert bronze["seconds"] is None
 
 
+# The run's event log, in pages: the gold step's failure sits on the second page,
+# behind a page of events from a long Silver step.
+_EVENT_PAGES = [
+    {"events": [{}] * 3 + [{"stepKey": "floe_sales"}], "cursor": "c1", "hasMore": True},
+    {
+        "events": [
+            {
+                "stepKey": "order_revenue_dbt_gold_assets",
+                "error": {
+                    "message": "step failed",
+                    "cause": {"message": "Query exceeded maximum stages", "cause": None},
+                },
+            }
+        ],
+        "cursor": "c2",
+        "hasMore": False,
+    },
+]
+
+
 class _Client:
-    def __init__(self, *, fail: bool) -> None:
+    def __init__(self, *, fail: bool, pages: list[dict[str, Any]] | None = None) -> None:
         self.fail = fail
+        self.pages = _EVENT_PAGES if pages is None else pages
+        self.cursors: list[str | None] = []
 
     def launch(self, job: str, *, tags: Mapping[str, str] | None = None) -> str:
         return f"run-{job}"
@@ -62,6 +84,10 @@ class _Client:
             raise ServiceClientError(f"{job} run {run_id} ended with FAILURE")
 
     def graphql(self, query: str, variables: Mapping[str, Any]) -> Mapping[str, Any]:
+        if "logsForRun" in query:
+            self.cursors.append(variables["after"])
+            index = 0 if variables["after"] is None else int(variables["after"][1:])
+            return {"logsForRun": {"__typename": "EventConnection", **self.pages[index]}}
         return {"runOrError": {"__typename": "Run", **_stats()}}
 
 
@@ -81,6 +107,29 @@ def test_a_failed_run_still_records_its_steps_before_failing() -> None:
         run_job(_Client(fail=True), "order_revenue_pipeline", detail, timeout_seconds=60)  # type: ignore[arg-type]
 
     assert len(detail["steps"]) == 4
+
+
+def test_a_failed_run_records_each_failed_steps_error_from_any_page_of_its_log() -> None:
+    client = _Client(fail=True)
+    detail: dict[str, Any] = {}
+
+    with pytest.raises(BenchError, match="order_revenue_dbt_gold_assets: step failed / caused by: Query exceeded"):
+        run_job(client, "order_revenue_pipeline", detail, timeout_seconds=60)  # type: ignore[arg-type]
+
+    assert client.cursors == [None, "c1"]
+    assert detail["step_errors"] == {
+        "order_revenue_dbt_gold_assets": "step failed / caused by: Query exceeded maximum stages"
+    }
+
+
+def test_an_unreadable_event_log_is_recorded_not_raised_over_the_run_failure() -> None:
+    class Broken(_Client):
+        def graphql(self, query: str, variables: Mapping[str, Any]) -> Mapping[str, Any]:
+            if "logsForRun" in query:
+                raise ServiceClientError("graphql timed out")
+            return super().graphql(query, variables)
+
+    assert step_errors(Broken(fail=True), "run-1") == {"(event log)": "graphql timed out"}  # type: ignore[arg-type]
 
 
 def test_floating_point_columns_are_rounded_for_the_checksum() -> None:
