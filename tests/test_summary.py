@@ -86,3 +86,31 @@ def test_a_many_tables_run_shows_its_floe_jobs_and_table_reads(tmp_path: Path) -
     assert result.exit_code == 0, result.output
     assert "1/1 Floe Jobs, pod start 6.0 s median / 9.5 s max" in result.output
     assert "100 tables, 100,000 rows, 100 files, read 0.4 s median / 1.2 s max" in result.output
+
+
+def test_a_failed_step_shows_its_own_error(tmp_path: Path) -> None:
+    path = tmp_path / "result.json"
+    path.write_text(
+        json.dumps(
+            {
+                "scenario": "many-tables-t300",
+                "status": "failed",
+                "measurements": [
+                    {
+                        "name": "run_1_profile_01",
+                        "status": "failed",
+                        "seconds": 478.7,
+                        "error": "profile_01_pipeline run r1 ended with FAILURE",
+                        "detail": {
+                            "step_errors": {"profile_01_dbt_gold_assets": "dbt failed / caused by: too many stages"}
+                        },
+                    }
+                ],
+            }
+        )
+    )
+
+    result = runner.invoke(app, ["summarize", str(path)])
+
+    row = next(line for line in result.output.splitlines() if line.startswith("| run_1_profile_01 "))
+    assert row.endswith("| profile_01_dbt_gold_assets: dbt failed / caused by: too many stages |")

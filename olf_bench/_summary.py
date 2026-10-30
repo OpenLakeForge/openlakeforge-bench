@@ -57,6 +57,10 @@ def _peak_memory(detail: Mapping[str, Any]) -> int | None:
 
 
 def _note(item: Mapping[str, Any], detail: Mapping[str, Any]) -> str:
+    errors = detail.get("step_errors")
+    if isinstance(errors, Mapping) and errors:
+        step, message = next(iter(errors.items()))
+        return _cell(f"{step}: {message}")
     if item.get("error"):
         return _cell(str(item["error"]).strip().splitlines()[0])
     floe = detail.get("floe_jobs")
@@ -82,7 +86,8 @@ def _note(item: Mapping[str, Any], detail: Mapping[str, Any]) -> str:
 
 
 def _cell(text: str, limit: int = 140) -> str:
-    text = text.replace("|", "\\|")
+    # A line break would end the table row; a multi-line error reads as one line.
+    text = " ".join(text.split()).replace("|", "\\|")
     return text if len(text) <= limit else text[: limit - 1] + "…"
 
 

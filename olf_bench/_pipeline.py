@@ -20,6 +20,25 @@ query RunStats($runId: ID!) {
 }
 """
 
+STEP_FAILURES_QUERY = """
+query StepFailures($runId: ID!, $after: String, $limit: Int) {
+  logsForRun(runId: $runId, afterCursor: $after, limit: $limit) {
+    __typename
+    ... on EventConnection {
+      cursor
+      hasMore
+      events {
+        ... on ExecutionStepFailureEvent {
+          stepKey
+          error { message cause { message cause { message cause { message } } } }
+        }
+      }
+    }
+    ... on PythonError { message }
+  }
+}
+"""
+
 TERMINATE_MUTATION = """
 mutation Terminate($runId: String!) {
   terminateRun(runId: $runId) {
@@ -100,7 +119,43 @@ def run_job(
     if result.get("__typename") == "Run":
         detail.update(summarize_run(result))
     if failure:
+        errors = step_errors(client, run_id)
+        if errors:
+            detail["step_errors"] = errors
+            failure += "".join(f"\n  {step}: {message}" for step, message in errors.items())
         raise BenchError(failure)
+
+
+def step_errors(client: DagsterClient, run_id: str, *, page: int = 1000, pages: int = 100) -> dict[str, str]:
+    """Each failed step's error, its cause chain joined, read page by page from the run's event log.
+
+    A step that loads many tables logs thousands of events, so its failure can sit far past a
+    single page. Best effort: a lookup error is recorded in place of the errors, never raised
+    over the run's own failure.
+    """
+    errors: dict[str, str] = {}
+    cursor: str | None = None
+    try:
+        for _ in range(pages):
+            connection = client.graphql(STEP_FAILURES_QUERY, {"runId": run_id, "after": cursor, "limit": page})[
+                "logsForRun"
+            ]
+            if connection.get("__typename") != "EventConnection":
+                return {"(event log)": str(connection.get("message", connection.get("__typename")))}
+            for event in connection.get("events") or []:
+                if not event.get("stepKey") or "error" not in event:
+                    continue
+                messages, error = [], event.get("error")
+                while error:
+                    messages.append(error["message"].strip())
+                    error = error.get("cause")
+                errors[event["stepKey"]] = " / caused by: ".join(messages)
+            if not connection.get("hasMore"):
+                break
+            cursor = connection.get("cursor")
+    except Exception as exc:  # noqa: BLE001 - never hide the run's own failure behind the lookup's
+        errors["(event log)"] = str(exc) or type(exc).__name__
+    return errors
 
 
 def run_stats(client: DagsterClient, run_id: str) -> dict[str, Any]:

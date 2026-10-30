@@ -146,9 +146,15 @@ jobs:
             echo "No benchmark result was written." >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # olf writes a local cluster's kubeconfig under the deployed project's
+      # .tmp/kubeconfigs/, which for scenarios C and D is not this checkout.
       - name: Collect kind diagnostics
         if: ${{ failure() }}
-        run: uv run --project tools/olf --locked olf diagnostics collect "$RESULTS/diagnostics"
+        run: |
+          KUBECONFIG=$(find "$RESULTS" ./.tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
+          export KUBECONFIG
+          echo "kubeconfig: ${KUBECONFIG:-none found}"
+          uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
 
       - name: Upload results
         if: ${{ always() }}
@@ -245,9 +251,15 @@ jobs:
             echo "No benchmark result was written." >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # olf writes a local cluster's kubeconfig under the deployed project's
+      # .tmp/kubeconfigs/, which for scenarios C and D is not this checkout.
       - name: Collect kind diagnostics
         if: ${{ failure() }}
-        run: uv run --project tools/olf --locked olf diagnostics collect "$RESULTS/diagnostics"
+        run: |
+          KUBECONFIG=$(find "$RESULTS" ./.tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
+          export KUBECONFIG
+          echo "kubeconfig: ${KUBECONFIG:-none found}"
+          uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
 
       - name: Upload results
         if: ${{ always() }}
@@ -355,9 +367,15 @@ jobs:
             echo "No benchmark result was written." >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # olf writes a local cluster's kubeconfig under the deployed project's
+      # .tmp/kubeconfigs/, which for scenarios C and D is not this checkout.
       - name: Collect kind diagnostics
         if: ${{ failure() }}
-        run: uv run --project tools/olf --locked olf diagnostics collect "$RESULTS/diagnostics"
+        run: |
+          KUBECONFIG=$(find "$RESULTS" ./.tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
+          export KUBECONFIG
+          echo "kubeconfig: ${KUBECONFIG:-none found}"
+          uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
 
       - name: Upload results
         if: ${{ always() }}
