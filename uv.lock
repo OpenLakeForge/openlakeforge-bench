@@ -778,7 +778,7 @@ wheels = [
 [[package]]
 name = "openlakeforge"
 version = "0.5.0a1"
-source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=tools%2Folf&rev=04b7368981118d0dabe72605600b71d2a9e0ffe9#04b7368981118d0dabe72605600b71d2a9e0ffe9" }
+source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=tools%2Folf&rev=3b589981a12b6fb9ae07aaca534eed36d9bf7433#3b589981a12b6fb9ae07aaca534eed36d9bf7433" }
 dependencies = [
     { name = "azure-identity" },
     { name = "azure-mgmt-containerservice" },
@@ -812,8 +812,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "openlakeforge", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=tools%2Folf&rev=04b7368981118d0dabe72605600b71d2a9e0ffe9" },
-    { name = "openlakeforge-domain-model", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Fdomain-model&rev=04b7368981118d0dabe72605600b71d2a9e0ffe9" },
+    { name = "openlakeforge", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=tools%2Folf&rev=3b589981a12b6fb9ae07aaca534eed36d9bf7433" },
+    { name = "openlakeforge-domain-model", git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Fdomain-model&rev=3b589981a12b6fb9ae07aaca534eed36d9bf7433" },
 ]
 
 [package.metadata.requires-dev]
@@ -827,7 +827,7 @@ dev = [
 [[package]]
 name = "openlakeforge-domain-model"
 version = "0.5.0a1"
-source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Fdomain-model&rev=04b7368981118d0dabe72605600b71d2a9e0ffe9#04b7368981118d0dabe72605600b71d2a9e0ffe9" }
+source = { git = "https://github.com/OpenLakeForge/openlakeforge?subdirectory=packages%2Fdomain-model&rev=3b589981a12b6fb9ae07aaca534eed36d9bf7433#3b589981a12b6fb9ae07aaca534eed36d9bf7433" }
 dependencies = [
     { name = "pyyaml" },
 ]

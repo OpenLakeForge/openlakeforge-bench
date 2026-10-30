@@ -17,9 +17,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from olf import log
-from olf.e2e._shell import E2EConfig, E2EError, kubectl
-from olf.e2e._trino import stage_catalog_name, trino_query
+from olf.common import log
+from olf.infra.e2e._shell import E2EConfig, E2EError, kubectl
+from olf.infra.e2e._trino import stage_catalog_name, trino_query
 
 from olf_bench import _dataset, _pipeline, _resources
 from olf_bench._dagster import dagster_client
