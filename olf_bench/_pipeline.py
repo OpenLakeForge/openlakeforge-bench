@@ -5,8 +5,8 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping
 from typing import Any
 
-from olf.clients.base import ServiceClientError
-from olf.clients.dagster import DagsterClient
+from olf.common.clients.base import ServiceClientError
+from olf.common.clients.dagster import DagsterClient
 
 from olf_bench._record import BenchError
 

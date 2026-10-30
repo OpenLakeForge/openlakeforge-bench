@@ -8,8 +8,9 @@ from contextlib import contextmanager
 from pathlib import Path
 
 import typer
-from olf import log
-from olf.commands._shared import applied_runtime_environment, deployment_context, fail
+from olf.common import log
+from olf.common.log import fail
+from olf.infra.commands._shared import applied_runtime_environment, deployment_context
 
 app = typer.Typer(help="Reproducible benchmarks of a local deployment; each run writes a JSON result.")
 
@@ -137,8 +138,8 @@ def _run(
 
 
 def _session(cluster_name: str, kubeconfig_path: Path):  # noqa: ANN202
-    from olf.e2e._runner import prepare_config
-    from olf.e2e._shell import E2EConfig
+    from olf.infra.e2e._runner import prepare_config
+    from olf.infra.e2e._shell import E2EConfig
 
     @contextmanager
     def session(project_root: Path) -> Iterator[E2EConfig]:

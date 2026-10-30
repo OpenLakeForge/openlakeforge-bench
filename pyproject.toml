@@ -13,8 +13,8 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "04b7368981118d0dabe72605600b71d2a9e0ffe9", subdirectory = "tools/olf" }
-openlakeforge-domain-model = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "04b7368981118d0dabe72605600b71d2a9e0ffe9", subdirectory = "packages/domain-model" }
+openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "3b589981a12b6fb9ae07aaca534eed36d9bf7433", subdirectory = "tools/olf" }
+openlakeforge-domain-model = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "3b589981a12b6fb9ae07aaca534eed36d9bf7433", subdirectory = "packages/domain-model" }
 
 [project.scripts]
 olf-bench = "olf_bench.cli:main"
