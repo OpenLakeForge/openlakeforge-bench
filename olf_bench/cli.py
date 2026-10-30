@@ -82,6 +82,78 @@ def etl_command(
     )
 
 
+@app.command("incremental")
+def incremental_command(
+    project: Path = typer.Option(  # noqa: B008
+        ..., "--project", help="The project to deploy and load: its root holds lakehouse_code/."
+    ),
+    product: str = typer.Option(..., "--product", help="The product whose job is run again and again."),
+    runs: int = typer.Option(5, "--runs", min=1, help="Incremental runs before the kill and the full refresh."),
+    rows_per_run: int = typer.Option(
+        100_000, "--rows-per-run", min=0, help="Rows each run adds to an incremental entity; 0 when unbounded."
+    ),
+    kill_after_seconds: float = typer.Option(
+        5.0, "--kill-after-seconds", help="Kill a run this far into its Bronze step, then retry; negative skips it."
+    ),
+    full_refresh: str = typer.Option("bronze", "--full-refresh", help="Last run's full-refresh scope, or none."),
+    live_check: list[str] = typer.Option(  # noqa: B008
+        [], "--live-check", help="A product run once, untimed and non-fatal, against a live public source."
+    ),
+    gold_mirror: list[str] = typer.Option(  # noqa: B008
+        [], "--gold-mirror", help="GOLD=SILVER: a Gold table that must hold as many rows as a Silver table."
+    ),
+    existing: bool = typer.Option(
+        False, "--existing", help="Use the running platform, applied from the same profile, instead of installing."
+    ),
+    sample_interval: float = typer.Option(2.0, "--sample-interval", help="Seconds between node usage samples."),
+    job_timeout_seconds: int = typer.Option(3600, "--job-timeout-seconds", help="Limit for one product job."),
+    output: str = typer.Option("", "--output", help=_OUTPUT_HELP),
+    project_root: str = typer.Option("", "--project-root", help="Project root; defaults to the current directory."),
+    cluster_name: str = typer.Option("openlakeforge-local", "--cluster-name", help="Local kind cluster name."),
+) -> None:
+    """Scenario D: an external project's incremental product, run after run, killed, retried and refreshed."""
+    from openlakeforge_domain import FULL_REFRESH_SCOPES
+
+    import olf_bench as bench
+
+    if full_refresh not in (*FULL_REFRESH_SCOPES, "none"):
+        raise typer.Exit(code=fail(f"--full-refresh must be one of {', '.join(FULL_REFRESH_SCOPES)} or none."))
+    mirrors = dict(pair.split("=", 1) for pair in gold_mirror if "=" in pair)
+    if len(mirrors) != len(gold_mirror):
+        raise typer.Exit(code=fail("--gold-mirror takes GOLD=SILVER."))
+    _run(
+        f"incremental-{product}",
+        project_root,
+        cluster_name,
+        output,
+        lambda record, target, session: bench.incremental(
+            record,
+            target,
+            session=session,
+            project=project.resolve(),
+            product_id=product,
+            runs=runs,
+            rows_per_run=rows_per_run,
+            kill_after_seconds=kill_after_seconds if kill_after_seconds >= 0 else None,
+            full_refresh=None if full_refresh == "none" else full_refresh,
+            live_check=live_check,
+            gold_mirrors=mirrors,
+            sample_interval=sample_interval,
+            install=not existing,
+        ),
+        job_timeout_seconds=job_timeout_seconds,
+        project=str(project),
+        product=product,
+        runs=runs,
+        rows_per_run=rows_per_run,
+        kill_after_seconds=kill_after_seconds,
+        full_refresh=full_refresh,
+        live_check=live_check,
+        gold_mirrors=mirrors,
+        existing=existing,
+    )
+
+
 @app.command("summarize")
 def summarize_command(
     results: list[Path] = typer.Argument(..., help="result.json files, in the order to show them."),  # noqa: B008

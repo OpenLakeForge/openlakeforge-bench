@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Mapping, Sequence
 from typing import Any
 
 from olf.common.clients.base import ServiceClientError
@@ -15,6 +15,16 @@ query RunStats($runId: ID!) {
   runOrError(runId: $runId) {
     __typename
     ... on Run { status startTime endTime stepStats { stepKey status startTime endTime } }
+    ... on PythonError { message }
+  }
+}
+"""
+
+TERMINATE_MUTATION = """
+mutation Terminate($runId: String!) {
+  terminateRun(runId: $runId) {
+    __typename
+    ... on TerminateRunFailure { message }
     ... on PythonError { message }
   }
 }
@@ -69,10 +79,17 @@ def summarize_run(stats: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
-def run_job(client: DagsterClient, job: str, detail: dict[str, Any], *, timeout_seconds: int) -> None:
+def run_job(
+    client: DagsterClient,
+    job: str,
+    detail: dict[str, Any],
+    *,
+    timeout_seconds: int,
+    tags: Mapping[str, str] | None = None,
+) -> None:
     """Launch `job`, wait for it, and fill `detail` with its run and step timings, even when it fails."""
-    run_id = client.launch(job)
-    detail.update(job=job, run_id=run_id)
+    run_id = client.launch(job, tags=tags)
+    detail.update(job=job, run_id=run_id, **({"tags": dict(tags)} if tags else {}))
     failure: str | None = None
     try:
         client.poll(job, run_id, timeout_seconds=timeout_seconds)
@@ -83,6 +100,28 @@ def run_job(client: DagsterClient, job: str, detail: dict[str, Any], *, timeout_
         detail.update(summarize_run(result))
     if failure:
         raise BenchError(failure)
+
+
+def run_stats(client: DagsterClient, run_id: str) -> dict[str, Any]:
+    """The run's status and step timings as `summarize_run` reports them."""
+    result = client.graphql(RUN_STATS_QUERY, {"runId": run_id})["runOrError"]
+    if result.get("__typename") != "Run":
+        raise BenchError(f"Dagster has no run {run_id}: {result.get('message', result.get('__typename'))}")
+    return summarize_run(result)
+
+
+def terminate(client: DagsterClient, run_id: str) -> None:
+    """Ask Dagster to stop the run; with the Kubernetes run launcher this deletes the run's pod."""
+    result = client.graphql(TERMINATE_MUTATION, {"runId": run_id})["terminateRun"]
+    if result.get("__typename") != "TerminateRunSuccess":
+        raise BenchError(f"could not terminate run {run_id}: {result.get('message', result.get('__typename'))}")
+
+
+def distinct_rows(query: Query, catalog: str, schema: str, table: str, columns: Sequence[str]) -> int:
+    """How many distinct values of `columns` the table holds; equal to its rows when they are a key."""
+    rendered = ", ".join('"' + column.replace('"', '""') + '"' for column in columns)
+    (count,) = _single(query(f'SELECT count(*) FROM (SELECT DISTINCT {rendered} FROM {catalog}.{schema}."{table}")'), 1)
+    return int(count)
 
 
 def column_expression(name: str, data_type: str) -> str:
