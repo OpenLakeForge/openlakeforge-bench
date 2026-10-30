@@ -83,6 +83,10 @@ class BenchRecord:
         finally:
             measurement.seconds = round(self._clock() - start, 3)
 
+    def fail(self, name: str, error: str) -> None:
+        """Record a failure raised outside any timed step, so the run still reads as failed."""
+        self.measurements.append(Measurement(name=name, status="failed", started_at=self._wall_clock(), error=error))
+
     def fact(self, name: str, detail: Mapping[str, Any]) -> None:
         """Record an untimed observation (a census, a footprint snapshot)."""
         self.measurements.append(

@@ -55,6 +55,25 @@ def test_a_failed_run_exits_non_zero_and_still_writes_its_result(
     assert document["measurements"][0]["error"] == "kubelet did not start"
 
 
+def test_a_failure_outside_any_step_still_fails_the_run(
+    external_project: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def footprint(record, target, **_kwargs):  # noqa: ANN001, ANN202
+        with record.timed("deploy_foundation"):
+            pass
+        raise bench.BenchError("the project has no product 'nope'")
+
+    monkeypatch.setattr(bench, "footprint", footprint)
+
+    result = _invoke(external_project, tmp_path, "footprint", "--idle-seconds", "1")
+
+    assert result.exit_code == 1
+    document = json.loads((tmp_path / "out" / "result.json").read_text())
+    assert document["status"] == "failed"
+    assert document["measurements"][-1]["name"] == "footprint"
+    assert document["measurements"][-1]["error"] == "the project has no product 'nope'"
+
+
 def test_existing_measures_the_running_deployment_without_installing(
     external_project: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

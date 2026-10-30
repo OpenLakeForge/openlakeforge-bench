@@ -40,6 +40,16 @@ def test_summarize_run_reports_each_layer_as_its_wall_clock_span() -> None:
     assert [step["layer"] for step in summary["steps"]] == ["bronze", "bronze", "silver", "gold"]
 
 
+def test_a_layer_with_a_running_step_has_not_ended() -> None:
+    stats = _stats()
+    stats["stepStats"][1] = {**stats["stepStats"][1], "status": "IN_PROGRESS", "endTime": None}
+
+    bronze = summarize_run(stats)["layers"]["bronze"]
+
+    assert bronze["end"] is None
+    assert bronze["seconds"] is None
+
+
 class _Client:
     def __init__(self, *, fail: bool) -> None:
         self.fail = fail
