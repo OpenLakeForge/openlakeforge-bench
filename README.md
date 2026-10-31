@@ -172,6 +172,7 @@ Docker version, and any kind-config or image override in effect.
 
 | Date | Host | Summary |
 | --- | --- | --- |
+| 2026-10-30 | GitHub-hosted runner: scenario C, 100 and 300 tables | [results/2026-10-30-many-tables](results/2026-10-30-many-tables/README.md) |
 | 2026-10-30 | GitHub-hosted runner, 4 vCPU, 15.6 GiB, cgroup v2 (reference) | [results/2026-10-30-github-runner](results/2026-10-30-github-runner/README.md) |
 | 2026-10-29 | Cloud VM, 4 vCPU, 15.7 GiB, cgroup v1, with workarounds | [results/2026-10-29-cloud-vm](results/2026-10-29-cloud-vm/README.md) |
 
