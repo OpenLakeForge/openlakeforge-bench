@@ -6,7 +6,8 @@ one), deploys it, runs every product job `runs` times, and records per run:
 
 - the Dagster run and its Bronze/Silver/Gold split, with cluster CPU/RAM;
 - every Floe Kubernetes Job the run started (Floe 0.8 starts one per domain):
-  how long its pod waited to start, and how long it ran;
+  how long its pod waited to start, how long it ran, and, from the Floe run
+  events in its log, how long each table took and how many ran at once;
 - every Silver table's rows against `expected.json`, its data files and
   snapshots, and how long Trino took to read its rows and metadata;
 - each Gold `mart_table_rows` against the row count of every table.
@@ -81,15 +82,22 @@ def _record_run(cfg: E2EConfig, sampler: _resources.Sampler, detail: dict[str, A
     if "run_id" not in detail:
         return
     try:
-        detail["floe_jobs"] = floe_jobs(_floe_pods(cfg, detail["run_id"]))
+        pods = _floe_pods(cfg, detail["run_id"])
+        detail["floe_jobs"] = floe_jobs(pods)
     except Exception as exc:  # noqa: BLE001 - never hide the run's own error behind this one
         detail["floe_jobs_error"] = str(exc) or type(exc).__name__
+        return
+    for job, pod in zip(detail["floe_jobs"]["jobs"], _sorted_pods(pods), strict=True):
+        try:
+            job["entities"] = floe_entities(_pod_log(cfg, pod["metadata"]["name"]))
+        except Exception as exc:  # noqa: BLE001 - a missing log must not hide the run's result
+            job["entities_error"] = str(exc) or type(exc).__name__
 
 
 def floe_jobs(pods: Mapping[str, Any]) -> dict[str, Any]:
     """Per Floe Job: seconds from pod creation to container start (cold start) and container run time."""
     jobs = []
-    for pod in pods.get("items", []):
+    for pod in _sorted_pods(pods):
         labels = pod.get("metadata", {}).get("labels", {})
         created = _time(pod.get("metadata", {}).get("creationTimestamp"))
         statuses: list[dict[str, Any]] = pod.get("status", {}).get("containerStatuses") or [{}]
@@ -106,7 +114,6 @@ def floe_jobs(pods: Mapping[str, Any]) -> dict[str, Any]:
                 "run_seconds": _span(started, finished),
             }
         )
-    jobs.sort(key=lambda job: job["job"] or "")
     return {
         "count": len(jobs),
         "succeeded": sum(job["exit_code"] == 0 for job in jobs),
@@ -114,6 +121,55 @@ def floe_jobs(pods: Mapping[str, Any]) -> dict[str, Any]:
         "run_seconds": _stats(job["run_seconds"] for job in jobs),
         "jobs": jobs,
     }
+
+
+def floe_entities(log: str) -> dict[str, Any]:
+    """Each table's seconds from `entity_started` to `entity_finished`, and the most that ran at once.
+
+    Floe writes one JSON event per line with `--log-format json`; other lines are skipped.
+    """
+    started: dict[str, float] = {}
+    spans: list[tuple[float, float]] = []
+    run_start = run_end = None
+    for line in log.splitlines():
+        if not line.startswith("{"):
+            continue
+        try:
+            event = json.loads(line)
+        except ValueError:
+            continue
+        kind, at = event.get("event"), event.get("ts_ms")
+        if not isinstance(at, int):
+            continue
+        if kind == "run_started":
+            run_start = at / 1000
+        elif kind == "run_finished":
+            run_end = at / 1000
+        elif kind == "entity_started":
+            started[event.get("name")] = at / 1000
+        elif kind == "entity_finished" and event.get("name") in started:
+            spans.append((started.pop(event["name"]), at / 1000))
+    first = min((start for start, _ in spans), default=None)
+    last = max((end for _, end in spans), default=None)
+    return {
+        "count": len(spans),
+        "unfinished": len(started),
+        "seconds": _stats(round(end - start, 3) for start, end in spans),
+        "max_concurrent": _max_concurrent(spans),
+        "before_first_seconds": _span(run_start, first),
+        "entities_seconds": _span(first, last),
+        "after_last_seconds": _span(last, run_end),
+    }
+
+
+def _max_concurrent(spans: Sequence[tuple[float, float]]) -> int:
+    # An entity that finishes at the instant another starts did not overlap it: ends sort first.
+    edges = sorted([(start, 1) for start, _ in spans] + [(end, -1) for _, end in spans], key=lambda e: (e[0], e[1]))
+    running = peak = 0
+    for _, step in edges:
+        running += step
+        peak = max(peak, running)
+    return peak
 
 
 def check_gold(rows: Sequence[tuple[str, int]], expected: Mapping[str, Any], *, product: str) -> None:
@@ -172,6 +228,17 @@ def _floe_pods(cfg: E2EConfig, run_id: str) -> dict[str, Any]:
         capture=True,
     )
     return json.loads(output)
+
+
+def _pod_log(cfg: E2EConfig, pod: str) -> str:
+    return kubectl(cfg, ["logs", "-n", cfg.namespace, pod], capture=True)
+
+
+def _sorted_pods(pods: Mapping[str, Any]) -> list[dict[str, Any]]:
+    def job(pod: Mapping[str, Any]) -> str:
+        return pod.get("metadata", {}).get("labels", {}).get("floe-job") or ""
+
+    return sorted(pods.get("items", []), key=job)
 
 
 def _product_of(source: str) -> str:
