@@ -1,0 +1,201 @@
+{
+  "environment": {
+    "cluster_config_override": null,
+    "component_catalog_sha256": "0980790d3cae5f625deb6de6f36a6d9dbe60e14afb1c205e919bba213af9deb8",
+    "docker_server_version": "29.4.2",
+    "git_commit": "cacde6ce2e06ceef7f2faf3e400fc987ec2fd1f5",
+    "git_modified": [],
+    "host": {
+      "cgroup": "v2",
+      "cpus": 4,
+      "kernel": "7.0.0-1017-azure",
+      "machine": "x86_64",
+      "memory_bytes": 16758403072
+    },
+    "image_overrides": {},
+    "olf_version": "0.5.0a1",
+    "parameters": {
+      "cluster_name": "openlakeforge-local",
+      "domains": 4,
+      "existing": false,
+      "preset": "slim",
+      "rows": 1000,
+      "runs": 2,
+      "seed": 328,
+      "tables": 300
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "domains": 4,
+        "files": 662,
+        "rows": 1000,
+        "seed": 328,
+        "tables": 300
+      },
+      "error": null,
+      "name": "generate_project",
+      "seconds": 1.474,
+      "started_at": 1793446582.3850732,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_foundation",
+      "seconds": 131.882,
+      "started_at": 1793446583.8587363,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_prefetch",
+      "seconds": 170.354,
+      "started_at": 1793446715.7410192,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_platform",
+      "seconds": 173.331,
+      "started_at": 1793446886.0955179,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "tables": 300
+      },
+      "error": null,
+      "name": "deploy_artifacts",
+      "seconds": 186.562,
+      "started_at": 1793447059.4267883,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793447752.017617,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "exit_code": 0,
+              "job": "floe-synth-01-d3524ed1",
+              "phase": "Succeeded",
+              "run_seconds": 313.0,
+              "start_seconds": 1.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 313.0,
+            "median": 313.0,
+            "min": 313.0,
+            "total": 313.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 1.0,
+            "median": 1.0,
+            "min": 1.0,
+            "total": 1.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_01_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.205,
+              "cpu_cores_mean": 1.103,
+              "cpu_cores_p95": 1.205,
+              "memory_bytes_max": 4867271687,
+              "memory_bytes_mean": 4856802704,
+              "memory_bytes_p95": 4867271687,
+              "samples": 4
+            },
+            "end": 1793447345.4977021,
+            "seconds": 14.956,
+            "start": 1793447330.5413096,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.898,
+              "cpu_cores_mean": 1.48,
+              "cpu_cores_p95": 2.898,
+              "memory_bytes_max": 5405216341,
+              "memory_bytes_mean": 5270998613,
+              "memory_bytes_p95": 5405216341,
+              "samples": 6
+            },
+            "end": 1793447750.7718728,
+            "seconds": 22.433,
+            "start": 1793447728.3392549,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.307,
+              "cpu_cores_mean": 0.558,
+              "cpu_cores_p95": 1.35,
+              "memory_bytes_max": 5403068857,
+              "memory_bytes_mean": 5260261194,
+              "memory_bytes_p95": 5373004086,
+              "samples": 91
+            },
+            "end": 1793447719.1020665,
+            "seconds": 364.491,
+            "start": 1793447354.610818,
+            "steps": 1
+          }
+        },
+        "product": "profile_01",
+        "run_id": "05127f8f-aade-48d1-9a2d-a2a325f58597",
+        "seconds": 429.755,
+        "start": 1793447322.262725,
+        "status": "FAILURE",
+        "step_errors": {
+          "profile_01_dbt_gold_assets": "dagster_dbt.errors.DagsterDbtCliRuntimeError: The dbt CLI process with command\n\n`dbt-ol build --select fqn:*`\n\nfailed with exit code `1`. Check the stdout in the Dagster compute logs for the full information about the error, or view the dbt debug log: /opt/openlakeforge/lakehouse_code/gold/profile_01/dbt/target/profile_01_dbt_gold_assets-05127f8-b2356f9/dbt.log.\n\nErrors parsed from dbt logs:\n\n1 of 1 ERROR creating sql table model profile_01_gold.mart_table_rows .......... [\u001b[31mERROR\u001b[0m in 4.02s]\n\n\u001b[31mFailure in model mart_table_rows (models/gold/mart_table_rows.sql)\u001b[0m\n\n  Database Error in model mart_table_rows (models/gold/mart_table_rows.sql)\n  TrinoUserError(type=USER_ERROR, name=QUERY_HAS_TOO_MANY_STAGES, message=\"Number of stages in the query (152) exceeds the allowed maximum (150). If the query contains multiple aggregates with DISTINCT over different columns, please set the 'distinct_aggregations_strategy' session property to 'single_step'. If the query contains WITH clauses that are referenced more than once, please create temporary table(s) for the queries in those clauses.\", query_id=20261031_115546_00002_36tr5)\n  compiled code at target/profile_01_dbt_gold_assets-05127f8-b2356f9/run/profile_01/models/gold/mart_table_rows.sql"
+        },
+        "steps": [
+          {
+            "end": 1793447345.4977021,
+            "layer": "bronze",
+            "seconds": 14.956,
+            "start": 1793447330.5413096,
+            "status": "SUCCESS",
+            "step": "feed_01_bronze_resources"
+          },
+          {
+            "end": 1793447719.1020665,
+            "layer": "silver",
+            "seconds": 364.491,
+            "start": 1793447354.610818,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_01__default_f0c2f986"
+          },
+          {
+            "end": 1793447750.7718728,
+            "layer": "gold",
+            "seconds": 22.433,
+            "start": 1793447728.3392549,
+            "status": "FAILURE",
+            "step": "profile_01_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": "profile_01_pipeline run 05127f8f-aade-48d1-9a2d-a2a325f58597 ended with FAILURE\n  profile_01_dbt_gold_assets: dagster_dbt.errors.DagsterDbtCliRuntimeError: The dbt CLI process with command\n\n`dbt-ol build --select fqn:*`\n\nfailed with exit code `1`. Check the stdout in the Dagster compute logs for the full information about the error, or view the dbt debug log: /opt/openlakeforge/lakehouse_code/gold/profile_01/dbt/target/profile_01_dbt_gold_assets-05127f8-b2356f9/dbt.log.\n\nErrors parsed from dbt logs:\n\n1 of 1 ERROR creating sql table model profile_01_gold.mart_table_rows .......... [\u001b[31mERROR\u001b[0m in 4.02s]\n\n\u001b[31mFailure in model mart_table_rows (models/gold/mart_table_rows.sql)\u001b[0m\n\n  Database Error in model mart_table_rows (models/gold/mart_table_rows.sql)\n  TrinoUserError(type=USER_ERROR, name=QUERY_HAS_TOO_MANY_STAGES, message=\"Number of stages in the query (152) exceeds the allowed maximum (150). If the query contains multiple aggregates with DISTINCT over different columns, please set the 'distinct_aggregations_strategy' session property to 'single_step'. If the query contains WITH clauses that are referenced more than once, please create temporary table(s) for the queries in those clauses.\", query_id=20261031_115546_00002_36tr5)\n  compiled code at target/profile_01_dbt_gold_assets-05127f8-b2356f9/run/profile_01/models/gold/mart_table_rows.sql",
+      "name": "run_1_profile_01",
+      "seconds": 513.844,
+      "started_at": 1793447246.2789657,
+      "status": "failed"
+    }
+  ],
+  "scenario": "many-tables-t300",
+  "schema_version": 1,
+  "started_at": 1793446582.3850362,
+  "status": "failed"
+}
