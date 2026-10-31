@@ -1,0 +1,6016 @@
+{
+  "environment": {
+    "cluster_config_override": null,
+    "component_catalog_sha256": "0980790d3cae5f625deb6de6f36a6d9dbe60e14afb1c205e919bba213af9deb8",
+    "docker_server_version": "29.4.2",
+    "git_commit": "967dd16f7d9d7abb4440a29cad881b3488cb5a3f",
+    "git_modified": [],
+    "host": {
+      "cgroup": "v2",
+      "cpus": 4,
+      "kernel": "7.0.0-1017-azure",
+      "machine": "x86_64",
+      "memory_bytes": 16758407168
+    },
+    "image_overrides": {},
+    "olf_version": "0.5.0a1",
+    "parameters": {
+      "cluster_name": "openlakeforge-local",
+      "domains": 4,
+      "existing": false,
+      "preset": "slim",
+      "rows": 1000,
+      "runs": 2,
+      "seed": 328,
+      "tables": 300
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "domains": 4,
+        "files": 662,
+        "rows": 1000,
+        "seed": 328,
+        "tables": 300
+      },
+      "error": null,
+      "name": "generate_project",
+      "seconds": 1.89,
+      "started_at": 1793451218.1797419,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_foundation",
+      "seconds": 139.634,
+      "started_at": 1793451220.0700474,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_prefetch",
+      "seconds": 194.895,
+      "started_at": 1793451359.70374,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_platform",
+      "seconds": 190.92,
+      "started_at": 1793451554.599243,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "tables": 300
+      },
+      "error": null,
+      "name": "deploy_artifacts",
+      "seconds": 214.697,
+      "started_at": 1793451745.519513,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793452528.649968,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "entities": {
+                "after_last_seconds": 0.008,
+                "before_first_seconds": 0.435,
+                "count": 75,
+                "entities_seconds": 314.488,
+                "max_concurrent": 4,
+                "seconds": {
+                  "count": 75,
+                  "max": 23.028,
+                  "median": 16.426,
+                  "min": 12.296,
+                  "total": 1245.594
+                },
+                "unfinished": 0
+              },
+              "exit_code": 0,
+              "job": "floe-synth-01-5bde0f11",
+              "phase": "Succeeded",
+              "run_seconds": 318.0,
+              "start_seconds": 0.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 318.0,
+            "median": 318.0,
+            "min": 318.0,
+            "total": 318.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "total": 0.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_01_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.758,
+              "cpu_cores_mean": 1.319,
+              "cpu_cores_p95": 1.758,
+              "memory_bytes_max": 4849018076,
+              "memory_bytes_mean": 4840159705,
+              "memory_bytes_p95": 4849018076,
+              "samples": 4
+            },
+            "end": 1793452085.7474842,
+            "seconds": 19.355,
+            "start": 1793452066.392157,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.228,
+              "cpu_cores_mean": 2.281,
+              "cpu_cores_p95": 4.228,
+              "memory_bytes_max": 5921686158,
+              "memory_bytes_mean": 5441365648,
+              "memory_bytes_p95": 5921686158,
+              "samples": 9
+            },
+            "end": 1793452527.2286267,
+            "seconds": 34.593,
+            "start": 1793452492.6352582,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.173,
+              "cpu_cores_mean": 0.597,
+              "cpu_cores_p95": 1.385,
+              "memory_bytes_max": 5491115686,
+              "memory_bytes_mean": 5335310096,
+              "memory_bytes_p95": 5461050915,
+              "samples": 95
+            },
+            "end": 1793452480.5029254,
+            "seconds": 384.195,
+            "start": 1793452096.307493,
+            "steps": 1
+          }
+        },
+        "product": "profile_01",
+        "run_id": "aa34bd5c-84b6-44ab-90f3-4f347861102a",
+        "seconds": 472.864,
+        "start": 1793452055.785523,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793452085.7474842,
+            "layer": "bronze",
+            "seconds": 19.355,
+            "start": 1793452066.392157,
+            "status": "SUCCESS",
+            "step": "feed_01_bronze_resources"
+          },
+          {
+            "end": 1793452480.5029254,
+            "layer": "silver",
+            "seconds": 384.195,
+            "start": 1793452096.307493,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_01__default_f0c2f986"
+          },
+          {
+            "end": 1793452527.2286267,
+            "layer": "gold",
+            "seconds": 34.593,
+            "start": 1793452492.6352582,
+            "status": "SUCCESS",
+            "step": "profile_01_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_1_profile_01",
+      "seconds": 574.272,
+      "started_at": 1793451960.6482646,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793453039.704568,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "entities": {
+                "after_last_seconds": 0.007,
+                "before_first_seconds": 0.437,
+                "count": 75,
+                "entities_seconds": 310.744,
+                "max_concurrent": 4,
+                "seconds": {
+                  "count": 75,
+                  "max": 24.402,
+                  "median": 16.329,
+                  "min": 4.187,
+                  "total": 1230.424
+                },
+                "unfinished": 0
+              },
+              "exit_code": 0,
+              "job": "floe-synth-02-c0647821",
+              "phase": "Succeeded",
+              "run_seconds": 313.0,
+              "start_seconds": 0.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 313.0,
+            "median": 313.0,
+            "min": 313.0,
+            "total": 313.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "total": 0.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_02_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.709,
+              "cpu_cores_mean": 1.345,
+              "cpu_cores_p95": 1.709,
+              "memory_bytes_max": 5641439541,
+              "memory_bytes_mean": 5624689169,
+              "memory_bytes_p95": 5641439541,
+              "samples": 5
+            },
+            "end": 1793452609.513677,
+            "seconds": 19.575,
+            "start": 1793452589.9381773,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.529,
+              "cpu_cores_mean": 1.653,
+              "cpu_cores_p95": 3.529,
+              "memory_bytes_max": 5884105194,
+              "memory_bytes_mean": 5828449576,
+              "memory_bytes_p95": 5884105194,
+              "samples": 6
+            },
+            "end": 1793453038.3704412,
+            "seconds": 25.328,
+            "start": 1793453013.042649,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.628,
+              "cpu_cores_mean": 0.58,
+              "cpu_cores_p95": 1.276,
+              "memory_bytes_max": 6026912857,
+              "memory_bytes_mean": 5928592013,
+              "memory_bytes_p95": 6016175439,
+              "samples": 95
+            },
+            "end": 1793453001.3844318,
+            "seconds": 380.002,
+            "start": 1793452621.3822002,
+            "steps": 1
+          }
+        },
+        "product": "profile_02",
+        "run_id": "9cc0ed1e-dc3e-4cd5-b57c-f559ba971295",
+        "seconds": 460.439,
+        "start": 1793452579.26584,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793452609.513677,
+            "layer": "bronze",
+            "seconds": 19.575,
+            "start": 1793452589.9381773,
+            "status": "SUCCESS",
+            "step": "feed_02_bronze_resources"
+          },
+          {
+            "end": 1793453001.3844318,
+            "layer": "silver",
+            "seconds": 380.002,
+            "start": 1793452621.3822002,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_02__default_bab1d03f"
+          },
+          {
+            "end": 1793453038.3704412,
+            "layer": "gold",
+            "seconds": 25.328,
+            "start": 1793453013.042649,
+            "status": "SUCCESS",
+            "step": "profile_02_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_1_profile_02",
+      "seconds": 511.271,
+      "started_at": 1793452534.919919,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793453562.180923,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "entities": {
+                "after_last_seconds": 0.007,
+                "before_first_seconds": 0.459,
+                "count": 75,
+                "entities_seconds": 310.563,
+                "max_concurrent": 4,
+                "seconds": {
+                  "count": 75,
+                  "max": 28.476,
+                  "median": 16.322,
+                  "min": 8.222,
+                  "total": 1217.669
+                },
+                "unfinished": 0
+              },
+              "exit_code": 0,
+              "job": "floe-synth-03-d2a21fcf",
+              "phase": "Succeeded",
+              "run_seconds": 314.0,
+              "start_seconds": 0.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 314.0,
+            "median": 314.0,
+            "min": 314.0,
+            "total": 314.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "total": 0.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_03_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.305,
+              "cpu_cores_mean": 1.527,
+              "cpu_cores_p95": 2.305,
+              "memory_bytes_max": 5798205848,
+              "memory_bytes_mean": 5756866788,
+              "memory_bytes_p95": 5798205848,
+              "samples": 4
+            },
+            "end": 1793453129.2367082,
+            "seconds": 19.59,
+            "start": 1793453109.647112,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.439,
+              "cpu_cores_mean": 1.56,
+              "cpu_cores_p95": 4.439,
+              "memory_bytes_max": 6000069311,
+              "memory_bytes_mean": 5873904646,
+              "memory_bytes_p95": 6000069311,
+              "samples": 6
+            },
+            "end": 1793453560.7134335,
+            "seconds": 23.735,
+            "start": 1793453536.9787118,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.788,
+              "cpu_cores_mean": 0.699,
+              "cpu_cores_p95": 1.684,
+              "memory_bytes_max": 6103148526,
+              "memory_bytes_mean": 5972498752,
+              "memory_bytes_p95": 6045166467,
+              "samples": 96
+            },
+            "end": 1793453525.1702135,
+            "seconds": 384.279,
+            "start": 1793453140.891443,
+            "steps": 1
+          }
+        },
+        "product": "profile_03",
+        "run_id": "bcf5d858-dea6-4ecb-bee9-67c5f26fbe13",
+        "seconds": 463.14,
+        "start": 1793453099.040907,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793453129.2367082,
+            "layer": "bronze",
+            "seconds": 19.59,
+            "start": 1793453109.647112,
+            "status": "SUCCESS",
+            "step": "feed_03_bronze_resources"
+          },
+          {
+            "end": 1793453525.1702135,
+            "layer": "silver",
+            "seconds": 384.279,
+            "start": 1793453140.891443,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_03__default_5b9d3da2"
+          },
+          {
+            "end": 1793453560.7134335,
+            "layer": "gold",
+            "seconds": 23.735,
+            "start": 1793453536.9787118,
+            "status": "SUCCESS",
+            "step": "profile_03_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_1_profile_03",
+      "seconds": 521.351,
+      "started_at": 1793453046.1908703,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793454132.284956,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "entities": {
+                "after_last_seconds": 0.005,
+                "before_first_seconds": 0.443,
+                "count": 75,
+                "entities_seconds": 310.096,
+                "max_concurrent": 4,
+                "seconds": {
+                  "count": 75,
+                  "max": 20.589,
+                  "median": 16.309,
+                  "min": 8.239,
+                  "total": 1223.905
+                },
+                "unfinished": 0
+              },
+              "exit_code": 0,
+              "job": "floe-synth-04-6a4b2eee",
+              "phase": "Succeeded",
+              "run_seconds": 313.0,
+              "start_seconds": 0.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 313.0,
+            "median": 313.0,
+            "min": 313.0,
+            "total": 313.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "total": 0.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_04_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.33,
+              "cpu_cores_mean": 1.234,
+              "cpu_cores_p95": 1.33,
+              "memory_bytes_max": 5793910881,
+              "memory_bytes_mean": 5786931559,
+              "memory_bytes_p95": 5793910881,
+              "samples": 4
+            },
+            "end": 1793453703.4747775,
+            "seconds": 18.843,
+            "start": 1793453684.6318302,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.194,
+              "cpu_cores_mean": 1.77,
+              "cpu_cores_p95": 4.194,
+              "memory_bytes_max": 6165425553,
+              "memory_bytes_mean": 5959088165,
+              "memory_bytes_p95": 6165425553,
+              "samples": 6
+            },
+            "end": 1793454130.9211533,
+            "seconds": 23.738,
+            "start": 1793454107.1829503,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.318,
+              "cpu_cores_mean": 0.64,
+              "cpu_cores_p95": 1.444,
+              "memory_bytes_max": 6151466908,
+              "memory_bytes_mean": 6050218705,
+              "memory_bytes_p95": 6141803232,
+              "samples": 95
+            },
+            "end": 1793454095.315429,
+            "seconds": 380.286,
+            "start": 1793453715.0290384,
+            "steps": 1
+          }
+        },
+        "product": "profile_04",
+        "run_id": "974796d9-577d-477f-8ac3-a9bb2fe47ebe",
+        "seconds": 458.059,
+        "start": 1793453674.225996,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793453703.4747775,
+            "layer": "bronze",
+            "seconds": 18.843,
+            "start": 1793453684.6318302,
+            "status": "SUCCESS",
+            "step": "feed_04_bronze_resources"
+          },
+          {
+            "end": 1793454095.315429,
+            "layer": "silver",
+            "seconds": 380.286,
+            "start": 1793453715.0290384,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_04__default_8700ea37"
+          },
+          {
+            "end": 1793454130.9211533,
+            "layer": "gold",
+            "seconds": 23.738,
+            "start": 1793454107.1829503,
+            "status": "SUCCESS",
+            "step": "profile_04_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_1_profile_04",
+      "seconds": 571.704,
+      "started_at": 1793453567.542345,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "data_files": 300,
+        "gold": {
+          "profile_01_gold.mart_table_rows": {
+            "rows": 75
+          },
+          "profile_02_gold.mart_table_rows": {
+            "rows": 75
+          },
+          "profile_03_gold.mart_table_rows": {
+            "rows": 75
+          },
+          "profile_04_gold.mart_table_rows": {
+            "rows": 75
+          }
+        },
+        "read_seconds": {
+          "count": 300,
+          "max": 8.652,
+          "median": 7.075,
+          "min": 6.748,
+          "total": 2140.665
+        },
+        "silver": {
+          "synth_01_silver.t001": {
+            "checksum": "F037A792832B30AC",
+            "data_file_bytes": 38266,
+            "data_files": 1,
+            "read_seconds": 8.652,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t005": {
+            "checksum": "21D66E43908E6A66",
+            "data_file_bytes": 36301,
+            "data_files": 1,
+            "read_seconds": 7.303,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t009": {
+            "checksum": "F39C1AE45A62BABA",
+            "data_file_bytes": 59383,
+            "data_files": 1,
+            "read_seconds": 7.538,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t013": {
+            "checksum": "3BFC5124C3652F0C",
+            "data_file_bytes": 31157,
+            "data_files": 1,
+            "read_seconds": 7.038,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t017": {
+            "checksum": "C4320685A5FCBA30",
+            "data_file_bytes": 29673,
+            "data_files": 1,
+            "read_seconds": 7.226,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t021": {
+            "checksum": "7CBD8EBA8FF558B3",
+            "data_file_bytes": 42529,
+            "data_files": 1,
+            "read_seconds": 7.958,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t025": {
+            "checksum": "F01645C04ACB18CB",
+            "data_file_bytes": 19059,
+            "data_files": 1,
+            "read_seconds": 7.346,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t029": {
+            "checksum": "7B59550C921BAC57",
+            "data_file_bytes": 40534,
+            "data_files": 1,
+            "read_seconds": 7.105,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t033": {
+            "checksum": "4822A300A2CAAA54",
+            "data_file_bytes": 15235,
+            "data_files": 1,
+            "read_seconds": 7.472,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t037": {
+            "checksum": "3A92FE082D9FFD49",
+            "data_file_bytes": 10910,
+            "data_files": 1,
+            "read_seconds": 7.223,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t041": {
+            "checksum": "913DB1A5A6EFF8AA",
+            "data_file_bytes": 13622,
+            "data_files": 1,
+            "read_seconds": 7.418,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t045": {
+            "checksum": "103F40679B315D71",
+            "data_file_bytes": 20329,
+            "data_files": 1,
+            "read_seconds": 6.962,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t049": {
+            "checksum": "E240AD7768D89946",
+            "data_file_bytes": 33503,
+            "data_files": 1,
+            "read_seconds": 7.169,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t053": {
+            "checksum": "471D66A87C2FDE10",
+            "data_file_bytes": 32389,
+            "data_files": 1,
+            "read_seconds": 7.358,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t057": {
+            "checksum": "3E5BE7679B2D8731",
+            "data_file_bytes": 24448,
+            "data_files": 1,
+            "read_seconds": 7.264,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t061": {
+            "checksum": "8E13A4BF2341C04C",
+            "data_file_bytes": 58388,
+            "data_files": 1,
+            "read_seconds": 7.135,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t065": {
+            "checksum": "60A86E94E44A56AC",
+            "data_file_bytes": 27788,
+            "data_files": 1,
+            "read_seconds": 7.472,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t069": {
+            "checksum": "AC85748E10801CBE",
+            "data_file_bytes": 22536,
+            "data_files": 1,
+            "read_seconds": 6.893,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t073": {
+            "checksum": "ADE82FAD00A46B12",
+            "data_file_bytes": 10407,
+            "data_files": 1,
+            "read_seconds": 7.178,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t077": {
+            "checksum": "BF923D7C28BAF477",
+            "data_file_bytes": 14023,
+            "data_files": 1,
+            "read_seconds": 7.546,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t081": {
+            "checksum": "489FDF78B4B8573C",
+            "data_file_bytes": 22148,
+            "data_files": 1,
+            "read_seconds": 6.979,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t085": {
+            "checksum": "8079E4A4BAFEAE26",
+            "data_file_bytes": 17158,
+            "data_files": 1,
+            "read_seconds": 7.296,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t089": {
+            "checksum": "C4728EE558FA5187",
+            "data_file_bytes": 43392,
+            "data_files": 1,
+            "read_seconds": 7.731,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t093": {
+            "checksum": "D5D8BFF7A971D283",
+            "data_file_bytes": 50369,
+            "data_files": 1,
+            "read_seconds": 7.158,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t097": {
+            "checksum": "95CA34A259E19100",
+            "data_file_bytes": 46536,
+            "data_files": 1,
+            "read_seconds": 7.41,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t101": {
+            "checksum": "69576320BA4A9FB8",
+            "data_file_bytes": 20394,
+            "data_files": 1,
+            "read_seconds": 7.092,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t105": {
+            "checksum": "CF47E44E0B50B6AF",
+            "data_file_bytes": 24847,
+            "data_files": 1,
+            "read_seconds": 7.155,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t109": {
+            "checksum": "D623ACE51D3937B4",
+            "data_file_bytes": 24215,
+            "data_files": 1,
+            "read_seconds": 7.605,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t113": {
+            "checksum": "D59278FBE5824139",
+            "data_file_bytes": 19418,
+            "data_files": 1,
+            "read_seconds": 7.112,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t117": {
+            "checksum": "BF643424E721CB02",
+            "data_file_bytes": 49162,
+            "data_files": 1,
+            "read_seconds": 7.125,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t121": {
+            "checksum": "7C7C6D25EDE5C585",
+            "data_file_bytes": 23482,
+            "data_files": 1,
+            "read_seconds": 7.538,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t125": {
+            "checksum": "780A7A3FC5C7BE02",
+            "data_file_bytes": 16295,
+            "data_files": 1,
+            "read_seconds": 7.399,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t129": {
+            "checksum": "AB297F90A98C93E3",
+            "data_file_bytes": 27784,
+            "data_files": 1,
+            "read_seconds": 7.416,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t133": {
+            "checksum": "91BF00D9C6AFFAED",
+            "data_file_bytes": 16813,
+            "data_files": 1,
+            "read_seconds": 7.164,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t137": {
+            "checksum": "B0BEEA3FDC92827C",
+            "data_file_bytes": 35829,
+            "data_files": 1,
+            "read_seconds": 7.041,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t141": {
+            "checksum": "B76435F8EBA1991D",
+            "data_file_bytes": 10551,
+            "data_files": 1,
+            "read_seconds": 7.593,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t145": {
+            "checksum": "697A9FFB5FB4E132",
+            "data_file_bytes": 15985,
+            "data_files": 1,
+            "read_seconds": 7.052,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t149": {
+            "checksum": "B5A734612339B3EF",
+            "data_file_bytes": 13689,
+            "data_files": 1,
+            "read_seconds": 7.025,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t153": {
+            "checksum": "9100CD245A429236",
+            "data_file_bytes": 22614,
+            "data_files": 1,
+            "read_seconds": 7.456,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t157": {
+            "checksum": "FE40FBE8ABEA84C0",
+            "data_file_bytes": 20722,
+            "data_files": 1,
+            "read_seconds": 6.968,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t161": {
+            "checksum": "E0F53DB759DEABD9",
+            "data_file_bytes": 39785,
+            "data_files": 1,
+            "read_seconds": 7.025,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t165": {
+            "checksum": "2678FBFCC5A908F4",
+            "data_file_bytes": 13429,
+            "data_files": 1,
+            "read_seconds": 7.218,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t169": {
+            "checksum": "09572B60E64299E5",
+            "data_file_bytes": 30517,
+            "data_files": 1,
+            "read_seconds": 6.953,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t173": {
+            "checksum": "A37B7A72F3958226",
+            "data_file_bytes": 33342,
+            "data_files": 1,
+            "read_seconds": 7.062,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t177": {
+            "checksum": "DD169E1DA5A5AB45",
+            "data_file_bytes": 28535,
+            "data_files": 1,
+            "read_seconds": 7.396,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t181": {
+            "checksum": "9463495660A3D5D0",
+            "data_file_bytes": 19856,
+            "data_files": 1,
+            "read_seconds": 7.007,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t185": {
+            "checksum": "ED4FD64C7BD589E2",
+            "data_file_bytes": 35468,
+            "data_files": 1,
+            "read_seconds": 7.285,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t189": {
+            "checksum": "030583D7D642B8E1",
+            "data_file_bytes": 19420,
+            "data_files": 1,
+            "read_seconds": 6.862,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t193": {
+            "checksum": "9D0F2075E1FFA6A8",
+            "data_file_bytes": 23815,
+            "data_files": 1,
+            "read_seconds": 7.133,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t197": {
+            "checksum": "0518F9A353F6D82C",
+            "data_file_bytes": 42020,
+            "data_files": 1,
+            "read_seconds": 7.323,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t201": {
+            "checksum": "F5B2D1C77B22B89D",
+            "data_file_bytes": 18361,
+            "data_files": 1,
+            "read_seconds": 7.032,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t205": {
+            "checksum": "D99F805D2892A88A",
+            "data_file_bytes": 26183,
+            "data_files": 1,
+            "read_seconds": 6.985,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t209": {
+            "checksum": "A70CCE5601372835",
+            "data_file_bytes": 30541,
+            "data_files": 1,
+            "read_seconds": 7.304,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t213": {
+            "checksum": "B78C0A759435279F",
+            "data_file_bytes": 25298,
+            "data_files": 1,
+            "read_seconds": 7.022,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t217": {
+            "checksum": "8152EFE23E5BBA6C",
+            "data_file_bytes": 10550,
+            "data_files": 1,
+            "read_seconds": 6.87,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t221": {
+            "checksum": "E025A3057A02C51C",
+            "data_file_bytes": 38069,
+            "data_files": 1,
+            "read_seconds": 7.461,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t225": {
+            "checksum": "B1761D45363947D1",
+            "data_file_bytes": 14474,
+            "data_files": 1,
+            "read_seconds": 6.987,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t229": {
+            "checksum": "5A7D60EE7DCE51B3",
+            "data_file_bytes": 21436,
+            "data_files": 1,
+            "read_seconds": 7.201,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t233": {
+            "checksum": "08FBFE7AAB5900A8",
+            "data_file_bytes": 28832,
+            "data_files": 1,
+            "read_seconds": 7.491,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t237": {
+            "checksum": "A775884204E8F6E0",
+            "data_file_bytes": 33880,
+            "data_files": 1,
+            "read_seconds": 6.98,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t241": {
+            "checksum": "5DAB8482CCF0EBFF",
+            "data_file_bytes": 19542,
+            "data_files": 1,
+            "read_seconds": 7.336,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t245": {
+            "checksum": "8C9BFF1BCEC6E045",
+            "data_file_bytes": 32735,
+            "data_files": 1,
+            "read_seconds": 6.937,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t249": {
+            "checksum": "FCA3C261558BDDB3",
+            "data_file_bytes": 33219,
+            "data_files": 1,
+            "read_seconds": 7.17,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t253": {
+            "checksum": "59FBAA8E03C461EB",
+            "data_file_bytes": 14420,
+            "data_files": 1,
+            "read_seconds": 7.252,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t257": {
+            "checksum": "6379E3D4612467E9",
+            "data_file_bytes": 19893,
+            "data_files": 1,
+            "read_seconds": 6.943,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t261": {
+            "checksum": "71A4937E03DB6C20",
+            "data_file_bytes": 30312,
+            "data_files": 1,
+            "read_seconds": 7.096,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t265": {
+            "checksum": "149515E47073FD91",
+            "data_file_bytes": 36709,
+            "data_files": 1,
+            "read_seconds": 7.387,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t269": {
+            "checksum": "416970D431175724",
+            "data_file_bytes": 50360,
+            "data_files": 1,
+            "read_seconds": 6.963,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t273": {
+            "checksum": "FBD18BE07A7C1F4B",
+            "data_file_bytes": 25341,
+            "data_files": 1,
+            "read_seconds": 6.833,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t277": {
+            "checksum": "712530E28887F626",
+            "data_file_bytes": 19974,
+            "data_files": 1,
+            "read_seconds": 7.249,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t281": {
+            "checksum": "189CAE6B4B2EF2D5",
+            "data_file_bytes": 27335,
+            "data_files": 1,
+            "read_seconds": 6.83,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t285": {
+            "checksum": "BCA2744BEA1D5A23",
+            "data_file_bytes": 27229,
+            "data_files": 1,
+            "read_seconds": 6.95,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t289": {
+            "checksum": "B3850D55A7E7A476",
+            "data_file_bytes": 35173,
+            "data_files": 1,
+            "read_seconds": 7.293,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t293": {
+            "checksum": "95C9AEEB6A65AC3E",
+            "data_file_bytes": 30334,
+            "data_files": 1,
+            "read_seconds": 6.748,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_01_silver.t297": {
+            "checksum": "08FE04074587C22C",
+            "data_file_bytes": 20323,
+            "data_files": 1,
+            "read_seconds": 7.024,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t002": {
+            "checksum": "BC855DDB2AC226D0",
+            "data_file_bytes": 19123,
+            "data_files": 1,
+            "read_seconds": 7.068,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t006": {
+            "checksum": "9E068CCBE4469C82",
+            "data_file_bytes": 38208,
+            "data_files": 1,
+            "read_seconds": 6.962,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t010": {
+            "checksum": "DB86DFF3D30DD5DB",
+            "data_file_bytes": 49794,
+            "data_files": 1,
+            "read_seconds": 7.322,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t014": {
+            "checksum": "2D49107DE2AFF97A",
+            "data_file_bytes": 32464,
+            "data_files": 1,
+            "read_seconds": 6.911,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t018": {
+            "checksum": "0E72C83FCF593A69",
+            "data_file_bytes": 46679,
+            "data_files": 1,
+            "read_seconds": 6.958,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t022": {
+            "checksum": "0A44540FA6C36332",
+            "data_file_bytes": 47679,
+            "data_files": 1,
+            "read_seconds": 7.343,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t026": {
+            "checksum": "D9EF0476670CEB39",
+            "data_file_bytes": 33521,
+            "data_files": 1,
+            "read_seconds": 6.899,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t030": {
+            "checksum": "FE52B3BAE6F2EDCD",
+            "data_file_bytes": 56085,
+            "data_files": 1,
+            "read_seconds": 6.842,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t034": {
+            "checksum": "3025326987F60688",
+            "data_file_bytes": 14076,
+            "data_files": 1,
+            "read_seconds": 7.383,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t038": {
+            "checksum": "B65AAD0CA139B9BC",
+            "data_file_bytes": 8169,
+            "data_files": 1,
+            "read_seconds": 6.898,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t042": {
+            "checksum": "BADAB961036F9812",
+            "data_file_bytes": 10862,
+            "data_files": 1,
+            "read_seconds": 6.914,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t046": {
+            "checksum": "7978E1B304BED984",
+            "data_file_bytes": 44321,
+            "data_files": 1,
+            "read_seconds": 7.305,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t050": {
+            "checksum": "7E33EF9C69D4E705",
+            "data_file_bytes": 41415,
+            "data_files": 1,
+            "read_seconds": 6.948,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t054": {
+            "checksum": "97D63818C5B595F3",
+            "data_file_bytes": 46456,
+            "data_files": 1,
+            "read_seconds": 6.872,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t058": {
+            "checksum": "50D5B1F1B9264BD8",
+            "data_file_bytes": 31475,
+            "data_files": 1,
+            "read_seconds": 7.361,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t062": {
+            "checksum": "D9A5AA39750F07C0",
+            "data_file_bytes": 43462,
+            "data_files": 1,
+            "read_seconds": 6.827,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t066": {
+            "checksum": "1EC830293C62A256",
+            "data_file_bytes": 40440,
+            "data_files": 1,
+            "read_seconds": 7.06,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t070": {
+            "checksum": "702E110DFC285039",
+            "data_file_bytes": 16246,
+            "data_files": 1,
+            "read_seconds": 7.273,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t074": {
+            "checksum": "8AC2B9CD5DAFC2F3",
+            "data_file_bytes": 13229,
+            "data_files": 1,
+            "read_seconds": 6.855,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t078": {
+            "checksum": "05BA7B80468CE696",
+            "data_file_bytes": 16381,
+            "data_files": 1,
+            "read_seconds": 7.237,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t082": {
+            "checksum": "DD51243ADCDA403A",
+            "data_file_bytes": 19951,
+            "data_files": 1,
+            "read_seconds": 6.993,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t086": {
+            "checksum": "A68EA9F91E86EEE0",
+            "data_file_bytes": 20166,
+            "data_files": 1,
+            "read_seconds": 6.94,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t090": {
+            "checksum": "0E829B7970ADFAE3",
+            "data_file_bytes": 34911,
+            "data_files": 1,
+            "read_seconds": 7.308,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t094": {
+            "checksum": "4BB66FF45E552600",
+            "data_file_bytes": 37876,
+            "data_files": 1,
+            "read_seconds": 6.991,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t098": {
+            "checksum": "78E316E9BE486D1C",
+            "data_file_bytes": 19881,
+            "data_files": 1,
+            "read_seconds": 6.873,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t102": {
+            "checksum": "1CE1CCA7F179296E",
+            "data_file_bytes": 33155,
+            "data_files": 1,
+            "read_seconds": 7.557,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t106": {
+            "checksum": "0AE8F355202B94E0",
+            "data_file_bytes": 20383,
+            "data_files": 1,
+            "read_seconds": 7.039,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t110": {
+            "checksum": "3AB8668E88175A33",
+            "data_file_bytes": 13589,
+            "data_files": 1,
+            "read_seconds": 6.949,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t114": {
+            "checksum": "F5AA6F06E055B56A",
+            "data_file_bytes": 20223,
+            "data_files": 1,
+            "read_seconds": 7.401,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t118": {
+            "checksum": "660FEE0A9E5E2F70",
+            "data_file_bytes": 13627,
+            "data_files": 1,
+            "read_seconds": 6.986,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t122": {
+            "checksum": "A3A4F6344A76501C",
+            "data_file_bytes": 27176,
+            "data_files": 1,
+            "read_seconds": 6.933,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t126": {
+            "checksum": "EF5862993A86A50D",
+            "data_file_bytes": 42027,
+            "data_files": 1,
+            "read_seconds": 7.327,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t130": {
+            "checksum": "8159C96EDA5F1850",
+            "data_file_bytes": 28448,
+            "data_files": 1,
+            "read_seconds": 6.891,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t134": {
+            "checksum": "031BA5E008262D26",
+            "data_file_bytes": 31190,
+            "data_files": 1,
+            "read_seconds": 7.474,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t138": {
+            "checksum": "AE29E611B981C795",
+            "data_file_bytes": 19148,
+            "data_files": 1,
+            "read_seconds": 6.973,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t142": {
+            "checksum": "7998092F4A45E2FD",
+            "data_file_bytes": 19977,
+            "data_files": 1,
+            "read_seconds": 6.914,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t146": {
+            "checksum": "7496FAA5EF7F522C",
+            "data_file_bytes": 24205,
+            "data_files": 1,
+            "read_seconds": 7.357,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t150": {
+            "checksum": "0B34C87A17FD05C0",
+            "data_file_bytes": 21315,
+            "data_files": 1,
+            "read_seconds": 6.818,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t154": {
+            "checksum": "F631C9B848F0C0AC",
+            "data_file_bytes": 41249,
+            "data_files": 1,
+            "read_seconds": 6.966,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t158": {
+            "checksum": "B7C3E68D711EDAF6",
+            "data_file_bytes": 18969,
+            "data_files": 1,
+            "read_seconds": 7.143,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t162": {
+            "checksum": "F7BDAFFB17659868",
+            "data_file_bytes": 39813,
+            "data_files": 1,
+            "read_seconds": 6.854,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t166": {
+            "checksum": "EB5E5654D00003EF",
+            "data_file_bytes": 13612,
+            "data_files": 1,
+            "read_seconds": 6.893,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t170": {
+            "checksum": "4AD89D56EFD44F81",
+            "data_file_bytes": 32547,
+            "data_files": 1,
+            "read_seconds": 7.495,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t174": {
+            "checksum": "615DF22DBB7EB45B",
+            "data_file_bytes": 49869,
+            "data_files": 1,
+            "read_seconds": 6.908,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t178": {
+            "checksum": "6A657089A5ED305A",
+            "data_file_bytes": 25845,
+            "data_files": 1,
+            "read_seconds": 6.947,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t182": {
+            "checksum": "F19047A010EA6A8B",
+            "data_file_bytes": 25012,
+            "data_files": 1,
+            "read_seconds": 7.424,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t186": {
+            "checksum": "99281FDD837D1BF9",
+            "data_file_bytes": 13659,
+            "data_files": 1,
+            "read_seconds": 6.941,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t190": {
+            "checksum": "6B53F85C642E7EA0",
+            "data_file_bytes": 23551,
+            "data_files": 1,
+            "read_seconds": 6.821,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t194": {
+            "checksum": "5C2F0F59728127C4",
+            "data_file_bytes": 30332,
+            "data_files": 1,
+            "read_seconds": 7.233,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t198": {
+            "checksum": "188595604E2AA0E8",
+            "data_file_bytes": 30035,
+            "data_files": 1,
+            "read_seconds": 6.964,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t202": {
+            "checksum": "B7012A4289DB5686",
+            "data_file_bytes": 24598,
+            "data_files": 1,
+            "read_seconds": 7.019,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t206": {
+            "checksum": "A1685928B07833BB",
+            "data_file_bytes": 11299,
+            "data_files": 1,
+            "read_seconds": 7.196,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t210": {
+            "checksum": "C986C3BF0BD2E581",
+            "data_file_bytes": 8222,
+            "data_files": 1,
+            "read_seconds": 6.834,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t214": {
+            "checksum": "0F512715E53F3166",
+            "data_file_bytes": 36547,
+            "data_files": 1,
+            "read_seconds": 7.187,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t218": {
+            "checksum": "1199FA12D5B203A2",
+            "data_file_bytes": 19906,
+            "data_files": 1,
+            "read_seconds": 6.805,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t222": {
+            "checksum": "3C4D2DE25F294956",
+            "data_file_bytes": 33971,
+            "data_files": 1,
+            "read_seconds": 6.89,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t226": {
+            "checksum": "50FB57D912C8A3C2",
+            "data_file_bytes": 33472,
+            "data_files": 1,
+            "read_seconds": 7.245,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t230": {
+            "checksum": "5B103970B7AD41FF",
+            "data_file_bytes": 42736,
+            "data_files": 1,
+            "read_seconds": 6.924,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t234": {
+            "checksum": "D9E73199FB580956",
+            "data_file_bytes": 37450,
+            "data_files": 1,
+            "read_seconds": 7.015,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t238": {
+            "checksum": "CCCC79B6370E69F3",
+            "data_file_bytes": 8141,
+            "data_files": 1,
+            "read_seconds": 7.434,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t242": {
+            "checksum": "937109B1B034A6D6",
+            "data_file_bytes": 18714,
+            "data_files": 1,
+            "read_seconds": 6.852,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t246": {
+            "checksum": "4C60FA8D13D04981",
+            "data_file_bytes": 20270,
+            "data_files": 1,
+            "read_seconds": 6.941,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t250": {
+            "checksum": "426FA6AC5C36C56D",
+            "data_file_bytes": 39857,
+            "data_files": 1,
+            "read_seconds": 7.34,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t254": {
+            "checksum": "D09EDA89DC0E771A",
+            "data_file_bytes": 28614,
+            "data_files": 1,
+            "read_seconds": 6.905,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t258": {
+            "checksum": "504061EA0099A057",
+            "data_file_bytes": 8979,
+            "data_files": 1,
+            "read_seconds": 6.889,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t262": {
+            "checksum": "E4C558D173C1C59A",
+            "data_file_bytes": 42902,
+            "data_files": 1,
+            "read_seconds": 7.422,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t266": {
+            "checksum": "5348903C0F13CAA1",
+            "data_file_bytes": 22617,
+            "data_files": 1,
+            "read_seconds": 6.996,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t270": {
+            "checksum": "0C1FEC60CA2528C1",
+            "data_file_bytes": 22235,
+            "data_files": 1,
+            "read_seconds": 7.279,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t274": {
+            "checksum": "559D9CD4236F9ADF",
+            "data_file_bytes": 24571,
+            "data_files": 1,
+            "read_seconds": 7.185,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t278": {
+            "checksum": "89F1B80E05E1AE61",
+            "data_file_bytes": 14016,
+            "data_files": 1,
+            "read_seconds": 6.792,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t282": {
+            "checksum": "C381C9F8F2016583",
+            "data_file_bytes": 29681,
+            "data_files": 1,
+            "read_seconds": 7.41,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t286": {
+            "checksum": "F504265C55CB17E0",
+            "data_file_bytes": 46777,
+            "data_files": 1,
+            "read_seconds": 6.943,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t290": {
+            "checksum": "B7FFDF13B2020563",
+            "data_file_bytes": 31549,
+            "data_files": 1,
+            "read_seconds": 7.013,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t294": {
+            "checksum": "B8F57159BEC4E228",
+            "data_file_bytes": 33854,
+            "data_files": 1,
+            "read_seconds": 7.918,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_02_silver.t298": {
+            "checksum": "60E35746AACF5A2E",
+            "data_file_bytes": 28439,
+            "data_files": 1,
+            "read_seconds": 6.943,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t003": {
+            "checksum": "471BF71E9DBE2AE4",
+            "data_file_bytes": 33036,
+            "data_files": 1,
+            "read_seconds": 6.916,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t007": {
+            "checksum": "01B6D6AA930734E6",
+            "data_file_bytes": 30986,
+            "data_files": 1,
+            "read_seconds": 7.401,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t011": {
+            "checksum": "77EED32AA6011393",
+            "data_file_bytes": 13593,
+            "data_files": 1,
+            "read_seconds": 6.922,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t015": {
+            "checksum": "B7743E107E99DE7B",
+            "data_file_bytes": 33956,
+            "data_files": 1,
+            "read_seconds": 6.83,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t019": {
+            "checksum": "348EF6FCA3E6B8FF",
+            "data_file_bytes": 18437,
+            "data_files": 1,
+            "read_seconds": 7.421,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t023": {
+            "checksum": "0B0922400313ED3D",
+            "data_file_bytes": 35696,
+            "data_files": 1,
+            "read_seconds": 7.101,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t027": {
+            "checksum": "10C79E32CDEBDF35",
+            "data_file_bytes": 21827,
+            "data_files": 1,
+            "read_seconds": 7.011,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t031": {
+            "checksum": "E1EAB71FFA196E9D",
+            "data_file_bytes": 28827,
+            "data_files": 1,
+            "read_seconds": 7.326,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t035": {
+            "checksum": "FD67D9229FD31106",
+            "data_file_bytes": 12826,
+            "data_files": 1,
+            "read_seconds": 7.119,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t039": {
+            "checksum": "B1D325151B5A1425",
+            "data_file_bytes": 13661,
+            "data_files": 1,
+            "read_seconds": 7.405,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t043": {
+            "checksum": "CAA6F1D9CED8F58D",
+            "data_file_bytes": 16370,
+            "data_files": 1,
+            "read_seconds": 7.239,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t047": {
+            "checksum": "610599B195589782",
+            "data_file_bytes": 25786,
+            "data_files": 1,
+            "read_seconds": 7.016,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t051": {
+            "checksum": "83EBD547B656DDD4",
+            "data_file_bytes": 15974,
+            "data_files": 1,
+            "read_seconds": 7.454,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t055": {
+            "checksum": "21439E4BACDADB3B",
+            "data_file_bytes": 41943,
+            "data_files": 1,
+            "read_seconds": 7.021,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t059": {
+            "checksum": "DDF0315A48622573",
+            "data_file_bytes": 22647,
+            "data_files": 1,
+            "read_seconds": 6.896,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t063": {
+            "checksum": "65A1ED1A8074F58D",
+            "data_file_bytes": 26555,
+            "data_files": 1,
+            "read_seconds": 7.248,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t067": {
+            "checksum": "57C4CCD4578761C2",
+            "data_file_bytes": 24071,
+            "data_files": 1,
+            "read_seconds": 6.904,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t071": {
+            "checksum": "0E347EA6196E0454",
+            "data_file_bytes": 44791,
+            "data_files": 1,
+            "read_seconds": 6.809,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t075": {
+            "checksum": "6C415B9B9F4DA2D4",
+            "data_file_bytes": 24079,
+            "data_files": 1,
+            "read_seconds": 7.518,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t079": {
+            "checksum": "36114910272FB673",
+            "data_file_bytes": 27611,
+            "data_files": 1,
+            "read_seconds": 6.883,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t083": {
+            "checksum": "A8ED9EB0FBDFC3FC",
+            "data_file_bytes": 46072,
+            "data_files": 1,
+            "read_seconds": 7.084,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t087": {
+            "checksum": "7FCA1370DCD4EA12",
+            "data_file_bytes": 22683,
+            "data_files": 1,
+            "read_seconds": 7.159,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t091": {
+            "checksum": "26B1BB07E91BCCB0",
+            "data_file_bytes": 40599,
+            "data_files": 1,
+            "read_seconds": 7.002,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t095": {
+            "checksum": "4632AC256A576152",
+            "data_file_bytes": 46468,
+            "data_files": 1,
+            "read_seconds": 7.291,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t099": {
+            "checksum": "74C0E637B616E9CC",
+            "data_file_bytes": 28855,
+            "data_files": 1,
+            "read_seconds": 6.803,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t103": {
+            "checksum": "4C9BBC3872B10157",
+            "data_file_bytes": 47559,
+            "data_files": 1,
+            "read_seconds": 6.841,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t107": {
+            "checksum": "9288C718D769BFC8",
+            "data_file_bytes": 21789,
+            "data_files": 1,
+            "read_seconds": 7.237,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t111": {
+            "checksum": "E268B63C0BE4BACB",
+            "data_file_bytes": 40825,
+            "data_files": 1,
+            "read_seconds": 7.011,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t115": {
+            "checksum": "0C01FB20F445C7E7",
+            "data_file_bytes": 30339,
+            "data_files": 1,
+            "read_seconds": 7.013,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t119": {
+            "checksum": "2EEDFB0B1261D362",
+            "data_file_bytes": 31557,
+            "data_files": 1,
+            "read_seconds": 7.265,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t123": {
+            "checksum": "B8EEF7908B94EC4D",
+            "data_file_bytes": 39802,
+            "data_files": 1,
+            "read_seconds": 6.947,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t127": {
+            "checksum": "700AA022BBEF8D80",
+            "data_file_bytes": 19088,
+            "data_files": 1,
+            "read_seconds": 6.911,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t131": {
+            "checksum": "47A31340FAF8523C",
+            "data_file_bytes": 21885,
+            "data_files": 1,
+            "read_seconds": 7.304,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t135": {
+            "checksum": "8432A8149D3B52C1",
+            "data_file_bytes": 23774,
+            "data_files": 1,
+            "read_seconds": 6.955,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t139": {
+            "checksum": "8F84938B4B4C7A69",
+            "data_file_bytes": 29184,
+            "data_files": 1,
+            "read_seconds": 6.891,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t143": {
+            "checksum": "CD811F3ABC9576B9",
+            "data_file_bytes": 48351,
+            "data_files": 1,
+            "read_seconds": 7.389,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t147": {
+            "checksum": "072D6E9AA09EC304",
+            "data_file_bytes": 32474,
+            "data_files": 1,
+            "read_seconds": 7.078,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t151": {
+            "checksum": "1814F13A80AE2F4B",
+            "data_file_bytes": 26825,
+            "data_files": 1,
+            "read_seconds": 7.249,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t155": {
+            "checksum": "3F1F48E353BEBE65",
+            "data_file_bytes": 38248,
+            "data_files": 1,
+            "read_seconds": 7.073,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t159": {
+            "checksum": "3D6AD8ED27BC4E0C",
+            "data_file_bytes": 23989,
+            "data_files": 1,
+            "read_seconds": 6.947,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t163": {
+            "checksum": "C883C3ED763B3FE8",
+            "data_file_bytes": 13737,
+            "data_files": 1,
+            "read_seconds": 7.323,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t167": {
+            "checksum": "44A8C978D0C0686B",
+            "data_file_bytes": 14463,
+            "data_files": 1,
+            "read_seconds": 7.227,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t171": {
+            "checksum": "4A63CBF64DB7CFD5",
+            "data_file_bytes": 40359,
+            "data_files": 1,
+            "read_seconds": 6.917,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t175": {
+            "checksum": "FAA47236E5BF506D",
+            "data_file_bytes": 24248,
+            "data_files": 1,
+            "read_seconds": 7.383,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t179": {
+            "checksum": "D42B2411095F2F23",
+            "data_file_bytes": 34326,
+            "data_files": 1,
+            "read_seconds": 7.011,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t183": {
+            "checksum": "E0C0EFC9C801FC1E",
+            "data_file_bytes": 44810,
+            "data_files": 1,
+            "read_seconds": 6.93,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t187": {
+            "checksum": "458A92A963983F8E",
+            "data_file_bytes": 34308,
+            "data_files": 1,
+            "read_seconds": 7.286,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t191": {
+            "checksum": "DBB12A1AF1B05CF7",
+            "data_file_bytes": 43708,
+            "data_files": 1,
+            "read_seconds": 6.941,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t195": {
+            "checksum": "79A3D56469A8EF83",
+            "data_file_bytes": 31128,
+            "data_files": 1,
+            "read_seconds": 6.892,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t199": {
+            "checksum": "E32A8087820663A1",
+            "data_file_bytes": 25318,
+            "data_files": 1,
+            "read_seconds": 7.49,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t203": {
+            "checksum": "832854549EBC0593",
+            "data_file_bytes": 18951,
+            "data_files": 1,
+            "read_seconds": 6.891,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t207": {
+            "checksum": "57DB03D26D9D380B",
+            "data_file_bytes": 28844,
+            "data_files": 1,
+            "read_seconds": 7.123,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t211": {
+            "checksum": "628FCE688D1E5163",
+            "data_file_bytes": 25343,
+            "data_files": 1,
+            "read_seconds": 7.081,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t215": {
+            "checksum": "B619A165F02C8923",
+            "data_file_bytes": 32535,
+            "data_files": 1,
+            "read_seconds": 6.995,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t219": {
+            "checksum": "5AEE5263F7DBF37B",
+            "data_file_bytes": 30016,
+            "data_files": 1,
+            "read_seconds": 7.414,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t223": {
+            "checksum": "C3E21D8D129AF93D",
+            "data_file_bytes": 16773,
+            "data_files": 1,
+            "read_seconds": 6.894,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t227": {
+            "checksum": "68CD8E6462E98C3E",
+            "data_file_bytes": 41816,
+            "data_files": 1,
+            "read_seconds": 6.987,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t231": {
+            "checksum": "C8A14F163C63465C",
+            "data_file_bytes": 17176,
+            "data_files": 1,
+            "read_seconds": 7.214,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t235": {
+            "checksum": "B75FB8EF4507D2B3",
+            "data_file_bytes": 31963,
+            "data_files": 1,
+            "read_seconds": 6.798,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t239": {
+            "checksum": "E11782D9852099D1",
+            "data_file_bytes": 16785,
+            "data_files": 1,
+            "read_seconds": 6.952,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t243": {
+            "checksum": "745F3446399E2836",
+            "data_file_bytes": 29537,
+            "data_files": 1,
+            "read_seconds": 7.296,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t247": {
+            "checksum": "1CCCDED11CA6CCA2",
+            "data_file_bytes": 22642,
+            "data_files": 1,
+            "read_seconds": 7.016,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t251": {
+            "checksum": "5FC21D57CF53E28A",
+            "data_file_bytes": 39656,
+            "data_files": 1,
+            "read_seconds": 6.932,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t255": {
+            "checksum": "580BB40C5495E3A3",
+            "data_file_bytes": 16757,
+            "data_files": 1,
+            "read_seconds": 7.357,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t259": {
+            "checksum": "3A00A2C2B9FEF7E8",
+            "data_file_bytes": 46058,
+            "data_files": 1,
+            "read_seconds": 6.991,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t263": {
+            "checksum": "9E642E2A7BC677A6",
+            "data_file_bytes": 26914,
+            "data_files": 1,
+            "read_seconds": 6.825,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t267": {
+            "checksum": "92B1620E0F62988B",
+            "data_file_bytes": 23002,
+            "data_files": 1,
+            "read_seconds": 7.124,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t271": {
+            "checksum": "BDD620F6A58AF637",
+            "data_file_bytes": 43482,
+            "data_files": 1,
+            "read_seconds": 6.936,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t275": {
+            "checksum": "9BA2F6E0AA2D9A7F",
+            "data_file_bytes": 22170,
+            "data_files": 1,
+            "read_seconds": 6.851,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t279": {
+            "checksum": "977D5522CAAADC5B",
+            "data_file_bytes": 13631,
+            "data_files": 1,
+            "read_seconds": 7.156,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t283": {
+            "checksum": "BBA8B91DE43E80C2",
+            "data_file_bytes": 42941,
+            "data_files": 1,
+            "read_seconds": 6.974,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t287": {
+            "checksum": "EA69B114D71B788D",
+            "data_file_bytes": 29360,
+            "data_files": 1,
+            "read_seconds": 6.992,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t291": {
+            "checksum": "AB349B20DFAF2006",
+            "data_file_bytes": 16736,
+            "data_files": 1,
+            "read_seconds": 7.026,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t295": {
+            "checksum": "9627B17F7EB2F093",
+            "data_file_bytes": 38848,
+            "data_files": 1,
+            "read_seconds": 6.943,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_03_silver.t299": {
+            "checksum": "08A9E7056C238426",
+            "data_file_bytes": 24584,
+            "data_files": 1,
+            "read_seconds": 7.297,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t004": {
+            "checksum": "B3AC3AED35D0FB4A",
+            "data_file_bytes": 14470,
+            "data_files": 1,
+            "read_seconds": 6.874,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t008": {
+            "checksum": "602298F81D53079D",
+            "data_file_bytes": 15948,
+            "data_files": 1,
+            "read_seconds": 6.924,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t012": {
+            "checksum": "F17BB136AC6EE34A",
+            "data_file_bytes": 24841,
+            "data_files": 1,
+            "read_seconds": 7.425,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t016": {
+            "checksum": "3D509126E3B7BB8B",
+            "data_file_bytes": 11719,
+            "data_files": 1,
+            "read_seconds": 6.835,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t020": {
+            "checksum": "F728A8927912A5E0",
+            "data_file_bytes": 11293,
+            "data_files": 1,
+            "read_seconds": 7.086,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t024": {
+            "checksum": "4BCDD19AB9875D84",
+            "data_file_bytes": 38627,
+            "data_files": 1,
+            "read_seconds": 7.497,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t028": {
+            "checksum": "B762C5AECDBA6409",
+            "data_file_bytes": 19804,
+            "data_files": 1,
+            "read_seconds": 6.884,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t032": {
+            "checksum": "94F62474F2CFEFFE",
+            "data_file_bytes": 30757,
+            "data_files": 1,
+            "read_seconds": 6.976,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t036": {
+            "checksum": "B85BD54789E40CB5",
+            "data_file_bytes": 16379,
+            "data_files": 1,
+            "read_seconds": 7.35,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t040": {
+            "checksum": "64BBC84934B1106B",
+            "data_file_bytes": 21234,
+            "data_files": 1,
+            "read_seconds": 7.191,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t044": {
+            "checksum": "FA3B990DCBD62E4D",
+            "data_file_bytes": 24154,
+            "data_files": 1,
+            "read_seconds": 7.166,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t048": {
+            "checksum": "E37364FD75F1A928",
+            "data_file_bytes": 22521,
+            "data_files": 1,
+            "read_seconds": 7.319,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t052": {
+            "checksum": "8E96238D38143E1E",
+            "data_file_bytes": 19949,
+            "data_files": 1,
+            "read_seconds": 7.002,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t056": {
+            "checksum": "8EFDC84DC761FE6F",
+            "data_file_bytes": 33385,
+            "data_files": 1,
+            "read_seconds": 7.474,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t060": {
+            "checksum": "47590B9ECE1A85C7",
+            "data_file_bytes": 41164,
+            "data_files": 1,
+            "read_seconds": 6.948,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t064": {
+            "checksum": "68BB2CBF3BF1F04C",
+            "data_file_bytes": 25438,
+            "data_files": 1,
+            "read_seconds": 7.097,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t068": {
+            "checksum": "A711AAADAB4120C9",
+            "data_file_bytes": 37998,
+            "data_files": 1,
+            "read_seconds": 7.272,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t072": {
+            "checksum": "D2146BAA978B66FD",
+            "data_file_bytes": 28203,
+            "data_files": 1,
+            "read_seconds": 6.923,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t076": {
+            "checksum": "45D348E14A15A120",
+            "data_file_bytes": 8171,
+            "data_files": 1,
+            "read_seconds": 6.918,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t080": {
+            "checksum": "69CBD2F6E7217C16",
+            "data_file_bytes": 24278,
+            "data_files": 1,
+            "read_seconds": 7.352,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t084": {
+            "checksum": "3C48C91E6908EECB",
+            "data_file_bytes": 35065,
+            "data_files": 1,
+            "read_seconds": 6.948,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t088": {
+            "checksum": "F710386B31650689",
+            "data_file_bytes": 27631,
+            "data_files": 1,
+            "read_seconds": 6.967,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t092": {
+            "checksum": "FBA0E24B0186183C",
+            "data_file_bytes": 24995,
+            "data_files": 1,
+            "read_seconds": 7.444,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t096": {
+            "checksum": "6A2E40E63C58CFFD",
+            "data_file_bytes": 15979,
+            "data_files": 1,
+            "read_seconds": 7.065,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t100": {
+            "checksum": "41FA027D8074461E",
+            "data_file_bytes": 41389,
+            "data_files": 1,
+            "read_seconds": 7.121,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t104": {
+            "checksum": "F3DE58EBBBCA037B",
+            "data_file_bytes": 46679,
+            "data_files": 1,
+            "read_seconds": 7.268,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t108": {
+            "checksum": "278CE52DFD662216",
+            "data_file_bytes": 25341,
+            "data_files": 1,
+            "read_seconds": 7.001,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t112": {
+            "checksum": "8CEAD9A965C3D804",
+            "data_file_bytes": 35132,
+            "data_files": 1,
+            "read_seconds": 7.245,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t116": {
+            "checksum": "76719E05C904C94B",
+            "data_file_bytes": 13633,
+            "data_files": 1,
+            "read_seconds": 7.0,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t120": {
+            "checksum": "03C7B491EC0977C8",
+            "data_file_bytes": 32011,
+            "data_files": 1,
+            "read_seconds": 7.076,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t124": {
+            "checksum": "47E332D3346724F8",
+            "data_file_bytes": 35268,
+            "data_files": 1,
+            "read_seconds": 7.432,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t128": {
+            "checksum": "B0BBFEB4DC5F03DA",
+            "data_file_bytes": 34248,
+            "data_files": 1,
+            "read_seconds": 6.89,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t132": {
+            "checksum": "6E449D4A481E3E28",
+            "data_file_bytes": 36482,
+            "data_files": 1,
+            "read_seconds": 6.985,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t136": {
+            "checksum": "933868CA5FF52CD4",
+            "data_file_bytes": 29334,
+            "data_files": 1,
+            "read_seconds": 7.266,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t140": {
+            "checksum": "11E3DB31F9F66E75",
+            "data_file_bytes": 14091,
+            "data_files": 1,
+            "read_seconds": 6.905,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t144": {
+            "checksum": "AD09E1D5BF84E083",
+            "data_file_bytes": 50679,
+            "data_files": 1,
+            "read_seconds": 6.96,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t148": {
+            "checksum": "8C837C84095DD147",
+            "data_file_bytes": 19004,
+            "data_files": 1,
+            "read_seconds": 7.418,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t152": {
+            "checksum": "DCB3F984E9B4A4B8",
+            "data_file_bytes": 14472,
+            "data_files": 1,
+            "read_seconds": 6.882,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t156": {
+            "checksum": "F745EF7A6651C7B8",
+            "data_file_bytes": 25265,
+            "data_files": 1,
+            "read_seconds": 7.105,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t160": {
+            "checksum": "C5D142014C9D7F38",
+            "data_file_bytes": 31092,
+            "data_files": 1,
+            "read_seconds": 7.474,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t164": {
+            "checksum": "5D8704A810A03295",
+            "data_file_bytes": 21745,
+            "data_files": 1,
+            "read_seconds": 6.959,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t168": {
+            "checksum": "6FFA917BFC28756F",
+            "data_file_bytes": 31928,
+            "data_files": 1,
+            "read_seconds": 7.293,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t172": {
+            "checksum": "85D59858D5DE292D",
+            "data_file_bytes": 31516,
+            "data_files": 1,
+            "read_seconds": 7.124,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t176": {
+            "checksum": "082BF239EBC79083",
+            "data_file_bytes": 46144,
+            "data_files": 1,
+            "read_seconds": 7.044,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t180": {
+            "checksum": "1DBD81721DB380A8",
+            "data_file_bytes": 14421,
+            "data_files": 1,
+            "read_seconds": 7.432,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t184": {
+            "checksum": "AC1EA4FE1A17B359",
+            "data_file_bytes": 7457,
+            "data_files": 1,
+            "read_seconds": 6.992,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t188": {
+            "checksum": "18D62DC9BE193C10",
+            "data_file_bytes": 25356,
+            "data_files": 1,
+            "read_seconds": 7.169,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t192": {
+            "checksum": "65E2C8D64EEF61CA",
+            "data_file_bytes": 34781,
+            "data_files": 1,
+            "read_seconds": 7.682,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t196": {
+            "checksum": "80B2782B67F00347",
+            "data_file_bytes": 27665,
+            "data_files": 1,
+            "read_seconds": 7.13,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t200": {
+            "checksum": "3537C7B9E67B0C67",
+            "data_file_bytes": 15994,
+            "data_files": 1,
+            "read_seconds": 7.059,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t204": {
+            "checksum": "60980D053C1A38A6",
+            "data_file_bytes": 37127,
+            "data_files": 1,
+            "read_seconds": 8.084,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t208": {
+            "checksum": "1CA23E87B1F48307",
+            "data_file_bytes": 18190,
+            "data_files": 1,
+            "read_seconds": 7.092,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t212": {
+            "checksum": "F0F3C3764572DFA2",
+            "data_file_bytes": 34354,
+            "data_files": 1,
+            "read_seconds": 7.319,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t216": {
+            "checksum": "8A0A3E3616BAED5C",
+            "data_file_bytes": 30749,
+            "data_files": 1,
+            "read_seconds": 7.05,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t220": {
+            "checksum": "FF93EF5D2060D3CC",
+            "data_file_bytes": 29963,
+            "data_files": 1,
+            "read_seconds": 6.963,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t224": {
+            "checksum": "9A94A2D54635E0C0",
+            "data_file_bytes": 29256,
+            "data_files": 1,
+            "read_seconds": 7.631,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t228": {
+            "checksum": "1E31BA983470A45F",
+            "data_file_bytes": 25415,
+            "data_files": 1,
+            "read_seconds": 7.032,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t232": {
+            "checksum": "B39578D9DE471EBA",
+            "data_file_bytes": 16805,
+            "data_files": 1,
+            "read_seconds": 7.094,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t236": {
+            "checksum": "573C332002AC5F85",
+            "data_file_bytes": 30897,
+            "data_files": 1,
+            "read_seconds": 7.399,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t240": {
+            "checksum": "505A914EC9382D5B",
+            "data_file_bytes": 13663,
+            "data_files": 1,
+            "read_seconds": 7.19,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t244": {
+            "checksum": "2FE90C87FE0DA616",
+            "data_file_bytes": 21511,
+            "data_files": 1,
+            "read_seconds": 7.089,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t248": {
+            "checksum": "373996D5E1F9D2EF",
+            "data_file_bytes": 33925,
+            "data_files": 1,
+            "read_seconds": 7.642,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t252": {
+            "checksum": "356861520FB61448",
+            "data_file_bytes": 36176,
+            "data_files": 1,
+            "read_seconds": 7.027,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t256": {
+            "checksum": "79F6F0B1BFDDCA3C",
+            "data_file_bytes": 14496,
+            "data_files": 1,
+            "read_seconds": 7.41,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t260": {
+            "checksum": "C776AC3CC9E97F2C",
+            "data_file_bytes": 42235,
+            "data_files": 1,
+            "read_seconds": 7.177,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t264": {
+            "checksum": "F287A2E8B057A860",
+            "data_file_bytes": 33932,
+            "data_files": 1,
+            "read_seconds": 7.052,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t268": {
+            "checksum": "4631B031174ECC6C",
+            "data_file_bytes": 19139,
+            "data_files": 1,
+            "read_seconds": 7.437,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t272": {
+            "checksum": "B6B46A13F1C45994",
+            "data_file_bytes": 28006,
+            "data_files": 1,
+            "read_seconds": 7.023,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t276": {
+            "checksum": "5335207F0A081161",
+            "data_file_bytes": 47226,
+            "data_files": 1,
+            "read_seconds": 7.087,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t280": {
+            "checksum": "E9A26D6545D71920",
+            "data_file_bytes": 13060,
+            "data_files": 1,
+            "read_seconds": 7.366,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t284": {
+            "checksum": "EF22344FA6363C4E",
+            "data_file_bytes": 53852,
+            "data_files": 1,
+            "read_seconds": 6.871,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t288": {
+            "checksum": "384399D263828D89",
+            "data_file_bytes": 15256,
+            "data_files": 1,
+            "read_seconds": 6.979,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t292": {
+            "checksum": "F3E6DE2219BC98C2",
+            "data_file_bytes": 38473,
+            "data_files": 1,
+            "read_seconds": 7.376,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t296": {
+            "checksum": "D423B857F4C7AF86",
+            "data_file_bytes": 19006,
+            "data_files": 1,
+            "read_seconds": 7.031,
+            "rows": 1000,
+            "snapshots": 1
+          },
+          "synth_04_silver.t300": {
+            "checksum": "161FD5AB57252648",
+            "data_file_bytes": 30987,
+            "data_files": 1,
+            "read_seconds": 6.933,
+            "rows": 1000,
+            "snapshots": 1
+          }
+        },
+        "silver_rows": 300000,
+        "silver_tables": 300,
+        "snapshots": {
+          "count": 300,
+          "max": 1,
+          "median": 1.0,
+          "min": 1,
+          "total": 300
+        },
+        "tables": 300
+      },
+      "error": null,
+      "name": "run_1_tables",
+      "seconds": 2148.52,
+      "started_at": 1793454139.2465615,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793456778.806768,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "entities": {
+                "after_last_seconds": 0.006,
+                "before_first_seconds": 0.443,
+                "count": 75,
+                "entities_seconds": 311.772,
+                "max_concurrent": 4,
+                "seconds": {
+                  "count": 75,
+                  "max": 24.58,
+                  "median": 16.383,
+                  "min": 4.233,
+                  "total": 1222.386
+                },
+                "unfinished": 0
+              },
+              "exit_code": 0,
+              "job": "floe-synth-01-996b121f",
+              "phase": "Succeeded",
+              "run_seconds": 315.0,
+              "start_seconds": 0.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 315.0,
+            "median": 315.0,
+            "min": 315.0,
+            "total": 315.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "total": 0.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_01_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.389,
+              "cpu_cores_mean": 1.189,
+              "cpu_cores_p95": 1.389,
+              "memory_bytes_max": 6357625338,
+              "memory_bytes_mean": 6350753390,
+              "memory_bytes_p95": 6357625338,
+              "samples": 5
+            },
+            "end": 1793456351.6101563,
+            "seconds": 19.375,
+            "start": 1793456332.2349398,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.441,
+              "cpu_cores_mean": 1.093,
+              "cpu_cores_p95": 2.441,
+              "memory_bytes_max": 6578816154,
+              "memory_bytes_mean": 6520834095,
+              "memory_bytes_p95": 6578816154,
+              "samples": 5
+            },
+            "end": 1793456777.3111284,
+            "seconds": 22.458,
+            "start": 1793456754.8530612,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.844,
+              "cpu_cores_mean": 0.66,
+              "cpu_cores_p95": 1.521,
+              "memory_bytes_max": 6760278522,
+              "memory_bytes_mean": 6636086152,
+              "memory_bytes_p95": 6736656203,
+              "samples": 95
+            },
+            "end": 1793456743.1139195,
+            "seconds": 379.561,
+            "start": 1793456363.553321,
+            "steps": 1
+          }
+        },
+        "product": "profile_01",
+        "run_id": "3a37d4ea-64d1-4a74-b75a-45728d51694d",
+        "seconds": 457.339,
+        "start": 1793456321.468138,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793456351.6101563,
+            "layer": "bronze",
+            "seconds": 19.375,
+            "start": 1793456332.2349398,
+            "status": "SUCCESS",
+            "step": "feed_01_bronze_resources"
+          },
+          {
+            "end": 1793456743.1139195,
+            "layer": "silver",
+            "seconds": 379.561,
+            "start": 1793456363.553321,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_01__default_f0c2f986"
+          },
+          {
+            "end": 1793456777.3111284,
+            "layer": "gold",
+            "seconds": 22.458,
+            "start": 1793456754.8530612,
+            "status": "SUCCESS",
+            "step": "profile_01_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_2_profile_01",
+      "seconds": 499.746,
+      "started_at": 1793456287.7666152,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793457316.743887,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "entities": {
+                "after_last_seconds": 0.006,
+                "before_first_seconds": 0.443,
+                "count": 75,
+                "entities_seconds": 312.114,
+                "max_concurrent": 4,
+                "seconds": {
+                  "count": 75,
+                  "max": 20.72,
+                  "median": 16.406,
+                  "min": 8.333,
+                  "total": 1235.92
+                },
+                "unfinished": 0
+              },
+              "exit_code": 0,
+              "job": "floe-synth-02-77cfbf40",
+              "phase": "Succeeded",
+              "run_seconds": 315.0,
+              "start_seconds": 1.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 315.0,
+            "median": 315.0,
+            "min": 315.0,
+            "total": 315.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 1.0,
+            "median": 1.0,
+            "min": 1.0,
+            "total": 1.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_02_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.253,
+              "cpu_cores_mean": 1.196,
+              "cpu_cores_p95": 1.253,
+              "memory_bytes_max": 6439229717,
+              "memory_bytes_mean": 6432518830,
+              "memory_bytes_p95": 6439229717,
+              "samples": 4
+            },
+            "end": 1793456890.9024038,
+            "seconds": 19.197,
+            "start": 1793456871.705705,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.043,
+              "cpu_cores_mean": 1.463,
+              "cpu_cores_p95": 4.043,
+              "memory_bytes_max": 6717328849,
+              "memory_bytes_mean": 6543382673,
+              "memory_bytes_p95": 6717328849,
+              "samples": 6
+            },
+            "end": 1793457315.3633635,
+            "seconds": 22.371,
+            "start": 1793457292.9924014,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.838,
+              "cpu_cores_mean": 0.664,
+              "cpu_cores_p95": 1.534,
+              "memory_bytes_max": 6808596904,
+              "memory_bytes_mean": 6668782011,
+              "memory_bytes_p95": 6758131039,
+              "samples": 94
+            },
+            "end": 1793457281.1049967,
+            "seconds": 378.518,
+            "start": 1793456902.5868125,
+            "steps": 1
+          }
+        },
+        "product": "profile_02",
+        "run_id": "3dfbfb28-3c24-4491-becf-3f340b7a3325",
+        "seconds": 455.668,
+        "start": 1793456861.075655,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793456890.9024038,
+            "layer": "bronze",
+            "seconds": 19.197,
+            "start": 1793456871.705705,
+            "status": "SUCCESS",
+            "step": "feed_02_bronze_resources"
+          },
+          {
+            "end": 1793457281.1049967,
+            "layer": "silver",
+            "seconds": 378.518,
+            "start": 1793456902.5868125,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_02__default_bab1d03f"
+          },
+          {
+            "end": 1793457315.3633635,
+            "layer": "gold",
+            "seconds": 22.371,
+            "start": 1793457292.9924014,
+            "status": "SUCCESS",
+            "step": "profile_02_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_2_profile_02",
+      "seconds": 531.436,
+      "started_at": 1793456787.5128658,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793457818.831018,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "entities": {
+                "after_last_seconds": 0.007,
+                "before_first_seconds": 0.431,
+                "count": 75,
+                "entities_seconds": 311.719,
+                "max_concurrent": 4,
+                "seconds": {
+                  "count": 75,
+                  "max": 20.675,
+                  "median": 16.377,
+                  "min": 4.223,
+                  "total": 1226.227
+                },
+                "unfinished": 0
+              },
+              "exit_code": 0,
+              "job": "floe-synth-03-69500c23",
+              "phase": "Succeeded",
+              "run_seconds": 315.0,
+              "start_seconds": 0.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 315.0,
+            "median": 315.0,
+            "min": 315.0,
+            "total": 315.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "total": 0.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_03_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.639,
+              "cpu_cores_mean": 1.285,
+              "cpu_cores_p95": 1.639,
+              "memory_bytes_max": 6469294488,
+              "memory_bytes_mean": 6463925779,
+              "memory_bytes_p95": 6469294488,
+              "samples": 5
+            },
+            "end": 1793457393.1662166,
+            "seconds": 19.41,
+            "start": 1793457373.755947,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.368,
+              "cpu_cores_mean": 1.144,
+              "cpu_cores_p95": 1.368,
+              "memory_bytes_max": 6636798213,
+              "memory_bytes_mean": 6559918298,
+              "memory_bytes_p95": 6636798213,
+              "samples": 5
+            },
+            "end": 1793457817.401476,
+            "seconds": 22.005,
+            "start": 1793457795.396642,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.37,
+              "cpu_cores_mean": 0.576,
+              "cpu_cores_p95": 1.321,
+              "memory_bytes_max": 6824703032,
+              "memory_bytes_mean": 6704215491,
+              "memory_bytes_p95": 6789269552,
+              "samples": 94
+            },
+            "end": 1793457783.6238694,
+            "seconds": 378.753,
+            "start": 1793457404.8703988,
+            "steps": 1
+          }
+        },
+        "product": "profile_03",
+        "run_id": "39d38f1b-dc76-4579-b65d-d57dae7c0830",
+        "seconds": 455.403,
+        "start": 1793457363.427659,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793457393.1662166,
+            "layer": "bronze",
+            "seconds": 19.41,
+            "start": 1793457373.755947,
+            "status": "SUCCESS",
+            "step": "feed_03_bronze_resources"
+          },
+          {
+            "end": 1793457783.6238694,
+            "layer": "silver",
+            "seconds": 378.753,
+            "start": 1793457404.8703988,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_03__default_5b9d3da2"
+          },
+          {
+            "end": 1793457817.401476,
+            "layer": "gold",
+            "seconds": 22.005,
+            "start": 1793457795.396642,
+            "status": "SUCCESS",
+            "step": "profile_03_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_2_profile_03",
+      "seconds": 501.46,
+      "started_at": 1793457318.948925,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793458441.342146,
+        "floe_jobs": {
+          "count": 1,
+          "jobs": [
+            {
+              "entities": {
+                "after_last_seconds": 0.01,
+                "before_first_seconds": 0.451,
+                "count": 75,
+                "entities_seconds": 311.734,
+                "max_concurrent": 4,
+                "seconds": {
+                  "count": 75,
+                  "max": 24.444,
+                  "median": 16.378,
+                  "min": 8.309,
+                  "total": 1226.262
+                },
+                "unfinished": 0
+              },
+              "exit_code": 0,
+              "job": "floe-synth-04-74baf670",
+              "phase": "Succeeded",
+              "run_seconds": 314.0,
+              "start_seconds": 0.0
+            }
+          ],
+          "run_seconds": {
+            "count": 1,
+            "max": 314.0,
+            "median": 314.0,
+            "min": 314.0,
+            "total": 314.0
+          },
+          "start_seconds": {
+            "count": 1,
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "total": 0.0
+          },
+          "succeeded": 1
+        },
+        "job": "profile_04_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.44,
+              "cpu_cores_mean": 1.222,
+              "cpu_cores_p95": 1.44,
+              "memory_bytes_max": 6472515713,
+              "memory_bytes_mean": 6454476850,
+              "memory_bytes_p95": 6472515713,
+              "samples": 5
+            },
+            "end": 1793458013.9063163,
+            "seconds": 19.844,
+            "start": 1793457994.0620725,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.571,
+              "cpu_cores_mean": 1.136,
+              "cpu_cores_p95": 2.571,
+              "memory_bytes_max": 6660420533,
+              "memory_bytes_mean": 6609525170,
+              "memory_bytes_p95": 6660420533,
+              "samples": 5
+            },
+            "end": 1793458439.7838662,
+            "seconds": 22.582,
+            "start": 1793458417.202111,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.063,
+              "cpu_cores_mean": 0.6,
+              "cpu_cores_p95": 1.311,
+              "memory_bytes_max": 6830071741,
+              "memory_bytes_mean": 6725444077,
+              "memory_bytes_p95": 6813965614,
+              "samples": 95
+            },
+            "end": 1793458405.388517,
+            "seconds": 379.648,
+            "start": 1793458025.7407072,
+            "steps": 1
+          }
+        },
+        "product": "profile_04",
+        "run_id": "901b00a6-3678-4209-80b1-3595194c34ee",
+        "seconds": 457.884,
+        "start": 1793457983.458356,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793458013.9063163,
+            "layer": "bronze",
+            "seconds": 19.844,
+            "start": 1793457994.0620725,
+            "status": "SUCCESS",
+            "step": "feed_04_bronze_resources"
+          },
+          {
+            "end": 1793458405.388517,
+            "layer": "silver",
+            "seconds": 379.648,
+            "start": 1793458025.7407072,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__synth_04__default_8700ea37"
+          },
+          {
+            "end": 1793458439.7838662,
+            "layer": "gold",
+            "seconds": 22.582,
+            "start": 1793458417.202111,
+            "status": "SUCCESS",
+            "step": "profile_04_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_2_profile_04",
+      "seconds": 621.937,
+      "started_at": 1793457820.4089015,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "data_files": 300,
+        "gold": {
+          "profile_01_gold.mart_table_rows": {
+            "rows": 75
+          },
+          "profile_02_gold.mart_table_rows": {
+            "rows": 75
+          },
+          "profile_03_gold.mart_table_rows": {
+            "rows": 75
+          },
+          "profile_04_gold.mart_table_rows": {
+            "rows": 75
+          }
+        },
+        "read_seconds": {
+          "count": 300,
+          "max": 8.377,
+          "median": 7.079,
+          "min": 6.722,
+          "total": 2143.833
+        },
+        "silver": {
+          "synth_01_silver.t001": {
+            "checksum": "F037A792832B30AC",
+            "data_file_bytes": 38266,
+            "data_files": 1,
+            "read_seconds": 7.172,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t005": {
+            "checksum": "21D66E43908E6A66",
+            "data_file_bytes": 36301,
+            "data_files": 1,
+            "read_seconds": 6.901,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t009": {
+            "checksum": "F39C1AE45A62BABA",
+            "data_file_bytes": 59383,
+            "data_files": 1,
+            "read_seconds": 7.275,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t013": {
+            "checksum": "3BFC5124C3652F0C",
+            "data_file_bytes": 31157,
+            "data_files": 1,
+            "read_seconds": 6.959,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t017": {
+            "checksum": "C4320685A5FCBA30",
+            "data_file_bytes": 29673,
+            "data_files": 1,
+            "read_seconds": 6.909,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t021": {
+            "checksum": "7CBD8EBA8FF558B3",
+            "data_file_bytes": 42529,
+            "data_files": 1,
+            "read_seconds": 7.225,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t025": {
+            "checksum": "F01645C04ACB18CB",
+            "data_file_bytes": 19059,
+            "data_files": 1,
+            "read_seconds": 6.926,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t029": {
+            "checksum": "7B59550C921BAC57",
+            "data_file_bytes": 40534,
+            "data_files": 1,
+            "read_seconds": 6.991,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t033": {
+            "checksum": "4822A300A2CAAA54",
+            "data_file_bytes": 15235,
+            "data_files": 1,
+            "read_seconds": 7.537,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t037": {
+            "checksum": "3A92FE082D9FFD49",
+            "data_file_bytes": 10910,
+            "data_files": 1,
+            "read_seconds": 7.037,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t041": {
+            "checksum": "913DB1A5A6EFF8AA",
+            "data_file_bytes": 13622,
+            "data_files": 1,
+            "read_seconds": 6.881,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t045": {
+            "checksum": "103F40679B315D71",
+            "data_file_bytes": 20329,
+            "data_files": 1,
+            "read_seconds": 7.318,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t049": {
+            "checksum": "E240AD7768D89946",
+            "data_file_bytes": 33503,
+            "data_files": 1,
+            "read_seconds": 7.025,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t053": {
+            "checksum": "471D66A87C2FDE10",
+            "data_file_bytes": 32389,
+            "data_files": 1,
+            "read_seconds": 7.294,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t057": {
+            "checksum": "3E5BE7679B2D8731",
+            "data_file_bytes": 24448,
+            "data_files": 1,
+            "read_seconds": 6.913,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t061": {
+            "checksum": "8E13A4BF2341C04C",
+            "data_file_bytes": 58388,
+            "data_files": 1,
+            "read_seconds": 6.803,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t065": {
+            "checksum": "60A86E94E44A56AC",
+            "data_file_bytes": 27788,
+            "data_files": 1,
+            "read_seconds": 7.456,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t069": {
+            "checksum": "AC85748E10801CBE",
+            "data_file_bytes": 22536,
+            "data_files": 1,
+            "read_seconds": 7.013,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t073": {
+            "checksum": "ADE82FAD00A46B12",
+            "data_file_bytes": 10407,
+            "data_files": 1,
+            "read_seconds": 6.863,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t077": {
+            "checksum": "BF923D7C28BAF477",
+            "data_file_bytes": 14023,
+            "data_files": 1,
+            "read_seconds": 7.345,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t081": {
+            "checksum": "489FDF78B4B8573C",
+            "data_file_bytes": 22148,
+            "data_files": 1,
+            "read_seconds": 7.074,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t085": {
+            "checksum": "8079E4A4BAFEAE26",
+            "data_file_bytes": 17158,
+            "data_files": 1,
+            "read_seconds": 7.035,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t089": {
+            "checksum": "C4728EE558FA5187",
+            "data_file_bytes": 43392,
+            "data_files": 1,
+            "read_seconds": 7.52,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t093": {
+            "checksum": "D5D8BFF7A971D283",
+            "data_file_bytes": 50369,
+            "data_files": 1,
+            "read_seconds": 6.894,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t097": {
+            "checksum": "95CA34A259E19100",
+            "data_file_bytes": 46536,
+            "data_files": 1,
+            "read_seconds": 7.093,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t101": {
+            "checksum": "69576320BA4A9FB8",
+            "data_file_bytes": 20394,
+            "data_files": 1,
+            "read_seconds": 7.495,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t105": {
+            "checksum": "CF47E44E0B50B6AF",
+            "data_file_bytes": 24847,
+            "data_files": 1,
+            "read_seconds": 6.938,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t109": {
+            "checksum": "D623ACE51D3937B4",
+            "data_file_bytes": 24215,
+            "data_files": 1,
+            "read_seconds": 7.157,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t113": {
+            "checksum": "D59278FBE5824139",
+            "data_file_bytes": 19418,
+            "data_files": 1,
+            "read_seconds": 7.08,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t117": {
+            "checksum": "BF643424E721CB02",
+            "data_file_bytes": 49162,
+            "data_files": 1,
+            "read_seconds": 6.976,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t121": {
+            "checksum": "7C7C6D25EDE5C585",
+            "data_file_bytes": 23482,
+            "data_files": 1,
+            "read_seconds": 7.361,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t125": {
+            "checksum": "780A7A3FC5C7BE02",
+            "data_file_bytes": 16295,
+            "data_files": 1,
+            "read_seconds": 6.901,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t129": {
+            "checksum": "AB297F90A98C93E3",
+            "data_file_bytes": 27784,
+            "data_files": 1,
+            "read_seconds": 7.057,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t133": {
+            "checksum": "91BF00D9C6AFFAED",
+            "data_file_bytes": 16813,
+            "data_files": 1,
+            "read_seconds": 7.313,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t137": {
+            "checksum": "B0BEEA3FDC92827C",
+            "data_file_bytes": 35829,
+            "data_files": 1,
+            "read_seconds": 7.294,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t141": {
+            "checksum": "B76435F8EBA1991D",
+            "data_file_bytes": 10551,
+            "data_files": 1,
+            "read_seconds": 6.916,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t145": {
+            "checksum": "697A9FFB5FB4E132",
+            "data_file_bytes": 15985,
+            "data_files": 1,
+            "read_seconds": 7.521,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t149": {
+            "checksum": "B5A734612339B3EF",
+            "data_file_bytes": 13689,
+            "data_files": 1,
+            "read_seconds": 7.023,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t153": {
+            "checksum": "9100CD245A429236",
+            "data_file_bytes": 22614,
+            "data_files": 1,
+            "read_seconds": 6.929,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t157": {
+            "checksum": "FE40FBE8ABEA84C0",
+            "data_file_bytes": 20722,
+            "data_files": 1,
+            "read_seconds": 7.464,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t161": {
+            "checksum": "E0F53DB759DEABD9",
+            "data_file_bytes": 39785,
+            "data_files": 1,
+            "read_seconds": 6.902,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t165": {
+            "checksum": "2678FBFCC5A908F4",
+            "data_file_bytes": 13429,
+            "data_files": 1,
+            "read_seconds": 7.345,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t169": {
+            "checksum": "09572B60E64299E5",
+            "data_file_bytes": 30517,
+            "data_files": 1,
+            "read_seconds": 7.226,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t173": {
+            "checksum": "A37B7A72F3958226",
+            "data_file_bytes": 33342,
+            "data_files": 1,
+            "read_seconds": 6.93,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t177": {
+            "checksum": "DD169E1DA5A5AB45",
+            "data_file_bytes": 28535,
+            "data_files": 1,
+            "read_seconds": 7.242,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t181": {
+            "checksum": "9463495660A3D5D0",
+            "data_file_bytes": 19856,
+            "data_files": 1,
+            "read_seconds": 6.952,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t185": {
+            "checksum": "ED4FD64C7BD589E2",
+            "data_file_bytes": 35468,
+            "data_files": 1,
+            "read_seconds": 6.972,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t189": {
+            "checksum": "030583D7D642B8E1",
+            "data_file_bytes": 19420,
+            "data_files": 1,
+            "read_seconds": 7.271,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t193": {
+            "checksum": "9D0F2075E1FFA6A8",
+            "data_file_bytes": 23815,
+            "data_files": 1,
+            "read_seconds": 6.894,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t197": {
+            "checksum": "0518F9A353F6D82C",
+            "data_file_bytes": 42020,
+            "data_files": 1,
+            "read_seconds": 6.983,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t201": {
+            "checksum": "F5B2D1C77B22B89D",
+            "data_file_bytes": 18361,
+            "data_files": 1,
+            "read_seconds": 8.377,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t205": {
+            "checksum": "D99F805D2892A88A",
+            "data_file_bytes": 26183,
+            "data_files": 1,
+            "read_seconds": 7.039,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t209": {
+            "checksum": "A70CCE5601372835",
+            "data_file_bytes": 30541,
+            "data_files": 1,
+            "read_seconds": 6.91,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t213": {
+            "checksum": "B78C0A759435279F",
+            "data_file_bytes": 25298,
+            "data_files": 1,
+            "read_seconds": 7.311,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t217": {
+            "checksum": "8152EFE23E5BBA6C",
+            "data_file_bytes": 10550,
+            "data_files": 1,
+            "read_seconds": 7.067,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t221": {
+            "checksum": "E025A3057A02C51C",
+            "data_file_bytes": 38069,
+            "data_files": 1,
+            "read_seconds": 7.381,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t225": {
+            "checksum": "B1761D45363947D1",
+            "data_file_bytes": 14474,
+            "data_files": 1,
+            "read_seconds": 7.007,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t229": {
+            "checksum": "5A7D60EE7DCE51B3",
+            "data_file_bytes": 21436,
+            "data_files": 1,
+            "read_seconds": 7.138,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t233": {
+            "checksum": "08FBFE7AAB5900A8",
+            "data_file_bytes": 28832,
+            "data_files": 1,
+            "read_seconds": 7.354,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t237": {
+            "checksum": "A775884204E8F6E0",
+            "data_file_bytes": 33880,
+            "data_files": 1,
+            "read_seconds": 7.235,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t241": {
+            "checksum": "5DAB8482CCF0EBFF",
+            "data_file_bytes": 19542,
+            "data_files": 1,
+            "read_seconds": 7.032,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t245": {
+            "checksum": "8C9BFF1BCEC6E045",
+            "data_file_bytes": 32735,
+            "data_files": 1,
+            "read_seconds": 7.468,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t249": {
+            "checksum": "FCA3C261558BDDB3",
+            "data_file_bytes": 33219,
+            "data_files": 1,
+            "read_seconds": 7.111,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t253": {
+            "checksum": "59FBAA8E03C461EB",
+            "data_file_bytes": 14420,
+            "data_files": 1,
+            "read_seconds": 7.102,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t257": {
+            "checksum": "6379E3D4612467E9",
+            "data_file_bytes": 19893,
+            "data_files": 1,
+            "read_seconds": 7.567,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t261": {
+            "checksum": "71A4937E03DB6C20",
+            "data_file_bytes": 30312,
+            "data_files": 1,
+            "read_seconds": 7.069,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t265": {
+            "checksum": "149515E47073FD91",
+            "data_file_bytes": 36709,
+            "data_files": 1,
+            "read_seconds": 7.446,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t269": {
+            "checksum": "416970D431175724",
+            "data_file_bytes": 50360,
+            "data_files": 1,
+            "read_seconds": 7.363,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t273": {
+            "checksum": "FBD18BE07A7C1F4B",
+            "data_file_bytes": 25341,
+            "data_files": 1,
+            "read_seconds": 7.082,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t277": {
+            "checksum": "712530E28887F626",
+            "data_file_bytes": 19974,
+            "data_files": 1,
+            "read_seconds": 7.416,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t281": {
+            "checksum": "189CAE6B4B2EF2D5",
+            "data_file_bytes": 27335,
+            "data_files": 1,
+            "read_seconds": 7.093,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t285": {
+            "checksum": "BCA2744BEA1D5A23",
+            "data_file_bytes": 27229,
+            "data_files": 1,
+            "read_seconds": 6.957,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t289": {
+            "checksum": "B3850D55A7E7A476",
+            "data_file_bytes": 35173,
+            "data_files": 1,
+            "read_seconds": 7.444,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t293": {
+            "checksum": "95C9AEEB6A65AC3E",
+            "data_file_bytes": 30334,
+            "data_files": 1,
+            "read_seconds": 6.996,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_01_silver.t297": {
+            "checksum": "08FE04074587C22C",
+            "data_file_bytes": 20323,
+            "data_files": 1,
+            "read_seconds": 7.056,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t002": {
+            "checksum": "BC855DDB2AC226D0",
+            "data_file_bytes": 19123,
+            "data_files": 1,
+            "read_seconds": 7.537,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t006": {
+            "checksum": "9E068CCBE4469C82",
+            "data_file_bytes": 38208,
+            "data_files": 1,
+            "read_seconds": 7.328,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t010": {
+            "checksum": "DB86DFF3D30DD5DB",
+            "data_file_bytes": 49794,
+            "data_files": 1,
+            "read_seconds": 7.177,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t014": {
+            "checksum": "2D49107DE2AFF97A",
+            "data_file_bytes": 32464,
+            "data_files": 1,
+            "read_seconds": 7.341,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t018": {
+            "checksum": "0E72C83FCF593A69",
+            "data_file_bytes": 46679,
+            "data_files": 1,
+            "read_seconds": 7.012,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t022": {
+            "checksum": "0A44540FA6C36332",
+            "data_file_bytes": 47679,
+            "data_files": 1,
+            "read_seconds": 7.527,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t026": {
+            "checksum": "D9EF0476670CEB39",
+            "data_file_bytes": 33521,
+            "data_files": 1,
+            "read_seconds": 6.951,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t030": {
+            "checksum": "FE52B3BAE6F2EDCD",
+            "data_file_bytes": 56085,
+            "data_files": 1,
+            "read_seconds": 7.033,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t034": {
+            "checksum": "3025326987F60688",
+            "data_file_bytes": 14076,
+            "data_files": 1,
+            "read_seconds": 7.462,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t038": {
+            "checksum": "B65AAD0CA139B9BC",
+            "data_file_bytes": 8169,
+            "data_files": 1,
+            "read_seconds": 7.267,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t042": {
+            "checksum": "BADAB961036F9812",
+            "data_file_bytes": 10862,
+            "data_files": 1,
+            "read_seconds": 6.977,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t046": {
+            "checksum": "7978E1B304BED984",
+            "data_file_bytes": 44321,
+            "data_files": 1,
+            "read_seconds": 7.449,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t050": {
+            "checksum": "7E33EF9C69D4E705",
+            "data_file_bytes": 41415,
+            "data_files": 1,
+            "read_seconds": 7.051,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t054": {
+            "checksum": "97D63818C5B595F3",
+            "data_file_bytes": 46456,
+            "data_files": 1,
+            "read_seconds": 7.126,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t058": {
+            "checksum": "50D5B1F1B9264BD8",
+            "data_file_bytes": 31475,
+            "data_files": 1,
+            "read_seconds": 7.374,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t062": {
+            "checksum": "D9A5AA39750F07C0",
+            "data_file_bytes": 43462,
+            "data_files": 1,
+            "read_seconds": 6.966,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t066": {
+            "checksum": "1EC830293C62A256",
+            "data_file_bytes": 40440,
+            "data_files": 1,
+            "read_seconds": 7.479,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t070": {
+            "checksum": "702E110DFC285039",
+            "data_file_bytes": 16246,
+            "data_files": 1,
+            "read_seconds": 7.039,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t074": {
+            "checksum": "8AC2B9CD5DAFC2F3",
+            "data_file_bytes": 13229,
+            "data_files": 1,
+            "read_seconds": 7.35,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t078": {
+            "checksum": "05BA7B80468CE696",
+            "data_file_bytes": 16381,
+            "data_files": 1,
+            "read_seconds": 7.521,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t082": {
+            "checksum": "DD51243ADCDA403A",
+            "data_file_bytes": 19951,
+            "data_files": 1,
+            "read_seconds": 7.08,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t086": {
+            "checksum": "A68EA9F91E86EEE0",
+            "data_file_bytes": 20166,
+            "data_files": 1,
+            "read_seconds": 6.926,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t090": {
+            "checksum": "0E829B7970ADFAE3",
+            "data_file_bytes": 34911,
+            "data_files": 1,
+            "read_seconds": 7.555,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t094": {
+            "checksum": "4BB66FF45E552600",
+            "data_file_bytes": 37876,
+            "data_files": 1,
+            "read_seconds": 7.026,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t098": {
+            "checksum": "78E316E9BE486D1C",
+            "data_file_bytes": 19881,
+            "data_files": 1,
+            "read_seconds": 7.151,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t102": {
+            "checksum": "1CE1CCA7F179296E",
+            "data_file_bytes": 33155,
+            "data_files": 1,
+            "read_seconds": 7.651,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t106": {
+            "checksum": "0AE8F355202B94E0",
+            "data_file_bytes": 20383,
+            "data_files": 1,
+            "read_seconds": 7.212,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t110": {
+            "checksum": "3AB8668E88175A33",
+            "data_file_bytes": 13589,
+            "data_files": 1,
+            "read_seconds": 7.341,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t114": {
+            "checksum": "F5AA6F06E055B56A",
+            "data_file_bytes": 20223,
+            "data_files": 1,
+            "read_seconds": 7.084,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t118": {
+            "checksum": "660FEE0A9E5E2F70",
+            "data_file_bytes": 13627,
+            "data_files": 1,
+            "read_seconds": 7.063,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t122": {
+            "checksum": "A3A4F6344A76501C",
+            "data_file_bytes": 27176,
+            "data_files": 1,
+            "read_seconds": 7.487,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t126": {
+            "checksum": "EF5862993A86A50D",
+            "data_file_bytes": 42027,
+            "data_files": 1,
+            "read_seconds": 7.032,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t130": {
+            "checksum": "8159C96EDA5F1850",
+            "data_file_bytes": 28448,
+            "data_files": 1,
+            "read_seconds": 7.039,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t134": {
+            "checksum": "031BA5E008262D26",
+            "data_file_bytes": 31190,
+            "data_files": 1,
+            "read_seconds": 7.428,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t138": {
+            "checksum": "AE29E611B981C795",
+            "data_file_bytes": 19148,
+            "data_files": 1,
+            "read_seconds": 7.257,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t142": {
+            "checksum": "7998092F4A45E2FD",
+            "data_file_bytes": 19977,
+            "data_files": 1,
+            "read_seconds": 7.197,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t146": {
+            "checksum": "7496FAA5EF7F522C",
+            "data_file_bytes": 24205,
+            "data_files": 1,
+            "read_seconds": 7.599,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t150": {
+            "checksum": "0B34C87A17FD05C0",
+            "data_file_bytes": 21315,
+            "data_files": 1,
+            "read_seconds": 7.057,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t154": {
+            "checksum": "F631C9B848F0C0AC",
+            "data_file_bytes": 41249,
+            "data_files": 1,
+            "read_seconds": 7.413,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t158": {
+            "checksum": "B7C3E68D711EDAF6",
+            "data_file_bytes": 18969,
+            "data_files": 1,
+            "read_seconds": 7.144,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t162": {
+            "checksum": "F7BDAFFB17659868",
+            "data_file_bytes": 39813,
+            "data_files": 1,
+            "read_seconds": 7.066,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t166": {
+            "checksum": "EB5E5654D00003EF",
+            "data_file_bytes": 13612,
+            "data_files": 1,
+            "read_seconds": 7.454,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t170": {
+            "checksum": "4AD89D56EFD44F81",
+            "data_file_bytes": 32547,
+            "data_files": 1,
+            "read_seconds": 7.031,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t174": {
+            "checksum": "615DF22DBB7EB45B",
+            "data_file_bytes": 49869,
+            "data_files": 1,
+            "read_seconds": 6.995,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t178": {
+            "checksum": "6A657089A5ED305A",
+            "data_file_bytes": 25845,
+            "data_files": 1,
+            "read_seconds": 7.404,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t182": {
+            "checksum": "F19047A010EA6A8B",
+            "data_file_bytes": 25012,
+            "data_files": 1,
+            "read_seconds": 6.935,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t186": {
+            "checksum": "99281FDD837D1BF9",
+            "data_file_bytes": 13659,
+            "data_files": 1,
+            "read_seconds": 6.978,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t190": {
+            "checksum": "6B53F85C642E7EA0",
+            "data_file_bytes": 23551,
+            "data_files": 1,
+            "read_seconds": 7.407,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t194": {
+            "checksum": "5C2F0F59728127C4",
+            "data_file_bytes": 30332,
+            "data_files": 1,
+            "read_seconds": 6.961,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t198": {
+            "checksum": "188595604E2AA0E8",
+            "data_file_bytes": 30035,
+            "data_files": 1,
+            "read_seconds": 6.85,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t202": {
+            "checksum": "B7012A4289DB5686",
+            "data_file_bytes": 24598,
+            "data_files": 1,
+            "read_seconds": 7.333,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t206": {
+            "checksum": "A1685928B07833BB",
+            "data_file_bytes": 11299,
+            "data_files": 1,
+            "read_seconds": 7.21,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t210": {
+            "checksum": "C986C3BF0BD2E581",
+            "data_file_bytes": 8222,
+            "data_files": 1,
+            "read_seconds": 7.233,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t214": {
+            "checksum": "0F512715E53F3166",
+            "data_file_bytes": 36547,
+            "data_files": 1,
+            "read_seconds": 7.057,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t218": {
+            "checksum": "1199FA12D5B203A2",
+            "data_file_bytes": 19906,
+            "data_files": 1,
+            "read_seconds": 6.944,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t222": {
+            "checksum": "3C4D2DE25F294956",
+            "data_file_bytes": 33971,
+            "data_files": 1,
+            "read_seconds": 7.428,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t226": {
+            "checksum": "50FB57D912C8A3C2",
+            "data_file_bytes": 33472,
+            "data_files": 1,
+            "read_seconds": 6.872,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t230": {
+            "checksum": "5B103970B7AD41FF",
+            "data_file_bytes": 42736,
+            "data_files": 1,
+            "read_seconds": 7.026,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t234": {
+            "checksum": "D9E73199FB580956",
+            "data_file_bytes": 37450,
+            "data_files": 1,
+            "read_seconds": 7.436,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t238": {
+            "checksum": "CCCC79B6370E69F3",
+            "data_file_bytes": 8141,
+            "data_files": 1,
+            "read_seconds": 7.106,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t242": {
+            "checksum": "937109B1B034A6D6",
+            "data_file_bytes": 18714,
+            "data_files": 1,
+            "read_seconds": 7.101,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t246": {
+            "checksum": "4C60FA8D13D04981",
+            "data_file_bytes": 20270,
+            "data_files": 1,
+            "read_seconds": 7.441,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t250": {
+            "checksum": "426FA6AC5C36C56D",
+            "data_file_bytes": 39857,
+            "data_files": 1,
+            "read_seconds": 7.017,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t254": {
+            "checksum": "D09EDA89DC0E771A",
+            "data_file_bytes": 28614,
+            "data_files": 1,
+            "read_seconds": 7.036,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t258": {
+            "checksum": "504061EA0099A057",
+            "data_file_bytes": 8979,
+            "data_files": 1,
+            "read_seconds": 7.493,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t262": {
+            "checksum": "E4C558D173C1C59A",
+            "data_file_bytes": 42902,
+            "data_files": 1,
+            "read_seconds": 7.015,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t266": {
+            "checksum": "5348903C0F13CAA1",
+            "data_file_bytes": 22617,
+            "data_files": 1,
+            "read_seconds": 7.407,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t270": {
+            "checksum": "0C1FEC60CA2528C1",
+            "data_file_bytes": 22235,
+            "data_files": 1,
+            "read_seconds": 7.091,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t274": {
+            "checksum": "559D9CD4236F9ADF",
+            "data_file_bytes": 24571,
+            "data_files": 1,
+            "read_seconds": 7.299,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t278": {
+            "checksum": "89F1B80E05E1AE61",
+            "data_file_bytes": 14016,
+            "data_files": 1,
+            "read_seconds": 7.45,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t282": {
+            "checksum": "C381C9F8F2016583",
+            "data_file_bytes": 29681,
+            "data_files": 1,
+            "read_seconds": 7.08,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t286": {
+            "checksum": "F504265C55CB17E0",
+            "data_file_bytes": 46777,
+            "data_files": 1,
+            "read_seconds": 7.078,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t290": {
+            "checksum": "B7FFDF13B2020563",
+            "data_file_bytes": 31549,
+            "data_files": 1,
+            "read_seconds": 7.534,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t294": {
+            "checksum": "B8F57159BEC4E228",
+            "data_file_bytes": 33854,
+            "data_files": 1,
+            "read_seconds": 7.13,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_02_silver.t298": {
+            "checksum": "60E35746AACF5A2E",
+            "data_file_bytes": 28439,
+            "data_files": 1,
+            "read_seconds": 7.081,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t003": {
+            "checksum": "471BF71E9DBE2AE4",
+            "data_file_bytes": 33036,
+            "data_files": 1,
+            "read_seconds": 7.53,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t007": {
+            "checksum": "01B6D6AA930734E6",
+            "data_file_bytes": 30986,
+            "data_files": 1,
+            "read_seconds": 7.066,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t011": {
+            "checksum": "77EED32AA6011393",
+            "data_file_bytes": 13593,
+            "data_files": 1,
+            "read_seconds": 7.495,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t015": {
+            "checksum": "B7743E107E99DE7B",
+            "data_file_bytes": 33956,
+            "data_files": 1,
+            "read_seconds": 7.158,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t019": {
+            "checksum": "348EF6FCA3E6B8FF",
+            "data_file_bytes": 18437,
+            "data_files": 1,
+            "read_seconds": 7.003,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t023": {
+            "checksum": "0B0922400313ED3D",
+            "data_file_bytes": 35696,
+            "data_files": 1,
+            "read_seconds": 7.573,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t027": {
+            "checksum": "10C79E32CDEBDF35",
+            "data_file_bytes": 21827,
+            "data_files": 1,
+            "read_seconds": 6.976,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t031": {
+            "checksum": "E1EAB71FFA196E9D",
+            "data_file_bytes": 28827,
+            "data_files": 1,
+            "read_seconds": 6.988,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t035": {
+            "checksum": "FD67D9229FD31106",
+            "data_file_bytes": 12826,
+            "data_files": 1,
+            "read_seconds": 7.266,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t039": {
+            "checksum": "B1D325151B5A1425",
+            "data_file_bytes": 13661,
+            "data_files": 1,
+            "read_seconds": 6.99,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t043": {
+            "checksum": "CAA6F1D9CED8F58D",
+            "data_file_bytes": 16370,
+            "data_files": 1,
+            "read_seconds": 7.082,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t047": {
+            "checksum": "610599B195589782",
+            "data_file_bytes": 25786,
+            "data_files": 1,
+            "read_seconds": 7.362,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t051": {
+            "checksum": "83EBD547B656DDD4",
+            "data_file_bytes": 15974,
+            "data_files": 1,
+            "read_seconds": 6.896,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t055": {
+            "checksum": "21439E4BACDADB3B",
+            "data_file_bytes": 41943,
+            "data_files": 1,
+            "read_seconds": 7.046,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t059": {
+            "checksum": "DDF0315A48622573",
+            "data_file_bytes": 22647,
+            "data_files": 1,
+            "read_seconds": 7.552,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t063": {
+            "checksum": "65A1ED1A8074F58D",
+            "data_file_bytes": 26555,
+            "data_files": 1,
+            "read_seconds": 7.022,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t067": {
+            "checksum": "57C4CCD4578761C2",
+            "data_file_bytes": 24071,
+            "data_files": 1,
+            "read_seconds": 7.352,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t071": {
+            "checksum": "0E347EA6196E0454",
+            "data_file_bytes": 44791,
+            "data_files": 1,
+            "read_seconds": 7.227,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t075": {
+            "checksum": "6C415B9B9F4DA2D4",
+            "data_file_bytes": 24079,
+            "data_files": 1,
+            "read_seconds": 6.843,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t079": {
+            "checksum": "36114910272FB673",
+            "data_file_bytes": 27611,
+            "data_files": 1,
+            "read_seconds": 7.477,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t083": {
+            "checksum": "A8ED9EB0FBDFC3FC",
+            "data_file_bytes": 46072,
+            "data_files": 1,
+            "read_seconds": 7.029,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t087": {
+            "checksum": "7FCA1370DCD4EA12",
+            "data_file_bytes": 22683,
+            "data_files": 1,
+            "read_seconds": 7.053,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t091": {
+            "checksum": "26B1BB07E91BCCB0",
+            "data_file_bytes": 40599,
+            "data_files": 1,
+            "read_seconds": 7.385,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t095": {
+            "checksum": "4632AC256A576152",
+            "data_file_bytes": 46468,
+            "data_files": 1,
+            "read_seconds": 7.111,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t099": {
+            "checksum": "74C0E637B616E9CC",
+            "data_file_bytes": 28855,
+            "data_files": 1,
+            "read_seconds": 7.0,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t103": {
+            "checksum": "4C9BBC3872B10157",
+            "data_file_bytes": 47559,
+            "data_files": 1,
+            "read_seconds": 8.116,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t107": {
+            "checksum": "9288C718D769BFC8",
+            "data_file_bytes": 21789,
+            "data_files": 1,
+            "read_seconds": 7.079,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t111": {
+            "checksum": "E268B63C0BE4BACB",
+            "data_file_bytes": 40825,
+            "data_files": 1,
+            "read_seconds": 7.342,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t115": {
+            "checksum": "0C01FB20F445C7E7",
+            "data_file_bytes": 30339,
+            "data_files": 1,
+            "read_seconds": 7.06,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t119": {
+            "checksum": "2EEDFB0B1261D362",
+            "data_file_bytes": 31557,
+            "data_files": 1,
+            "read_seconds": 6.946,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t123": {
+            "checksum": "B8EEF7908B94EC4D",
+            "data_file_bytes": 39802,
+            "data_files": 1,
+            "read_seconds": 7.492,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t127": {
+            "checksum": "700AA022BBEF8D80",
+            "data_file_bytes": 19088,
+            "data_files": 1,
+            "read_seconds": 6.876,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t131": {
+            "checksum": "47A31340FAF8523C",
+            "data_file_bytes": 21885,
+            "data_files": 1,
+            "read_seconds": 7.08,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t135": {
+            "checksum": "8432A8149D3B52C1",
+            "data_file_bytes": 23774,
+            "data_files": 1,
+            "read_seconds": 7.466,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t139": {
+            "checksum": "8F84938B4B4C7A69",
+            "data_file_bytes": 29184,
+            "data_files": 1,
+            "read_seconds": 6.914,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t143": {
+            "checksum": "CD811F3ABC9576B9",
+            "data_file_bytes": 48351,
+            "data_files": 1,
+            "read_seconds": 6.945,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t147": {
+            "checksum": "072D6E9AA09EC304",
+            "data_file_bytes": 32474,
+            "data_files": 1,
+            "read_seconds": 7.707,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t151": {
+            "checksum": "1814F13A80AE2F4B",
+            "data_file_bytes": 26825,
+            "data_files": 1,
+            "read_seconds": 7.011,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t155": {
+            "checksum": "3F1F48E353BEBE65",
+            "data_file_bytes": 38248,
+            "data_files": 1,
+            "read_seconds": 7.06,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t159": {
+            "checksum": "3D6AD8ED27BC4E0C",
+            "data_file_bytes": 23989,
+            "data_files": 1,
+            "read_seconds": 7.221,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t163": {
+            "checksum": "C883C3ED763B3FE8",
+            "data_file_bytes": 13737,
+            "data_files": 1,
+            "read_seconds": 6.963,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t167": {
+            "checksum": "44A8C978D0C0686B",
+            "data_file_bytes": 14463,
+            "data_files": 1,
+            "read_seconds": 7.217,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t171": {
+            "checksum": "4A63CBF64DB7CFD5",
+            "data_file_bytes": 40359,
+            "data_files": 1,
+            "read_seconds": 7.075,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t175": {
+            "checksum": "FAA47236E5BF506D",
+            "data_file_bytes": 24248,
+            "data_files": 1,
+            "read_seconds": 6.995,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t179": {
+            "checksum": "D42B2411095F2F23",
+            "data_file_bytes": 34326,
+            "data_files": 1,
+            "read_seconds": 7.429,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t183": {
+            "checksum": "E0C0EFC9C801FC1E",
+            "data_file_bytes": 44810,
+            "data_files": 1,
+            "read_seconds": 6.904,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t187": {
+            "checksum": "458A92A963983F8E",
+            "data_file_bytes": 34308,
+            "data_files": 1,
+            "read_seconds": 6.792,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t191": {
+            "checksum": "DBB12A1AF1B05CF7",
+            "data_file_bytes": 43708,
+            "data_files": 1,
+            "read_seconds": 7.309,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t195": {
+            "checksum": "79A3D56469A8EF83",
+            "data_file_bytes": 31128,
+            "data_files": 1,
+            "read_seconds": 6.814,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t199": {
+            "checksum": "E32A8087820663A1",
+            "data_file_bytes": 25318,
+            "data_files": 1,
+            "read_seconds": 6.806,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t203": {
+            "checksum": "832854549EBC0593",
+            "data_file_bytes": 18951,
+            "data_files": 1,
+            "read_seconds": 7.272,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t207": {
+            "checksum": "57DB03D26D9D380B",
+            "data_file_bytes": 28844,
+            "data_files": 1,
+            "read_seconds": 6.971,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t211": {
+            "checksum": "628FCE688D1E5163",
+            "data_file_bytes": 25343,
+            "data_files": 1,
+            "read_seconds": 6.814,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t215": {
+            "checksum": "B619A165F02C8923",
+            "data_file_bytes": 32535,
+            "data_files": 1,
+            "read_seconds": 7.589,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t219": {
+            "checksum": "5AEE5263F7DBF37B",
+            "data_file_bytes": 30016,
+            "data_files": 1,
+            "read_seconds": 6.897,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t223": {
+            "checksum": "C3E21D8D129AF93D",
+            "data_file_bytes": 16773,
+            "data_files": 1,
+            "read_seconds": 7.034,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t227": {
+            "checksum": "68CD8E6462E98C3E",
+            "data_file_bytes": 41816,
+            "data_files": 1,
+            "read_seconds": 7.274,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t231": {
+            "checksum": "C8A14F163C63465C",
+            "data_file_bytes": 17176,
+            "data_files": 1,
+            "read_seconds": 6.906,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t235": {
+            "checksum": "B75FB8EF4507D2B3",
+            "data_file_bytes": 31963,
+            "data_files": 1,
+            "read_seconds": 7.246,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t239": {
+            "checksum": "E11782D9852099D1",
+            "data_file_bytes": 16785,
+            "data_files": 1,
+            "read_seconds": 6.951,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t243": {
+            "checksum": "745F3446399E2836",
+            "data_file_bytes": 29537,
+            "data_files": 1,
+            "read_seconds": 6.995,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t247": {
+            "checksum": "1CCCDED11CA6CCA2",
+            "data_file_bytes": 22642,
+            "data_files": 1,
+            "read_seconds": 7.573,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t251": {
+            "checksum": "5FC21D57CF53E28A",
+            "data_file_bytes": 39656,
+            "data_files": 1,
+            "read_seconds": 6.877,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t255": {
+            "checksum": "580BB40C5495E3A3",
+            "data_file_bytes": 16757,
+            "data_files": 1,
+            "read_seconds": 6.942,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t259": {
+            "checksum": "3A00A2C2B9FEF7E8",
+            "data_file_bytes": 46058,
+            "data_files": 1,
+            "read_seconds": 7.295,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t263": {
+            "checksum": "9E642E2A7BC677A6",
+            "data_file_bytes": 26914,
+            "data_files": 1,
+            "read_seconds": 6.897,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t267": {
+            "checksum": "92B1620E0F62988B",
+            "data_file_bytes": 23002,
+            "data_files": 1,
+            "read_seconds": 6.831,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t271": {
+            "checksum": "BDD620F6A58AF637",
+            "data_file_bytes": 43482,
+            "data_files": 1,
+            "read_seconds": 7.325,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t275": {
+            "checksum": "9BA2F6E0AA2D9A7F",
+            "data_file_bytes": 22170,
+            "data_files": 1,
+            "read_seconds": 6.919,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t279": {
+            "checksum": "977D5522CAAADC5B",
+            "data_file_bytes": 13631,
+            "data_files": 1,
+            "read_seconds": 6.842,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t283": {
+            "checksum": "BBA8B91DE43E80C2",
+            "data_file_bytes": 42941,
+            "data_files": 1,
+            "read_seconds": 7.422,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t287": {
+            "checksum": "EA69B114D71B788D",
+            "data_file_bytes": 29360,
+            "data_files": 1,
+            "read_seconds": 6.855,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t291": {
+            "checksum": "AB349B20DFAF2006",
+            "data_file_bytes": 16736,
+            "data_files": 1,
+            "read_seconds": 7.17,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t295": {
+            "checksum": "9627B17F7EB2F093",
+            "data_file_bytes": 38848,
+            "data_files": 1,
+            "read_seconds": 7.112,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_03_silver.t299": {
+            "checksum": "08A9E7056C238426",
+            "data_file_bytes": 24584,
+            "data_files": 1,
+            "read_seconds": 6.869,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t004": {
+            "checksum": "B3AC3AED35D0FB4A",
+            "data_file_bytes": 14470,
+            "data_files": 1,
+            "read_seconds": 7.32,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t008": {
+            "checksum": "602298F81D53079D",
+            "data_file_bytes": 15948,
+            "data_files": 1,
+            "read_seconds": 6.892,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t012": {
+            "checksum": "F17BB136AC6EE34A",
+            "data_file_bytes": 24841,
+            "data_files": 1,
+            "read_seconds": 7.041,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t016": {
+            "checksum": "3D509126E3B7BB8B",
+            "data_file_bytes": 11719,
+            "data_files": 1,
+            "read_seconds": 7.22,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t020": {
+            "checksum": "F728A8927912A5E0",
+            "data_file_bytes": 11293,
+            "data_files": 1,
+            "read_seconds": 7.001,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t024": {
+            "checksum": "4BCDD19AB9875D84",
+            "data_file_bytes": 38627,
+            "data_files": 1,
+            "read_seconds": 6.845,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t028": {
+            "checksum": "B762C5AECDBA6409",
+            "data_file_bytes": 19804,
+            "data_files": 1,
+            "read_seconds": 7.383,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t032": {
+            "checksum": "94F62474F2CFEFFE",
+            "data_file_bytes": 30757,
+            "data_files": 1,
+            "read_seconds": 6.899,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t036": {
+            "checksum": "B85BD54789E40CB5",
+            "data_file_bytes": 16379,
+            "data_files": 1,
+            "read_seconds": 7.134,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t040": {
+            "checksum": "64BBC84934B1106B",
+            "data_file_bytes": 21234,
+            "data_files": 1,
+            "read_seconds": 7.321,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t044": {
+            "checksum": "FA3B990DCBD62E4D",
+            "data_file_bytes": 24154,
+            "data_files": 1,
+            "read_seconds": 7.019,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t048": {
+            "checksum": "E37364FD75F1A928",
+            "data_file_bytes": 22521,
+            "data_files": 1,
+            "read_seconds": 6.952,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t052": {
+            "checksum": "8E96238D38143E1E",
+            "data_file_bytes": 19949,
+            "data_files": 1,
+            "read_seconds": 7.395,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t056": {
+            "checksum": "8EFDC84DC761FE6F",
+            "data_file_bytes": 33385,
+            "data_files": 1,
+            "read_seconds": 6.949,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t060": {
+            "checksum": "47590B9ECE1A85C7",
+            "data_file_bytes": 41164,
+            "data_files": 1,
+            "read_seconds": 7.355,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t064": {
+            "checksum": "68BB2CBF3BF1F04C",
+            "data_file_bytes": 25438,
+            "data_files": 1,
+            "read_seconds": 6.996,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t068": {
+            "checksum": "A711AAADAB4120C9",
+            "data_file_bytes": 37998,
+            "data_files": 1,
+            "read_seconds": 6.891,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t072": {
+            "checksum": "D2146BAA978B66FD",
+            "data_file_bytes": 28203,
+            "data_files": 1,
+            "read_seconds": 7.301,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t076": {
+            "checksum": "45D348E14A15A120",
+            "data_file_bytes": 8171,
+            "data_files": 1,
+            "read_seconds": 6.982,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t080": {
+            "checksum": "69CBD2F6E7217C16",
+            "data_file_bytes": 24278,
+            "data_files": 1,
+            "read_seconds": 6.93,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t084": {
+            "checksum": "3C48C91E6908EECB",
+            "data_file_bytes": 35065,
+            "data_files": 1,
+            "read_seconds": 7.329,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t088": {
+            "checksum": "F710386B31650689",
+            "data_file_bytes": 27631,
+            "data_files": 1,
+            "read_seconds": 7.079,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t092": {
+            "checksum": "FBA0E24B0186183C",
+            "data_file_bytes": 24995,
+            "data_files": 1,
+            "read_seconds": 6.958,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t096": {
+            "checksum": "6A2E40E63C58CFFD",
+            "data_file_bytes": 15979,
+            "data_files": 1,
+            "read_seconds": 7.398,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t100": {
+            "checksum": "41FA027D8074461E",
+            "data_file_bytes": 41389,
+            "data_files": 1,
+            "read_seconds": 6.722,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t104": {
+            "checksum": "F3DE58EBBBCA037B",
+            "data_file_bytes": 46679,
+            "data_files": 1,
+            "read_seconds": 6.729,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t108": {
+            "checksum": "278CE52DFD662216",
+            "data_file_bytes": 25341,
+            "data_files": 1,
+            "read_seconds": 7.164,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t112": {
+            "checksum": "8CEAD9A965C3D804",
+            "data_file_bytes": 35132,
+            "data_files": 1,
+            "read_seconds": 6.999,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t116": {
+            "checksum": "76719E05C904C94B",
+            "data_file_bytes": 13633,
+            "data_files": 1,
+            "read_seconds": 6.985,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t120": {
+            "checksum": "03C7B491EC0977C8",
+            "data_file_bytes": 32011,
+            "data_files": 1,
+            "read_seconds": 7.45,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t124": {
+            "checksum": "47E332D3346724F8",
+            "data_file_bytes": 35268,
+            "data_files": 1,
+            "read_seconds": 6.782,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t128": {
+            "checksum": "B0BBFEB4DC5F03DA",
+            "data_file_bytes": 34248,
+            "data_files": 1,
+            "read_seconds": 7.064,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t132": {
+            "checksum": "6E449D4A481E3E28",
+            "data_file_bytes": 36482,
+            "data_files": 1,
+            "read_seconds": 7.16,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t136": {
+            "checksum": "933868CA5FF52CD4",
+            "data_file_bytes": 29334,
+            "data_files": 1,
+            "read_seconds": 6.818,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t140": {
+            "checksum": "11E3DB31F9F66E75",
+            "data_file_bytes": 14091,
+            "data_files": 1,
+            "read_seconds": 7.351,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t144": {
+            "checksum": "AD09E1D5BF84E083",
+            "data_file_bytes": 50679,
+            "data_files": 1,
+            "read_seconds": 6.869,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t148": {
+            "checksum": "8C837C84095DD147",
+            "data_file_bytes": 19004,
+            "data_files": 1,
+            "read_seconds": 6.941,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t152": {
+            "checksum": "DCB3F984E9B4A4B8",
+            "data_file_bytes": 14472,
+            "data_files": 1,
+            "read_seconds": 7.264,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t156": {
+            "checksum": "F745EF7A6651C7B8",
+            "data_file_bytes": 25265,
+            "data_files": 1,
+            "read_seconds": 7.138,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t160": {
+            "checksum": "C5D142014C9D7F38",
+            "data_file_bytes": 31092,
+            "data_files": 1,
+            "read_seconds": 6.958,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t164": {
+            "checksum": "5D8704A810A03295",
+            "data_file_bytes": 21745,
+            "data_files": 1,
+            "read_seconds": 7.298,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t168": {
+            "checksum": "6FFA917BFC28756F",
+            "data_file_bytes": 31928,
+            "data_files": 1,
+            "read_seconds": 6.866,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t172": {
+            "checksum": "85D59858D5DE292D",
+            "data_file_bytes": 31516,
+            "data_files": 1,
+            "read_seconds": 6.893,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t176": {
+            "checksum": "082BF239EBC79083",
+            "data_file_bytes": 46144,
+            "data_files": 1,
+            "read_seconds": 7.278,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t180": {
+            "checksum": "1DBD81721DB380A8",
+            "data_file_bytes": 14421,
+            "data_files": 1,
+            "read_seconds": 6.857,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t184": {
+            "checksum": "AC1EA4FE1A17B359",
+            "data_file_bytes": 7457,
+            "data_files": 1,
+            "read_seconds": 6.936,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t188": {
+            "checksum": "18D62DC9BE193C10",
+            "data_file_bytes": 25356,
+            "data_files": 1,
+            "read_seconds": 7.361,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t192": {
+            "checksum": "65E2C8D64EEF61CA",
+            "data_file_bytes": 34781,
+            "data_files": 1,
+            "read_seconds": 7.072,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t196": {
+            "checksum": "80B2782B67F00347",
+            "data_file_bytes": 27665,
+            "data_files": 1,
+            "read_seconds": 7.284,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t200": {
+            "checksum": "3537C7B9E67B0C67",
+            "data_file_bytes": 15994,
+            "data_files": 1,
+            "read_seconds": 7.073,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t204": {
+            "checksum": "60980D053C1A38A6",
+            "data_file_bytes": 37127,
+            "data_files": 1,
+            "read_seconds": 6.864,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t208": {
+            "checksum": "1CA23E87B1F48307",
+            "data_file_bytes": 18190,
+            "data_files": 1,
+            "read_seconds": 7.321,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t212": {
+            "checksum": "F0F3C3764572DFA2",
+            "data_file_bytes": 34354,
+            "data_files": 1,
+            "read_seconds": 6.945,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t216": {
+            "checksum": "8A0A3E3616BAED5C",
+            "data_file_bytes": 30749,
+            "data_files": 1,
+            "read_seconds": 7.0,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t220": {
+            "checksum": "FF93EF5D2060D3CC",
+            "data_file_bytes": 29963,
+            "data_files": 1,
+            "read_seconds": 7.382,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t224": {
+            "checksum": "9A94A2D54635E0C0",
+            "data_file_bytes": 29256,
+            "data_files": 1,
+            "read_seconds": 7.083,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t228": {
+            "checksum": "1E31BA983470A45F",
+            "data_file_bytes": 25415,
+            "data_files": 1,
+            "read_seconds": 6.908,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t232": {
+            "checksum": "B39578D9DE471EBA",
+            "data_file_bytes": 16805,
+            "data_files": 1,
+            "read_seconds": 7.411,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t236": {
+            "checksum": "573C332002AC5F85",
+            "data_file_bytes": 30897,
+            "data_files": 1,
+            "read_seconds": 6.975,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t240": {
+            "checksum": "505A914EC9382D5B",
+            "data_file_bytes": 13663,
+            "data_files": 1,
+            "read_seconds": 6.961,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t244": {
+            "checksum": "2FE90C87FE0DA616",
+            "data_file_bytes": 21511,
+            "data_files": 1,
+            "read_seconds": 7.32,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t248": {
+            "checksum": "373996D5E1F9D2EF",
+            "data_file_bytes": 33925,
+            "data_files": 1,
+            "read_seconds": 7.003,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t252": {
+            "checksum": "356861520FB61448",
+            "data_file_bytes": 36176,
+            "data_files": 1,
+            "read_seconds": 7.041,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t256": {
+            "checksum": "79F6F0B1BFDDCA3C",
+            "data_file_bytes": 14496,
+            "data_files": 1,
+            "read_seconds": 7.054,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t260": {
+            "checksum": "C776AC3CC9E97F2C",
+            "data_file_bytes": 42235,
+            "data_files": 1,
+            "read_seconds": 7.177,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t264": {
+            "checksum": "F287A2E8B057A860",
+            "data_file_bytes": 33932,
+            "data_files": 1,
+            "read_seconds": 7.281,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t268": {
+            "checksum": "4631B031174ECC6C",
+            "data_file_bytes": 19139,
+            "data_files": 1,
+            "read_seconds": 6.912,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t272": {
+            "checksum": "B6B46A13F1C45994",
+            "data_file_bytes": 28006,
+            "data_files": 1,
+            "read_seconds": 6.929,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t276": {
+            "checksum": "5335207F0A081161",
+            "data_file_bytes": 47226,
+            "data_files": 1,
+            "read_seconds": 7.433,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t280": {
+            "checksum": "E9A26D6545D71920",
+            "data_file_bytes": 13060,
+            "data_files": 1,
+            "read_seconds": 6.949,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t284": {
+            "checksum": "EF22344FA6363C4E",
+            "data_file_bytes": 53852,
+            "data_files": 1,
+            "read_seconds": 6.878,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t288": {
+            "checksum": "384399D263828D89",
+            "data_file_bytes": 15256,
+            "data_files": 1,
+            "read_seconds": 7.399,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t292": {
+            "checksum": "F3E6DE2219BC98C2",
+            "data_file_bytes": 38473,
+            "data_files": 1,
+            "read_seconds": 7.132,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t296": {
+            "checksum": "D423B857F4C7AF86",
+            "data_file_bytes": 19006,
+            "data_files": 1,
+            "read_seconds": 6.876,
+            "rows": 1000,
+            "snapshots": 2
+          },
+          "synth_04_silver.t300": {
+            "checksum": "161FD5AB57252648",
+            "data_file_bytes": 30987,
+            "data_files": 1,
+            "read_seconds": 7.408,
+            "rows": 1000,
+            "snapshots": 2
+          }
+        },
+        "silver_rows": 300000,
+        "silver_tables": 300,
+        "snapshots": {
+          "count": 300,
+          "max": 2,
+          "median": 2.0,
+          "min": 2,
+          "total": 600
+        },
+        "tables": 300
+      },
+      "error": null,
+      "name": "run_2_tables",
+      "seconds": 2151.24,
+      "started_at": 1793458442.3456056,
+      "status": "ok"
+    }
+  ],
+  "scenario": "many-tables-t300",
+  "schema_version": 1,
+  "started_at": 1793451218.1796956,
+  "status": "ok"
+}
