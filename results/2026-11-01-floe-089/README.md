@@ -8,6 +8,7 @@ They ran on `ubuntu-latest` runners (4 vCPU, 15.6 GiB) with the Slim preset, in 
 | --- | --- |
 | [many-tables-t100.json](many-tables-t100.json) | C: 100 tables over 4 domains |
 | [many-tables-t300.json](many-tables-t300.json) | C: 300 tables over 4 domains |
+| [many-tables-t300-12-domains.json](many-tables-t300-12-domains.json) | C: 300 tables over 12 domains, from [run 41318362081](https://github.com/OpenLakeForge/openlakeforge-bench/actions/runs/41318362081) |
 | [incremental-rna_catalog.json](incremental-rna_catalog.json) | D: acme-lakehouse `rna_catalog` |
 | [footprint.json](footprint.json) | A: install, first pipeline, 300 s idle |
 | [etl-x100000.json](etl-x100000.json) | B at ×100,000: 13.8M rows, 0.82 GB of CSV; the delta step adds 10% (0.90 GB) |
@@ -25,6 +26,12 @@ They ran on `ubuntu-latest` runners (4 vCPU, 15.6 GiB) with the Slim preset, in 
 | Table checks (every table read back) | — | 1810–1813 s |
 
 **Holds:** every check is exact on both runs, at both sizes.
+
+**300 tables over 12 domains (25 per domain, Slim):** passed on both runs.
+- Per domain: Dagster run 76–87 s; Bronze 3.9–9.9 s, Silver 18.5–24.7 s, Gold 15.8–22.1 s.
+- Floe: Job 3–8 s, median entity 0.20–0.30 s.
+- Peak memory: 5.1–6.4 GiB.
+- Twelve domains cost no more per domain than four, because the domains run one after another.
 
 **Silver scaling:** three times the tables cost about twice the Silver step. The Floe Job itself is under 10 s; the rest of the Silver step is Dagster's step launch and the dagster-floe poll.
 
