@@ -1,0 +1,1162 @@
+{
+  "environment": {
+    "cluster_config_override": null,
+    "component_catalog_sha256": "0980790d3cae5f625deb6de6f36a6d9dbe60e14afb1c205e919bba213af9deb8",
+    "docker_server_version": "29.4.2",
+    "git_commit": "a1e34db073bf9b9a9a7eb54289164fff30a531f8",
+    "git_modified": [],
+    "host": {
+      "cgroup": "v2",
+      "cpus": 4,
+      "kernel": "7.0.0-1017-azure",
+      "machine": "x86_64",
+      "memory_bytes": 16763777024
+    },
+    "image_overrides": {},
+    "olf_version": "0.5.0a1",
+    "parameters": {
+      "cluster_name": "openlakeforge-local",
+      "existing": false,
+      "full_refresh": "bronze",
+      "gold_mirrors": {
+        "mart_sequence_index": "sequences"
+      },
+      "kill_after_seconds": 5.0,
+      "live_check": [
+        "food_quality"
+      ],
+      "preset": "slim",
+      "product": "rna_catalog",
+      "project": "/home/runner/work/openlakeforge-bench/openlakeforge-bench/project",
+      "rows_per_run": 100000,
+      "runs": 5
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "git_commit": "5c495f56d09a41ebadee48fd58b71fe3ccc0e335",
+        "path": "/home/runner/work/openlakeforge-bench/openlakeforge-bench/project"
+      },
+      "error": null,
+      "name": "project",
+      "seconds": null,
+      "started_at": 1793533930.2180853,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_foundation",
+      "seconds": 119.389,
+      "started_at": 1793533930.2180977,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_prefetch",
+      "seconds": 131.596,
+      "started_at": 1793534049.6069984,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_platform",
+      "seconds": 187.202,
+      "started_at": 1793534181.2028823,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "bound": [
+          "ConfigMap/olf-source-open-food-facts",
+          "ConfigMap/olf-source-rnacentral",
+          "Secret/olf-source-rnacentral-credentials"
+        ]
+      },
+      "error": null,
+      "name": "bind_sources",
+      "seconds": 0.81,
+      "started_at": 1793534368.6395586,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "project": "/home/runner/work/openlakeforge-bench/openlakeforge-bench/project"
+      },
+      "error": null,
+      "name": "deploy_artifacts",
+      "seconds": 190.317,
+      "started_at": 1793534369.4505556,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793534624.548055,
+        "error": "food_quality_pipeline run dc9ed9e1-05d2-4b52-911d-0fef0a6ce1d4 ended with FAILURE\n  open_food_facts_bronze_resources: dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op \"open_food_facts_bronze_resources\":\n    caused by: dlt.pipeline.exceptions.PipelineStepFailed: Pipeline execution failed at `step=extract` when processing package with `load_id=1793534607.3387306` with exception:\n\n<class 'dlt.extract.exceptions.ResourceExtractionError'>\nIn processing pipe `products`: extraction of resource `products` in `generator` `products` caused an exception: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1\n    caused by: dlt.extract.exceptions.ResourceExtractionError: In processing pipe `products`: extraction of resource `products` in `generator` `products` caused an exception: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1\n    caused by: requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1\n  open_food_facts_bronze_resources: dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op \"open_food_facts_bronze_resources\": / caused by: dlt.pipeline.exceptions.PipelineStepFailed: Pipeline execution failed at `step=extract` when processing package with `load_id=1793534607.3387306` with exception:\n\n<class 'dlt.extract.exceptions.ResourceExtractionError'>\nIn processing pipe `products`: extraction of resource `products` in `generator` `products` caused an exception: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1 / caused by: dlt.extract.exceptions.ResourceExtractionError: In processing pipe `products`: extraction of resource `products` in `generator` `products` caused an exception: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1 / caused by: requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1",
+        "job": "food_quality_pipeline",
+        "layers": {
+          "bronze": {
+            "end": 1793534623.43371,
+            "seconds": 16.743,
+            "start": 1793534606.690447,
+            "steps": 1
+          }
+        },
+        "outcome": "failed",
+        "product": "food_quality",
+        "run_id": "dc9ed9e1-05d2-4b52-911d-0fef0a6ce1d4",
+        "seconds": 23.399,
+        "start": 1793534601.149435,
+        "status": "FAILURE",
+        "step_errors": {
+          "open_food_facts_bronze_resources": "dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op \"open_food_facts_bronze_resources\": / caused by: dlt.pipeline.exceptions.PipelineStepFailed: Pipeline execution failed at `step=extract` when processing package with `load_id=1793534607.3387306` with exception:\n\n<class 'dlt.extract.exceptions.ResourceExtractionError'>\nIn processing pipe `products`: extraction of resource `products` in `generator` `products` caused an exception: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1 / caused by: dlt.extract.exceptions.ResourceExtractionError: In processing pipe `products`: extraction of resource `products` in `generator` `products` caused an exception: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1 / caused by: requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://world.openfoodfacts.net/api/v2/search?countries_tags_en=belgium&sort_by=last_modified_t&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriscore_grade%2Cnova_group%2Cnutriments%2Clast_modified_t&page_size=100&page=1"
+        },
+        "steps": [
+          {
+            "end": 1793534623.43371,
+            "layer": "bronze",
+            "seconds": 16.743,
+            "start": 1793534606.690447,
+            "status": "FAILURE",
+            "step": "open_food_facts_bronze_resources"
+          }
+        ]
+      },
+      "error": null,
+      "name": "live_check_food_quality",
+      "seconds": null,
+      "started_at": 1793534633.142721,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793534706.080934,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.331,
+              "cpu_cores_mean": 0.894,
+              "cpu_cores_p95": 1.331,
+              "memory_bytes_max": 5292473448,
+              "memory_bytes_mean": 5289789094,
+              "memory_bytes_p95": 5292473448,
+              "samples": 2
+            },
+            "end": 1793534657.9958968,
+            "seconds": 10.807,
+            "start": 1793534647.189279,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.974,
+              "cpu_cores_mean": 2.284,
+              "cpu_cores_p95": 3.974,
+              "memory_bytes_max": 5818606942,
+              "memory_bytes_mean": 5668927332,
+              "memory_bytes_p95": 5818606942,
+              "samples": 5
+            },
+            "end": 1793534705.0226505,
+            "seconds": 21.688,
+            "start": 1793534683.3350677,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.869,
+              "cpu_cores_mean": 1.654,
+              "cpu_cores_p95": 2.869,
+              "memory_bytes_max": 5687610440,
+              "memory_bytes_mean": 5550529400,
+              "memory_bytes_p95": 5687610440,
+              "samples": 3
+            },
+            "end": 1793534676.9203947,
+            "seconds": 12.51,
+            "start": 1793534664.4105875,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "fb7928e2-12be-4ede-93a8-fc6863cb5836",
+        "seconds": 64.602,
+        "start": 1793534641.479004,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793534657.9958968,
+            "layer": "bronze",
+            "seconds": 10.807,
+            "start": 1793534647.189279,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793534676.9203947,
+            "layer": "silver",
+            "seconds": 12.51,
+            "start": 1793534664.4105875,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793534705.0226505,
+            "layer": "gold",
+            "seconds": 21.688,
+            "start": 1793534683.3350677,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_1",
+      "seconds": 80.831,
+      "started_at": 1793534633.1427655,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 1
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "C7DFF4B1D12DA3AA",
+            "data_file_bytes": 2102706,
+            "data_files": 1,
+            "rows": 100000,
+            "snapshots": 1
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 1
+          },
+          "rna_silver.sequences": {
+            "checksum": "B1C73F01E0F7DAF4",
+            "data_file_bytes": 2095912,
+            "data_files": 1,
+            "distinct_keys": 100000,
+            "rows": 100000,
+            "snapshots": 1
+          }
+        }
+      },
+      "error": null,
+      "name": "run_1_tables",
+      "seconds": 38.827,
+      "started_at": 1793534713.9737167,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793534819.270963,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.224,
+              "cpu_cores_mean": 1.063,
+              "cpu_cores_p95": 1.224,
+              "memory_bytes_max": 5860482875,
+              "memory_bytes_mean": 5851356068,
+              "memory_bytes_p95": 5860482875,
+              "samples": 2
+            },
+            "end": 1793534779.0239472,
+            "seconds": 9.381,
+            "start": 1793534769.6433933,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.924,
+              "cpu_cores_mean": 2.214,
+              "cpu_cores_p95": 3.924,
+              "memory_bytes_max": 6219112643,
+              "memory_bytes_mean": 6038724016,
+              "memory_bytes_p95": 6219112643,
+              "samples": 4
+            },
+            "end": 1793534818.198681,
+            "seconds": 17.64,
+            "start": 1793534800.5587666,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.462,
+              "cpu_cores_mean": 1.117,
+              "cpu_cores_p95": 1.462,
+              "memory_bytes_max": 5985036926,
+              "memory_bytes_mean": 5943697865,
+              "memory_bytes_p95": 5985036926,
+              "samples": 2
+            },
+            "end": 1793534794.2395604,
+            "seconds": 8.776,
+            "start": 1793534785.463612,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "444667c3-bccb-4fc3-b4a5-b7c70a478742",
+        "seconds": 55.104,
+        "start": 1793534764.167322,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793534779.0239472,
+            "layer": "bronze",
+            "seconds": 9.381,
+            "start": 1793534769.6433933,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793534794.2395604,
+            "layer": "silver",
+            "seconds": 8.776,
+            "start": 1793534785.463612,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793534818.198681,
+            "layer": "gold",
+            "seconds": 17.64,
+            "start": 1793534800.5587666,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_2",
+      "seconds": 70.839,
+      "started_at": 1793534752.800546,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 2
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "9854AF2AD51E1F55",
+            "data_file_bytes": 4565811,
+            "data_files": 2,
+            "rows": 200000,
+            "snapshots": 2
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 2
+          },
+          "rna_silver.sequences": {
+            "checksum": "62D8864AF096BBE3",
+            "data_file_bytes": 4507938,
+            "data_files": 2,
+            "distinct_keys": 200000,
+            "rows": 200000,
+            "snapshots": 2
+          }
+        }
+      },
+      "error": null,
+      "name": "run_2_tables",
+      "seconds": 37.091,
+      "started_at": 1793534823.639224,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793534925.353485,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.08,
+              "cpu_cores_mean": 1.586,
+              "cpu_cores_p95": 2.08,
+              "memory_bytes_max": 6390911335,
+              "memory_bytes_mean": 6389837593,
+              "memory_bytes_p95": 6390911335,
+              "samples": 2
+            },
+            "end": 1793534886.4176173,
+            "seconds": 9.493,
+            "start": 1793534876.9249358,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.909,
+              "cpu_cores_mean": 2.122,
+              "cpu_cores_p95": 2.909,
+              "memory_bytes_max": 6666862984,
+              "memory_bytes_mean": 6588748266,
+              "memory_bytes_p95": 6666862984,
+              "samples": 4
+            },
+            "end": 1793534924.2267332,
+            "seconds": 16.046,
+            "start": 1793534908.1809256,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.126,
+              "cpu_cores_mean": 1.543,
+              "cpu_cores_p95": 2.126,
+              "memory_bytes_max": 6588479830,
+              "memory_bytes_mean": 6535329610,
+              "memory_bytes_p95": 6588479830,
+              "samples": 2
+            },
+            "end": 1793534901.6212215,
+            "seconds": 8.753,
+            "start": 1793534892.8679862,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "b31fe3ff-2d06-49b0-832f-8a83765e3998",
+        "seconds": 54.001,
+        "start": 1793534871.352905,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793534886.4176173,
+            "layer": "bronze",
+            "seconds": 9.493,
+            "start": 1793534876.9249358,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793534901.6212215,
+            "layer": "silver",
+            "seconds": 8.753,
+            "start": 1793534892.8679862,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793534924.2267332,
+            "layer": "gold",
+            "seconds": 16.046,
+            "start": 1793534908.1809256,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_3",
+      "seconds": 70.931,
+      "started_at": 1793534860.7302876,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 3
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "66619837B734DAD5",
+            "data_file_bytes": 7026444,
+            "data_files": 3,
+            "rows": 300000,
+            "snapshots": 3
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 3
+          },
+          "rna_silver.sequences": {
+            "checksum": "D16A4DE0D7AD67C3",
+            "data_file_bytes": 6921605,
+            "data_files": 3,
+            "distinct_keys": 300000,
+            "rows": 300000,
+            "snapshots": 3
+          }
+        }
+      },
+      "error": null,
+      "name": "run_3_tables",
+      "seconds": 37.215,
+      "started_at": 1793534931.6617556,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793535034.018237,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.223,
+              "cpu_cores_mean": 1.695,
+              "cpu_cores_p95": 2.223,
+              "memory_bytes_max": 6601364733,
+              "memory_bytes_mean": 6586332347,
+              "memory_bytes_p95": 6601364733,
+              "samples": 2
+            },
+            "end": 1793534993.6200442,
+            "seconds": 9.265,
+            "start": 1793534984.3546739,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.239,
+              "cpu_cores_mean": 1.976,
+              "cpu_cores_p95": 3.239,
+              "memory_bytes_max": 6614249634,
+              "memory_bytes_mean": 6496406469,
+              "memory_bytes_p95": 6614249634,
+              "samples": 4
+            },
+            "end": 1793535032.9308434,
+            "seconds": 15.985,
+            "start": 1793535016.9459844,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.091,
+              "cpu_cores_mean": 1.689,
+              "cpu_cores_p95": 2.091,
+              "memory_bytes_max": 6675452919,
+              "memory_bytes_mean": 6517970784,
+              "memory_bytes_p95": 6675452919,
+              "samples": 3
+            },
+            "end": 1793535010.518202,
+            "seconds": 10.66,
+            "start": 1793534999.8579931,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "3a4dccb6-8203-457f-a76c-4f2aa20da49f",
+        "seconds": 55.258,
+        "start": 1793534978.76033,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793534993.6200442,
+            "layer": "bronze",
+            "seconds": 9.265,
+            "start": 1793534984.3546739,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793535010.518202,
+            "layer": "silver",
+            "seconds": 10.66,
+            "start": 1793534999.8579931,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793535032.9308434,
+            "layer": "gold",
+            "seconds": 15.985,
+            "start": 1793535016.9459844,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_4",
+      "seconds": 71.035,
+      "started_at": 1793534968.8766983,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 4
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "FF4FCF910E0D3390",
+            "data_file_bytes": 9490612,
+            "data_files": 4,
+            "rows": 400000,
+            "snapshots": 4
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 4
+          },
+          "rna_silver.sequences": {
+            "checksum": "8588B1CDFACC4032",
+            "data_file_bytes": 9340512,
+            "data_files": 4,
+            "distinct_keys": 400000,
+            "rows": 400000,
+            "snapshots": 4
+          }
+        }
+      },
+      "error": null,
+      "name": "run_4_tables",
+      "seconds": 36.861,
+      "started_at": 1793535039.9120092,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793535140.616211,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.296,
+              "cpu_cores_mean": 0.918,
+              "cpu_cores_p95": 1.296,
+              "memory_bytes_max": 6505801710,
+              "memory_bytes_mean": 6483790003,
+              "memory_bytes_p95": 6505801710,
+              "samples": 2
+            },
+            "end": 1793535100.8375506,
+            "seconds": 9.04,
+            "start": 1793535091.7978516,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.597,
+              "cpu_cores_mean": 1.807,
+              "cpu_cores_p95": 2.597,
+              "memory_bytes_max": 6558415060,
+              "memory_bytes_mean": 6460704553,
+              "memory_bytes_p95": 6558415060,
+              "samples": 4
+            },
+            "end": 1793535139.6532154,
+            "seconds": 15.003,
+            "start": 1793535124.6505454,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.976,
+              "cpu_cores_mean": 1.748,
+              "cpu_cores_p95": 2.976,
+              "memory_bytes_max": 6705517689,
+              "memory_bytes_mean": 6527276547,
+              "memory_bytes_p95": 6705517689,
+              "samples": 2
+            },
+            "end": 1793535118.0951915,
+            "seconds": 10.678,
+            "start": 1793535107.4175923,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "d29afc23-8534-4e78-a548-99f586ac3f84",
+        "seconds": 54.42,
+        "start": 1793535086.196271,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793535100.8375506,
+            "layer": "bronze",
+            "seconds": 9.04,
+            "start": 1793535091.7978516,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793535118.0951915,
+            "layer": "silver",
+            "seconds": 10.678,
+            "start": 1793535107.4175923,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793535139.6532154,
+            "layer": "gold",
+            "seconds": 15.003,
+            "start": 1793535124.6505454,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_5",
+      "seconds": 70.715,
+      "started_at": 1793535076.773252,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 5
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "5644FF646F7C58E9",
+            "data_file_bytes": 11950001,
+            "data_files": 5,
+            "rows": 500000,
+            "snapshots": 5
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 5
+          },
+          "rna_silver.sequences": {
+            "checksum": "06A7B59D9B8723C5",
+            "data_file_bytes": 11751672,
+            "data_files": 5,
+            "distinct_keys": 500000,
+            "rows": 500000,
+            "snapshots": 5
+          }
+        }
+      },
+      "error": null,
+      "name": "run_5_tables",
+      "seconds": 37.229,
+      "started_at": 1793535147.4885182,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793535205.733256,
+        "kill_after_seconds": 5.0,
+        "killed_into_bronze_seconds": 5.015,
+        "layers": {
+          "bronze": {
+            "end": 1793535204.6851826,
+            "seconds": 5.982,
+            "start": 1793535198.7030742,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "16272f2b-2a10-46e4-8d02-8767d5774ee1",
+        "seconds": 12.57,
+        "settled_seconds": 2.868,
+        "start": 1793535193.162957,
+        "status": "CANCELED",
+        "steps": [
+          {
+            "end": 1793535204.6851826,
+            "layer": "bronze",
+            "seconds": 5.982,
+            "start": 1793535198.7030742,
+            "status": "FAILURE",
+            "step": "rnacentral_bronze_resources"
+          }
+        ]
+      },
+      "error": null,
+      "name": "killed_run",
+      "seconds": 21.869,
+      "started_at": 1793535184.7171824,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 5
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "5644FF646F7C58E9",
+            "data_file_bytes": 11950001,
+            "data_files": 5,
+            "rows": 500000,
+            "snapshots": 5
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 0
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 5
+          },
+          "rna_silver.sequences": {
+            "checksum": "06A7B59D9B8723C5",
+            "data_file_bytes": 11751672,
+            "data_files": 5,
+            "distinct_keys": 500000,
+            "rows": 500000,
+            "snapshots": 5
+          }
+        }
+      },
+      "error": null,
+      "name": "killed_run_tables",
+      "seconds": 36.994,
+      "started_at": 1793535206.586367,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793535309.072088,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.247,
+              "cpu_cores_mean": 1.216,
+              "cpu_cores_p95": 1.247,
+              "memory_bytes_max": 6573447446,
+              "memory_bytes_mean": 6563783769,
+              "memory_bytes_p95": 6573447446,
+              "samples": 2
+            },
+            "end": 1793535269.6052706,
+            "seconds": 9.081,
+            "start": 1793535260.5243123,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.658,
+              "cpu_cores_mean": 2.254,
+              "cpu_cores_p95": 2.658,
+              "memory_bytes_max": 6628208277,
+              "memory_bytes_mean": 6486205921,
+              "memory_bytes_p95": 6628208277,
+              "samples": 4
+            },
+            "end": 1793535308.093469,
+            "seconds": 16.454,
+            "start": 1793535291.639127,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.294,
+              "cpu_cores_mean": 1.943,
+              "cpu_cores_p95": 2.294,
+              "memory_bytes_max": 6611028409,
+              "memory_bytes_mean": 6524413235,
+              "memory_bytes_p95": 6611028409,
+              "samples": 3
+            },
+            "end": 1793535285.133765,
+            "seconds": 8.895,
+            "start": 1793535276.2384574,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "9717fcb4-743e-404e-922c-435c605c1695",
+        "seconds": 54.011,
+        "start": 1793535255.060873,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793535269.6052706,
+            "layer": "bronze",
+            "seconds": 9.081,
+            "start": 1793535260.5243123,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793535285.133765,
+            "layer": "silver",
+            "seconds": 8.895,
+            "start": 1793535276.2384574,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793535308.093469,
+            "layer": "gold",
+            "seconds": 16.454,
+            "start": 1793535291.639127,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "retry",
+      "seconds": 71.001,
+      "started_at": 1793535243.5807965,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 6
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "B19205DDEEEBEB22",
+            "data_file_bytes": 14412330,
+            "data_files": 6,
+            "rows": 600000,
+            "snapshots": 6
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 6
+          },
+          "rna_silver.sequences": {
+            "checksum": "E98273A854B7E7BE",
+            "data_file_bytes": 14163542,
+            "data_files": 6,
+            "distinct_keys": 600000,
+            "rows": 600000,
+            "snapshots": 6
+          }
+        }
+      },
+      "error": null,
+      "name": "retry_tables",
+      "seconds": 36.645,
+      "started_at": 1793535314.5818834,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793535413.524659,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.068,
+              "cpu_cores_mean": 1.778,
+              "cpu_cores_p95": 2.068,
+              "memory_bytes_max": 6529424031,
+              "memory_bytes_mean": 6477884423,
+              "memory_bytes_p95": 6529424031,
+              "samples": 2
+            },
+            "end": 1793535376.7458785,
+            "seconds": 8.903,
+            "start": 1793535367.842922,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.454,
+              "cpu_cores_mean": 1.401,
+              "cpu_cores_p95": 1.454,
+              "memory_bytes_max": 6627134536,
+              "memory_bytes_mean": 6575594928,
+              "memory_bytes_p95": 6627134536,
+              "samples": 3
+            },
+            "end": 1793535412.398467,
+            "seconds": 13.985,
+            "start": 1793535398.4135644,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.564,
+              "cpu_cores_mean": 1.526,
+              "cpu_cores_p95": 2.564,
+              "memory_bytes_max": 6555193834,
+              "memory_bytes_mean": 6514928515,
+              "memory_bytes_p95": 6555193834,
+              "samples": 2
+            },
+            "end": 1793535392.082655,
+            "seconds": 8.98,
+            "start": 1793535383.1025264,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "15cd45a6-5c03-42cf-ad97-f1a3db513e90",
+        "seconds": 51.224,
+        "start": 1793535362.30069,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793535376.7458785,
+            "layer": "bronze",
+            "seconds": 8.903,
+            "start": 1793535367.842922,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793535392.082655,
+            "layer": "silver",
+            "seconds": 8.98,
+            "start": 1793535383.1025264,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793535412.398467,
+            "layer": "gold",
+            "seconds": 13.985,
+            "start": 1793535398.4135644,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ],
+        "tags": {
+          "floe/full_refresh": "true",
+          "openlakeforge/full_refresh": "bronze"
+        }
+      },
+      "error": null,
+      "name": "full_refresh_bronze",
+      "seconds": 70.928,
+      "started_at": 1793535351.2267234,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 7
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "C7DFF4B1D12DA3AA",
+            "data_file_bytes": 2098915,
+            "data_files": 1,
+            "rows": 100000,
+            "snapshots": 7
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 7
+          },
+          "rna_silver.sequences": {
+            "checksum": "B1C73F01E0F7DAF4",
+            "data_file_bytes": 2438442,
+            "data_files": 1,
+            "distinct_keys": 100000,
+            "rows": 100000,
+            "snapshots": 7
+          }
+        }
+      },
+      "error": null,
+      "name": "full_refresh_bronze_tables",
+      "seconds": 36.71,
+      "started_at": 1793535422.154863,
+      "status": "ok"
+    }
+  ],
+  "scenario": "incremental-rna_catalog",
+  "schema_version": 1,
+  "started_at": 1793533930.216467,
+  "status": "ok"
+}
