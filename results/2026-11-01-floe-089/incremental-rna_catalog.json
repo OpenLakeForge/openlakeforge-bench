@@ -1,0 +1,1176 @@
+{
+  "environment": {
+    "cluster_config_override": null,
+    "component_catalog_sha256": "fd399dde2fa792c048b8c51f789e7e2a53bb635533377600e7a8997c3944afff",
+    "docker_server_version": "29.4.2",
+    "git_commit": "824820bfcf29511790a84c0d36226e65657dd842",
+    "git_modified": [],
+    "host": {
+      "cgroup": "v2",
+      "cpus": 4,
+      "kernel": "7.0.0-1017-azure",
+      "machine": "x86_64",
+      "memory_bytes": 16759443456
+    },
+    "image_overrides": {},
+    "olf_version": "0.5.1a1",
+    "parameters": {
+      "cluster_name": "openlakeforge-local",
+      "existing": false,
+      "full_refresh": "bronze",
+      "gold_mirrors": {
+        "mart_sequence_index": "sequences"
+      },
+      "kill_after_seconds": 5.0,
+      "live_check": [
+        "food_quality"
+      ],
+      "preset": "slim",
+      "product": "rna_catalog",
+      "project": "/home/runner/work/openlakeforge-bench/openlakeforge-bench/project",
+      "rows_per_run": 100000,
+      "runs": 5
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "git_commit": "5c495f56d09a41ebadee48fd58b71fe3ccc0e335",
+        "path": "/home/runner/work/openlakeforge-bench/openlakeforge-bench/project"
+      },
+      "error": null,
+      "name": "project",
+      "seconds": null,
+      "started_at": 1793544796.708674,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_foundation",
+      "seconds": 121.228,
+      "started_at": 1793544796.7086878,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_prefetch",
+      "seconds": 134.194,
+      "started_at": 1793544917.936869,
+      "status": "ok"
+    },
+    {
+      "detail": {},
+      "error": null,
+      "name": "deploy_platform",
+      "seconds": 179.402,
+      "started_at": 1793545052.1309204,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "bound": [
+          "ConfigMap/olf-source-open-food-facts",
+          "ConfigMap/olf-source-rnacentral",
+          "Secret/olf-source-rnacentral-credentials"
+        ]
+      },
+      "error": null,
+      "name": "bind_sources",
+      "seconds": 0.772,
+      "started_at": 1793545231.786599,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "project": "/home/runner/work/openlakeforge-bench/openlakeforge-bench/project"
+      },
+      "error": null,
+      "name": "deploy_artifacts",
+      "seconds": 194.132,
+      "started_at": 1793545232.5595155,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793545467.747592,
+        "error": "food_quality_pipeline run 9211b60c-877a-4fdb-88fe-2022aa2cf691 ended with FAILURE\n  floe_openlakeforge__food__default_6a5b9afc: dagster._core.definitions.events.Failure: floe run failed for entities food.nutrition_grades, food.products\n  floe_openlakeforge__food__default_6a5b9afc: dagster._core.definitions.events.Failure: floe run failed for entities food.nutrition_grades, food.products",
+        "job": "food_quality_pipeline",
+        "layers": {
+          "bronze": {
+            "end": 1793545452.3836026,
+            "seconds": 4.856,
+            "start": 1793545447.5278068,
+            "steps": 1
+          },
+          "silver": {
+            "end": 1793545466.4317586,
+            "seconds": 8.12,
+            "start": 1793545458.3122427,
+            "steps": 1
+          }
+        },
+        "outcome": "failed",
+        "product": "food_quality",
+        "run_id": "9211b60c-877a-4fdb-88fe-2022aa2cf691",
+        "seconds": 26.787,
+        "start": 1793545440.960202,
+        "status": "FAILURE",
+        "step_errors": {
+          "floe_openlakeforge__food__default_6a5b9afc": "dagster._core.definitions.events.Failure: floe run failed for entities food.nutrition_grades, food.products"
+        },
+        "steps": [
+          {
+            "end": 1793545452.3836026,
+            "layer": "bronze",
+            "seconds": 4.856,
+            "start": 1793545447.5278068,
+            "status": "SUCCESS",
+            "step": "open_food_facts_bronze_resources"
+          },
+          {
+            "end": 1793545466.4317586,
+            "layer": "silver",
+            "seconds": 8.12,
+            "start": 1793545458.3122427,
+            "status": "FAILURE",
+            "step": "floe_openlakeforge__food__default_6a5b9afc"
+          }
+        ]
+      },
+      "error": null,
+      "name": "live_check_food_quality",
+      "seconds": null,
+      "started_at": 1793545480.1983974,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793545557.098765,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.464,
+              "cpu_cores_mean": 1.491,
+              "cpu_cores_p95": 2.464,
+              "memory_bytes_max": 5345086798,
+              "memory_bytes_mean": 5301063383,
+              "memory_bytes_p95": 5345086798,
+              "samples": 3
+            },
+            "end": 1793545507.537789,
+            "seconds": 10.213,
+            "start": 1793545497.3250353,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.233,
+              "cpu_cores_mean": 2.294,
+              "cpu_cores_p95": 3.233,
+              "memory_bytes_max": 5799279590,
+              "memory_bytes_mean": 5644446019,
+              "memory_bytes_p95": 5799279590,
+              "samples": 5
+            },
+            "end": 1793545555.69477,
+            "seconds": 21.322,
+            "start": 1793545534.3730466,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.304,
+              "cpu_cores_mean": 1.764,
+              "cpu_cores_p95": 2.304,
+              "memory_bytes_max": 5697274117,
+              "memory_bytes_mean": 5578446687,
+              "memory_bytes_p95": 5697274117,
+              "samples": 3
+            },
+            "end": 1793545527.5107744,
+            "seconds": 13.085,
+            "start": 1793545514.4252844,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "27a59825-fd2f-4927-b54c-e65e4186d0c7",
+        "seconds": 65.602,
+        "start": 1793545491.496975,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793545507.537789,
+            "layer": "bronze",
+            "seconds": 10.213,
+            "start": 1793545497.3250353,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793545527.5107744,
+            "layer": "silver",
+            "seconds": 13.085,
+            "start": 1793545514.4252844,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793545555.69477,
+            "layer": "gold",
+            "seconds": 21.322,
+            "start": 1793545534.3730466,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_1",
+      "seconds": 80.805,
+      "started_at": 1793545480.1984208,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 1
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "C7DFF4B1D12DA3AA",
+            "data_file_bytes": 2089151,
+            "data_files": 1,
+            "rows": 100000,
+            "snapshots": 1
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 1
+          },
+          "rna_silver.sequences": {
+            "checksum": "B1C73F01E0F7DAF4",
+            "data_file_bytes": 2086110,
+            "data_files": 1,
+            "distinct_keys": 100000,
+            "rows": 100000,
+            "snapshots": 1
+          }
+        }
+      },
+      "error": null,
+      "name": "run_1_tables",
+      "seconds": 38.856,
+      "started_at": 1793545561.003825,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793545670.24734,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.082,
+              "cpu_cores_mean": 1.373,
+              "cpu_cores_p95": 2.082,
+              "memory_bytes_max": 5851892939,
+              "memory_bytes_mean": 5837397424,
+              "memory_bytes_p95": 5851892939,
+              "samples": 2
+            },
+            "end": 1793545626.434106,
+            "seconds": 11.345,
+            "start": 1793545615.089391,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.945,
+              "cpu_cores_mean": 2.319,
+              "cpu_cores_p95": 2.945,
+              "memory_bytes_max": 6174015487,
+              "memory_bytes_mean": 6029328775,
+              "memory_bytes_p95": 6174015487,
+              "samples": 4
+            },
+            "end": 1793545668.9229774,
+            "seconds": 17.877,
+            "start": 1793545651.0461314,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.848,
+              "cpu_cores_mean": 1.056,
+              "cpu_cores_p95": 1.848,
+              "memory_bytes_max": 5908801257,
+              "memory_bytes_mean": 5875157346,
+              "memory_bytes_p95": 5908801257,
+              "samples": 3
+            },
+            "end": 1793545644.513916,
+            "seconds": 11.377,
+            "start": 1793545633.1364381,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "5e2c5ba1-2ccc-4759-baf3-e93174233d94",
+        "seconds": 60.831,
+        "start": 1793545609.416829,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793545626.434106,
+            "layer": "bronze",
+            "seconds": 11.345,
+            "start": 1793545615.089391,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793545644.513916,
+            "layer": "silver",
+            "seconds": 11.377,
+            "start": 1793545633.1364381,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793545668.9229774,
+            "layer": "gold",
+            "seconds": 17.877,
+            "start": 1793545651.0461314,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_2",
+      "seconds": 70.794,
+      "started_at": 1793545599.8595343,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 2
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "9854AF2AD51E1F55",
+            "data_file_bytes": 4553316,
+            "data_files": 2,
+            "rows": 200000,
+            "snapshots": 2
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 2
+          },
+          "rna_silver.sequences": {
+            "checksum": "62D8864AF096BBE3",
+            "data_file_bytes": 4494432,
+            "data_files": 2,
+            "distinct_keys": 200000,
+            "rows": 200000,
+            "snapshots": 2
+          }
+        }
+      },
+      "error": null,
+      "name": "run_2_tables",
+      "seconds": 37.804,
+      "started_at": 1793545670.6534421,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793545775.703797,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.335,
+              "cpu_cores_mean": 1.307,
+              "cpu_cores_p95": 2.335,
+              "memory_bytes_max": 6187974130,
+              "memory_bytes_mean": 6174373400,
+              "memory_bytes_p95": 6187974130,
+              "samples": 3
+            },
+            "end": 1793545733.1369002,
+            "seconds": 10.598,
+            "start": 1793545722.5389633,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.415,
+              "cpu_cores_mean": 2.446,
+              "cpu_cores_p95": 4.415,
+              "memory_bytes_max": 6439229717,
+              "memory_bytes_mean": 6323265600,
+              "memory_bytes_p95": 6439229717,
+              "samples": 4
+            },
+            "end": 1793545774.2179475,
+            "seconds": 16.422,
+            "start": 1793545757.7961328,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.588,
+              "cpu_cores_mean": 1.482,
+              "cpu_cores_p95": 2.588,
+              "memory_bytes_max": 6341519211,
+              "memory_bytes_mean": 6281926539,
+              "memory_bytes_p95": 6341519211,
+              "samples": 2
+            },
+            "end": 1793545751.106959,
+            "seconds": 10.813,
+            "start": 1793545740.2942176,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "f1df0c68-4f69-429e-b143-f2f85b23bcd7",
+        "seconds": 58.914,
+        "start": 1793545716.789897,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793545733.1369002,
+            "layer": "bronze",
+            "seconds": 10.598,
+            "start": 1793545722.5389633,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793545751.106959,
+            "layer": "silver",
+            "seconds": 10.813,
+            "start": 1793545740.2942176,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793545774.2179475,
+            "layer": "gold",
+            "seconds": 16.422,
+            "start": 1793545757.7961328,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_3",
+      "seconds": 70.819,
+      "started_at": 1793545708.457959,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 3
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "66619837B734DAD5",
+            "data_file_bytes": 7002705,
+            "data_files": 3,
+            "rows": 300000,
+            "snapshots": 3
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 3
+          },
+          "rna_silver.sequences": {
+            "checksum": "D16A4DE0D7AD67C3",
+            "data_file_bytes": 6902509,
+            "data_files": 3,
+            "distinct_keys": 300000,
+            "rows": 300000,
+            "snapshots": 3
+          }
+        }
+      },
+      "error": null,
+      "name": "run_3_tables",
+      "seconds": 37.059,
+      "started_at": 1793545779.2774673,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793545881.223386,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.716,
+              "cpu_cores_mean": 1.149,
+              "cpu_cores_p95": 1.716,
+              "memory_bytes_max": 6278168444,
+              "memory_bytes_mean": 6272262864,
+              "memory_bytes_p95": 6278168444,
+              "samples": 2
+            },
+            "end": 1793545839.9972334,
+            "seconds": 10.877,
+            "start": 1793545829.1204906,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.665,
+              "cpu_cores_mean": 1.899,
+              "cpu_cores_p95": 2.665,
+              "memory_bytes_max": 6480031906,
+              "memory_bytes_mean": 6340445469,
+              "memory_bytes_p95": 6480031906,
+              "samples": 4
+            },
+            "end": 1793545879.9768755,
+            "seconds": 15.434,
+            "start": 1793545864.5431454,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.755,
+              "cpu_cores_mean": 1.333,
+              "cpu_cores_p95": 1.755,
+              "memory_bytes_max": 6382321401,
+              "memory_bytes_mean": 6316465235,
+              "memory_bytes_p95": 6382321401,
+              "samples": 3
+            },
+            "end": 1793545857.5854387,
+            "seconds": 10.912,
+            "start": 1793545846.673185,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "ad4170b3-2053-44e7-aaea-e3e183eaa8ee",
+        "seconds": 57.58,
+        "start": 1793545823.643221,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793545839.9972334,
+            "layer": "bronze",
+            "seconds": 10.877,
+            "start": 1793545829.1204906,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793545857.5854387,
+            "layer": "silver",
+            "seconds": 10.912,
+            "start": 1793545846.673185,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793545879.9768755,
+            "layer": "gold",
+            "seconds": 15.434,
+            "start": 1793545864.5431454,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_4",
+      "seconds": 70.852,
+      "started_at": 1793545816.3366656,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 4
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "FF4FCF910E0D3390",
+            "data_file_bytes": 9470015,
+            "data_files": 4,
+            "rows": 400000,
+            "snapshots": 4
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 4
+          },
+          "rna_silver.sequences": {
+            "checksum": "8588B1CDFACC4032",
+            "data_file_bytes": 9322417,
+            "data_files": 4,
+            "distinct_keys": 400000,
+            "rows": 400000,
+            "snapshots": 4
+          }
+        }
+      },
+      "error": null,
+      "name": "run_4_tables",
+      "seconds": 37.418,
+      "started_at": 1793545887.189003,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793545990.490175,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.564,
+              "cpu_cores_mean": 1.087,
+              "cpu_cores_p95": 1.564,
+              "memory_bytes_max": 6368362757,
+              "memory_bytes_mean": 6343666695,
+              "memory_bytes_p95": 6368362757,
+              "samples": 2
+            },
+            "end": 1793545951.6806076,
+            "seconds": 9.843,
+            "start": 1793545941.8379843,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.861,
+              "cpu_cores_mean": 2.021,
+              "cpu_cores_p95": 2.861,
+              "memory_bytes_max": 6449967136,
+              "memory_bytes_mean": 6396637958,
+              "memory_bytes_p95": 6449967136,
+              "samples": 3
+            },
+            "end": 1793545989.1651642,
+            "seconds": 15.129,
+            "start": 1793545974.036153,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.749,
+              "cpu_cores_mean": 1.78,
+              "cpu_cores_p95": 2.749,
+              "memory_bytes_max": 6545530158,
+              "memory_bytes_mean": 6434934749,
+              "memory_bytes_p95": 6545530158,
+              "samples": 2
+            },
+            "end": 1793545967.5072842,
+            "seconds": 8.775,
+            "start": 1793545958.7320142,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "57c336c3-4b02-40e2-9cf8-f442ee612ce0",
+        "seconds": 54.248,
+        "start": 1793545936.242608,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793545951.6806076,
+            "layer": "bronze",
+            "seconds": 9.843,
+            "start": 1793545941.8379843,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793545967.5072842,
+            "layer": "silver",
+            "seconds": 8.775,
+            "start": 1793545958.7320142,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793545989.1651642,
+            "layer": "gold",
+            "seconds": 15.129,
+            "start": 1793545974.036153,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "run_5",
+      "seconds": 70.856,
+      "started_at": 1793545924.6071358,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 5
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "5644FF646F7C58E9",
+            "data_file_bytes": 11926560,
+            "data_files": 5,
+            "rows": 500000,
+            "snapshots": 5
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 5
+          },
+          "rna_silver.sequences": {
+            "checksum": "06A7B59D9B8723C5",
+            "data_file_bytes": 11741299,
+            "data_files": 5,
+            "distinct_keys": 500000,
+            "rows": 500000,
+            "snapshots": 5
+          }
+        }
+      },
+      "error": null,
+      "name": "run_5_tables",
+      "seconds": 36.593,
+      "started_at": 1793545995.4628794,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793546057.168799,
+        "kill_after_seconds": 5.0,
+        "killed_into_bronze_seconds": 5.015,
+        "layers": {
+          "bronze": {
+            "end": 1793546055.4006872,
+            "seconds": 5.912,
+            "start": 1793546049.4883895,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "5972f2b8-19a0-4f5f-90b4-f1bd94dc1652",
+        "seconds": 13.345,
+        "settled_seconds": 4.696,
+        "start": 1793546043.823832,
+        "status": "CANCELED",
+        "steps": [
+          {
+            "end": 1793546055.4006872,
+            "layer": "bronze",
+            "seconds": 5.912,
+            "start": 1793546049.4883895,
+            "status": "FAILURE",
+            "step": "rnacentral_bronze_resources"
+          }
+        ]
+      },
+      "error": null,
+      "name": "killed_run",
+      "seconds": 27.144,
+      "started_at": 1793546032.0555105,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 5
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "5644FF646F7C58E9",
+            "data_file_bytes": 11926560,
+            "data_files": 5,
+            "rows": 500000,
+            "snapshots": 5
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 0
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 5
+          },
+          "rna_silver.sequences": {
+            "checksum": "06A7B59D9B8723C5",
+            "data_file_bytes": 11741299,
+            "data_files": 5,
+            "distinct_keys": 500000,
+            "rows": 500000,
+            "snapshots": 5
+          }
+        }
+      },
+      "error": null,
+      "name": "killed_run_tables",
+      "seconds": 36.404,
+      "started_at": 1793546059.1996298,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793546165.154713,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.665,
+              "cpu_cores_mean": 1.264,
+              "cpu_cores_p95": 2.665,
+              "memory_bytes_max": 6844030384,
+              "memory_bytes_mean": 6777458391,
+              "memory_bytes_p95": 6844030384,
+              "samples": 3
+            },
+            "end": 1793546124.027812,
+            "seconds": 12.15,
+            "start": 1793546111.8779628,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.499,
+              "cpu_cores_mean": 1.951,
+              "cpu_cores_p95": 2.499,
+              "memory_bytes_max": 6921339796,
+              "memory_bytes_mean": 6879105950,
+              "memory_bytes_p95": 6921339796,
+              "samples": 3
+            },
+            "end": 1793546163.8271441,
+            "seconds": 15.22,
+            "start": 1793546148.606729,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.393,
+              "cpu_cores_mean": 1.477,
+              "cpu_cores_p95": 2.393,
+              "memory_bytes_max": 6825776774,
+              "memory_bytes_mean": 6773879252,
+              "memory_bytes_p95": 6825776774,
+              "samples": 3
+            },
+            "end": 1793546141.6820667,
+            "seconds": 10.983,
+            "start": 1793546130.6986117,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "dc2a972d-a070-4c37-9bc1-e46a41fe6f07",
+        "seconds": 58.849,
+        "start": 1793546106.305957,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793546124.027812,
+            "layer": "bronze",
+            "seconds": 12.15,
+            "start": 1793546111.8779628,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793546141.6820667,
+            "layer": "silver",
+            "seconds": 10.983,
+            "start": 1793546130.6986117,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793546163.8271441,
+            "layer": "gold",
+            "seconds": 15.22,
+            "start": 1793546148.606729,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "retry",
+      "seconds": 71.021,
+      "started_at": 1793546095.6033914,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 6
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "B19205DDEEEBEB22",
+            "data_file_bytes": 14387191,
+            "data_files": 6,
+            "rows": 600000,
+            "snapshots": 6
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 6
+          },
+          "rna_silver.sequences": {
+            "checksum": "E98273A854B7E7BE",
+            "data_file_bytes": 14151211,
+            "data_files": 6,
+            "distinct_keys": 600000,
+            "rows": 600000,
+            "snapshots": 6
+          }
+        }
+      },
+      "error": null,
+      "name": "retry_tables",
+      "seconds": 36.885,
+      "started_at": 1793546166.6245275,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793546268.845726,
+        "job": "rna_catalog_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 1.949,
+              "cpu_cores_mean": 1.429,
+              "cpu_cores_p95": 1.949,
+              "memory_bytes_max": 6847251610,
+              "memory_bytes_mean": 6807523162,
+              "memory_bytes_p95": 6847251610,
+              "samples": 3
+            },
+            "end": 1793546230.210902,
+            "seconds": 11.938,
+            "start": 1793546218.2727196,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.159,
+              "cpu_cores_mean": 2.381,
+              "cpu_cores_p95": 3.159,
+              "memory_bytes_max": 6921339796,
+              "memory_bytes_mean": 6874810983,
+              "memory_bytes_p95": 6921339796,
+              "samples": 3
+            },
+            "end": 1793546267.3939965,
+            "seconds": 14.709,
+            "start": 1793546252.6848497,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.323,
+              "cpu_cores_mean": 1.878,
+              "cpu_cores_p95": 2.323,
+              "memory_bytes_max": 7049115073,
+              "memory_bytes_mean": 6908454894,
+              "memory_bytes_p95": 7049115073,
+              "samples": 2
+            },
+            "end": 1793546246.0978518,
+            "seconds": 9.005,
+            "start": 1793546237.0925114,
+            "steps": 1
+          }
+        },
+        "product": "rna_catalog",
+        "run_id": "382438af-19c9-4f4c-89a6-f432b31790d4",
+        "seconds": 56.163,
+        "start": 1793546212.682775,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793546230.210902,
+            "layer": "bronze",
+            "seconds": 11.938,
+            "start": 1793546218.2727196,
+            "status": "SUCCESS",
+            "step": "rnacentral_bronze_resources"
+          },
+          {
+            "end": 1793546246.0978518,
+            "layer": "silver",
+            "seconds": 9.005,
+            "start": 1793546237.0925114,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__rna__default_7a4d27f6"
+          },
+          {
+            "end": 1793546267.3939965,
+            "layer": "gold",
+            "seconds": 14.709,
+            "start": 1793546252.6848497,
+            "status": "SUCCESS",
+            "step": "rna_catalog_dbt_gold_assets"
+          }
+        ],
+        "tags": {
+          "floe/full_refresh": "true",
+          "openlakeforge/full_refresh": "bronze"
+        }
+      },
+      "error": null,
+      "name": "full_refresh_bronze",
+      "seconds": 70.932,
+      "started_at": 1793546203.509414,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "rna_catalog_gold.mart_database_coverage": {
+            "checksum": "0EF5CD540D245E71",
+            "data_file_bytes": 2396,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 7
+          },
+          "rna_catalog_gold.mart_sequence_index": {
+            "checksum": "C7DFF4B1D12DA3AA",
+            "data_file_bytes": 2098915,
+            "data_files": 1,
+            "rows": 100000,
+            "snapshots": 7
+          }
+        },
+        "growth": {
+          "rna_silver.sequences": 100000
+        },
+        "silver": {
+          "rna_silver.expert_databases": {
+            "checksum": "AEA5EC5E7BAFE557",
+            "data_file_bytes": 4858,
+            "data_files": 1,
+            "rows": 59,
+            "snapshots": 7
+          },
+          "rna_silver.sequences": {
+            "checksum": "B1C73F01E0F7DAF4",
+            "data_file_bytes": 2438442,
+            "data_files": 1,
+            "distinct_keys": 100000,
+            "rows": 100000,
+            "snapshots": 7
+          }
+        }
+      },
+      "error": null,
+      "name": "full_refresh_bronze_tables",
+      "seconds": 35.938,
+      "started_at": 1793546274.4410622,
+      "status": "ok"
+    }
+  ],
+  "scenario": "incremental-rna_catalog",
+  "schema_version": 1,
+  "started_at": 1793544796.7066104,
+  "status": "ok"
+}
