@@ -4,7 +4,7 @@ These runs use OpenLakeForge `824820b`, which is main plus the bump to Floe 0.8.
 
 They ran on `ubuntu-latest` runners (4 vCPU, 15.6 GiB) with the Slim preset, in [run 41318305780](https://github.com/OpenLakeForge/openlakeforge-bench/actions/runs/41318305780).
 
-Scenarios A and B at ×100,000 and ×300,000 are still running and will be added here.
+Scenarios A and B at ×100,000 and ×300,000 from the same run follow in a separate results folder.
 
 | File | Scenario |
 | --- | --- |
