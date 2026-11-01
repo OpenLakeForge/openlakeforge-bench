@@ -24,6 +24,11 @@ on:
         description: Run scenarios A and B
         type: boolean
         default: true
+      preset:
+        description: Preset scenarios A and B deploy (slim, or full with Superset and OpenMetadata)
+        type: choice
+        options: [slim, full]
+        default: slim
       many_tables:
         description: Space-separated table counts for scenario C, run in order on one cluster; empty skips it
         default: "100"
@@ -115,6 +120,14 @@ jobs:
           for value in $ETL_SCALES $IDLE_SECONDS; do
             [[ "$value" =~ ^[1-9][0-9]*$ ]] || { echo "::error::not a positive integer: $value"; exit 1; }
           done
+
+      # The platform's own profile names the preset; scenarios A and B deploy it.
+      - name: Select the preset
+        env:
+          PRESET: ${{ inputs.preset }}
+        run: |
+          sed -i -E "s/^(  preset: )slim$/\1$PRESET/" openlakeforge.yaml
+          grep -qx "  preset: $PRESET" openlakeforge.yaml || { echo "::error::could not set preset $PRESET"; exit 1; }
 
       - name: "Scenario A: install, first pipeline, idle footprint"
         env:
