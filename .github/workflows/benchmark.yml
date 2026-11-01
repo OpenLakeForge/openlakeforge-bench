@@ -159,6 +159,9 @@ jobs:
           export KUBECONFIG
           echo "kubeconfig: ${KUBECONFIG:-none found}"
           uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
+          # Trino, Polaris and SeaweedFS run in the shared namespace; a Gold or catalog
+          # failure is explained only by their logs.
+          uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics-olf-system" --namespace olf-system
 
       - name: Upload results
         if: ${{ always() }}
@@ -267,6 +270,9 @@ jobs:
           export KUBECONFIG
           echo "kubeconfig: ${KUBECONFIG:-none found}"
           uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
+          # Trino, Polaris and SeaweedFS run in the shared namespace; a Gold or catalog
+          # failure is explained only by their logs.
+          uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics-olf-system" --namespace olf-system
 
       - name: Upload results
         if: ${{ always() }}
@@ -390,6 +396,9 @@ jobs:
           export KUBECONFIG
           echo "kubeconfig: ${KUBECONFIG:-none found}"
           uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
+          # Trino, Polaris and SeaweedFS run in the shared namespace; a Gold or catalog
+          # failure is explained only by their logs.
+          uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics-olf-system" --namespace olf-system
 
       - name: Upload results
         if: ${{ always() }}
