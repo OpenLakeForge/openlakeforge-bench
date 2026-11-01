@@ -43,7 +43,7 @@ They are compared with the [30 Oct reference](../2026-10-30-github-runner/) on `
 | Time to first query | 3.5 s | 3.2 s |
 | Idle, 300 s: CPU mean / memory mean | 0.42 cores / 4.2 GiB | 0.37 cores / 4.3 GiB |
 
-Install took 133 s longer on main, mostly prefetch (+57 s) and foundation (+22 s). #743 doesn't touch those phases. This run doesn't show whether the difference is the runner or the newer platform.
+Install took 103 s longer on main, mostly prefetch (+57 s) and foundation (+22 s). #743 doesn't touch those phases. This run doesn't show whether the difference is the runner or the newer platform.
 
 ## Scenario C
 
