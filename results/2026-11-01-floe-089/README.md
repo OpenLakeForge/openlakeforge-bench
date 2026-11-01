@@ -1,16 +1,17 @@
-# 2026-11-01: Floe 0.8.9 (scenarios C and D)
+# 2026-11-01: Floe 0.8.9 (scenarios A, B at GB scale, C and D)
 
 These runs use OpenLakeForge `824820b`, which is main plus the bump to Floe 0.8.9 (OpenLakeForge#749). Floe 0.8.9 fixes the per-entity costs reported in floe#1129.
 
 They ran on `ubuntu-latest` runners (4 vCPU, 15.6 GiB) with the Slim preset, in [run 41318305780](https://github.com/OpenLakeForge/openlakeforge-bench/actions/runs/41318305780).
-
-Scenarios A and B at ×100,000 and ×300,000 are still running and will be added here.
 
 | File | Scenario |
 | --- | --- |
 | [many-tables-t100.json](many-tables-t100.json) | C: 100 tables over 4 domains |
 | [many-tables-t300.json](many-tables-t300.json) | C: 300 tables over 4 domains |
 | [incremental-rna_catalog.json](incremental-rna_catalog.json) | D: acme-lakehouse `rna_catalog` |
+| [footprint.json](footprint.json) | A: install, first pipeline, 300 s idle |
+| [etl-x100000.json](etl-x100000.json) | B at ×100,000: 13.8M rows, 0.82 GB of CSV; the delta step adds 10% (0.90 GB) |
+| [etl-x300000.json](etl-x300000.json) | B at ×300,000: 41.4M rows, 2.5 GB of CSV. **failed** on the repeat step |
 
 ## Scenario C, per 25- or 75-table domain
 
@@ -39,3 +40,33 @@ Scenarios A and B at ×100,000 and ×300,000 are still running and will be added
 | run 1 | 65.6 s | 10.2 s | 13.1 s | 21.3 s |
 | runs 2–5, retry | 54–61 s | 9.8–12.2 s | 8.8–11.4 s | 15.1–17.9 s |
 | full refresh from Bronze | 56.2 s | 11.9 s | 9.0 s | 14.7 s |
+
+## Scenario B at GB scale
+
+**×100,000:** every step passed: initial, repeat and +10% delta.
+
+**×300,000:**
+- **Initial:** passed for all three products.
+- **Repeat:** `order_revenue`'s Gold step failed. The Trino coordinator was OOM-killed at its 3Gi limit while it ran `mart_order_revenue_by_channel`, and dbt got `404 Query not found`. Filed as OpenLakeForge#755.
+- **Not run:** the rest of the scale was skipped after the failure.
+
+| Scale | Step | Product run | Bronze | Silver | Gold | Peak memory |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| ×100,000 | initial, repeat | 286–404 s | 219–322 s | 16–24 s | 28–40 s | 5.7–7.4 GiB |
+| ×100,000 | +10% delta | 308–428 s | 237–352 s | 19–27 s | 30–33 s | 6.0–7.0 GiB |
+| ×300,000 | initial | 761–1104 s | 654–970 s | 41–65 s | 42–51 s | 6.8–9.3 GiB |
+| ×300,000 | repeat `order_revenue` | failed | 953 s | 61 s | failed at 79 s | — |
+
+**What it shows:**
+- **Bronze is 75–88% of every run.** The reference CSV loader moves about 1 MB/s on about one core (1.5 cores in use across the cluster). It holds every row in memory, which is why peak memory reaches 9.3 GiB at ×300,000. Filed as OpenLakeForge#756.
+- **Silver scales.** Floe 0.8.9 loads 2.5 GB in 41–65 s per product, using 3.1–3.3 cores, about 15 MB/s.
+- **Gold fits until the coordinator runs out of room.** 42–51 s at ×300,000, but the Slim coordinator's 1Gi of non-heap headroom over its 2G heap isn't enough for a rebuild over 3.6M orders and 6.3M order lines.
+
+## Scenario A
+
+| | |
+| ---: | --- |
+| foundation / prefetch / platform / artifacts | 122 / 137 / 186 / 200 s (646 s in total) |
+| First pipeline (Dagster run; Bronze / Silver / Gold) | 66 s (2.0 / 16.8 / 28.0 s) |
+| Time to first query | 3.0 s |
+| Idle, 300 s: CPU mean / memory mean | 0.38 cores / 4.1 GiB |

@@ -1,0 +1,699 @@
+{
+  "environment": {
+    "cluster_config_override": null,
+    "component_catalog_sha256": "fd399dde2fa792c048b8c51f789e7e2a53bb635533377600e7a8997c3944afff",
+    "docker_server_version": "29.4.2",
+    "git_commit": "824820bfcf29511790a84c0d36226e65657dd842",
+    "git_modified": [],
+    "host": {
+      "cgroup": "v2",
+      "cpus": 4,
+      "kernel": "7.0.0-1017-azure",
+      "machine": "x86_64",
+      "memory_bytes": 16759443456
+    },
+    "image_overrides": {},
+    "olf_version": "0.5.1a1",
+    "parameters": {
+      "cluster_name": "openlakeforge-local",
+      "delta": 30000,
+      "preset": "slim",
+      "scale": 300000
+    }
+  },
+  "measurements": [
+    {
+      "detail": {
+        "bytes": 2524866998,
+        "rows": 41400000,
+        "scale": 300000,
+        "tables": [
+          {
+            "bytes": 149411151,
+            "resource": "accounts",
+            "rows": 2400000,
+            "sha256": "78c20310c67d168bf6dc1eb558b8f87cfa8688e5d67ed02482fcf43447c67abf",
+            "source": "crm"
+          },
+          {
+            "bytes": 36566698,
+            "resource": "channels",
+            "rows": 900000,
+            "sha256": "9f56608e7678a585e0b57c70c0a0d5ea602a33c8c6acd7c6e6b782660ad7ca60",
+            "source": "crm"
+          },
+          {
+            "bytes": 127377783,
+            "resource": "nps_responses",
+            "rows": 3000000,
+            "sha256": "16ee9edb13a1bb2b2a551e7b90568947bc90ff6376bb49ad342b6a5fabe729f9",
+            "source": "crm"
+          },
+          {
+            "bytes": 362599945,
+            "resource": "order_lines",
+            "rows": 6300000,
+            "sha256": "5d5d503a7372fa359b4758f306ebbce44af18ba8e89e0057be7ec51b0fdd4a84",
+            "source": "crm"
+          },
+          {
+            "bytes": 290900002,
+            "resource": "orders",
+            "rows": 3600000,
+            "sha256": "6372ab1504312586cd431da5cecd553255d9a07574be8fe61ac22a6ea0db8254",
+            "source": "crm"
+          },
+          {
+            "bytes": 96011139,
+            "resource": "products",
+            "rows": 2400000,
+            "sha256": "38cee67f32c178e2e95677cafd5418da07d935e087fcd6e254c3d7f85d16470d",
+            "source": "crm"
+          },
+          {
+            "bytes": 48455590,
+            "resource": "promotions",
+            "rows": 1200000,
+            "sha256": "4f1743885c1e4fbe86224fbe12f75788e8674e33aa069d89c624a3b24c9efebe",
+            "source": "crm"
+          },
+          {
+            "bytes": 180322286,
+            "resource": "subscriptions",
+            "rows": 2400000,
+            "sha256": "ced50a7cd0e8a12ca852bcfad71b6d85b3837a1776affcd2535ece189e9f3b2d",
+            "source": "crm"
+          },
+          {
+            "bytes": 192633355,
+            "resource": "support_tickets",
+            "rows": 3600000,
+            "sha256": "7b5beb75953de324a8ee7af49a1dbecd437392178e73373f74d676b2e90dd7c9",
+            "source": "crm"
+          },
+          {
+            "bytes": 310300009,
+            "resource": "inventory_snapshots",
+            "rows": 4500000,
+            "sha256": "05346b3b972b84315597c75c4b0d2583b532f43213bcdb12fc61626856d58d46",
+            "source": "erp"
+          },
+          {
+            "bytes": 263155573,
+            "resource": "purchase_orders",
+            "rows": 3000000,
+            "sha256": "8b27295e0bdcaff70d1c557256979651fcbeed335ae8091addbbf98251b67f99",
+            "source": "erp"
+          },
+          {
+            "bytes": 174777810,
+            "resource": "shipments",
+            "rows": 3000000,
+            "sha256": "eec0dd27d86c2a672ffb7165c8a97b9265d8fdd115bf84e0d604e780e6ade2fe",
+            "source": "erp"
+          },
+          {
+            "bytes": 156366693,
+            "resource": "stockout_events",
+            "rows": 2100000,
+            "sha256": "73c41391f61f67ca933e4f3bd2a49b71a16b41c563362f2fa5dff3beecf9d817",
+            "source": "erp"
+          },
+          {
+            "bytes": 72644479,
+            "resource": "suppliers",
+            "rows": 1500000,
+            "sha256": "1a72f892f765a2e7a3b3d2ad4bdcc1007640f093fb2d4203046534305ab2f7b1",
+            "source": "erp"
+          },
+          {
+            "bytes": 63344485,
+            "resource": "warehouses",
+            "rows": 1500000,
+            "sha256": "2cb36b56d148f746f1065486da2da24a4ad26d4f0d6d7570f6206759aca6f22d",
+            "source": "erp"
+          }
+        ]
+      },
+      "error": null,
+      "name": "generate_dataset",
+      "seconds": 144.764,
+      "started_at": 1793550462.4405897,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "scale": 300000
+      },
+      "error": null,
+      "name": "deploy_artifacts",
+      "seconds": 201.558,
+      "started_at": 1793550607.2045405,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793551930.284763,
+        "job": "order_revenue_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.818,
+              "cpu_cores_mean": 1.53,
+              "cpu_cores_p95": 2.372,
+              "memory_bytes_max": 9679186950,
+              "memory_bytes_mean": 7091540492,
+              "memory_bytes_p95": 9042726485,
+              "samples": 242
+            },
+            "end": 1793551803.196471,
+            "seconds": 970.471,
+            "start": 1793550832.7254677,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.289,
+              "cpu_cores_mean": 2.581,
+              "cpu_cores_p95": 4.213,
+              "memory_bytes_max": 7454381308,
+              "memory_bytes_mean": 6774829853,
+              "memory_bytes_p95": 7452078636,
+              "samples": 13
+            },
+            "end": 1793551929.04646,
+            "seconds": 50.699,
+            "start": 1793551878.3470619,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.754,
+              "cpu_cores_mean": 3.258,
+              "cpu_cores_p95": 4.714,
+              "memory_bytes_max": 7764508146,
+              "memory_bytes_mean": 6423581048,
+              "memory_bytes_p95": 7319484104,
+              "samples": 15
+            },
+            "end": 1793551871.3720374,
+            "seconds": 59.918,
+            "start": 1793551811.4542975,
+            "steps": 1
+          }
+        },
+        "product": "order_revenue",
+        "run_id": "15744031-066f-49c3-a54b-e0d9411b588a",
+        "scale": 300000,
+        "seconds": 1103.997,
+        "start": 1793550826.287271,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793551803.196471,
+            "layer": "bronze",
+            "seconds": 970.471,
+            "start": 1793550832.7254677,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793551871.3720374,
+            "layer": "silver",
+            "seconds": 59.918,
+            "start": 1793551811.4542975,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          },
+          {
+            "end": 1793551929.04646,
+            "layer": "gold",
+            "seconds": 50.699,
+            "start": 1793551878.3470619,
+            "status": "SUCCESS",
+            "step": "order_revenue_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "initial_order_revenue",
+      "seconds": 1128.672,
+      "started_at": 1793550809.6621108,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793552711.886269,
+        "job": "customer_health_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 2.553,
+              "cpu_cores_mean": 1.495,
+              "cpu_cores_p95": 2.202,
+              "memory_bytes_max": 9776704520,
+              "memory_bytes_mean": 8147567975,
+              "memory_bytes_p95": 9093569838,
+              "samples": 162
+            },
+            "end": 1793552611.084572,
+            "seconds": 654.017,
+            "start": 1793551957.0680034,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.501,
+              "cpu_cores_mean": 2.564,
+              "cpu_cores_p95": 4.501,
+              "memory_bytes_max": 7355903245,
+              "memory_bytes_mean": 7209719930,
+              "memory_bytes_p95": 7355903245,
+              "samples": 11
+            },
+            "end": 1793552710.6888788,
+            "seconds": 43.951,
+            "start": 1793552666.738192,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.221,
+              "cpu_cores_mean": 3.124,
+              "cpu_cores_p95": 4.221,
+              "memory_bytes_max": 8914686966,
+              "memory_bytes_mean": 7882179764,
+              "memory_bytes_p95": 8914686966,
+              "samples": 10
+            },
+            "end": 1793552658.9560497,
+            "seconds": 40.957,
+            "start": 1793552617.9988825,
+            "steps": 1
+          }
+        },
+        "product": "customer_health",
+        "run_id": "047a835f-b9e1-477f-a4f6-ee6ee9f138ff",
+        "scale": 300000,
+        "seconds": 760.808,
+        "start": 1793551951.078403,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793552611.084572,
+            "layer": "bronze",
+            "seconds": 654.017,
+            "start": 1793551957.0680034,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793552658.9560497,
+            "layer": "silver",
+            "seconds": 40.957,
+            "start": 1793552617.9988825,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          },
+          {
+            "end": 1793552710.6888788,
+            "layer": "gold",
+            "seconds": 43.951,
+            "start": 1793552666.738192,
+            "status": "SUCCESS",
+            "step": "customer_health_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "initial_customer_health",
+      "seconds": 782.48,
+      "started_at": 1793551938.3344398,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793553765.931315,
+        "job": "inventory_reliability_pipeline",
+        "layers": {
+          "bronze": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.486,
+              "cpu_cores_mean": 1.54,
+              "cpu_cores_p95": 2.4,
+              "memory_bytes_max": 9944082414,
+              "memory_bytes_mean": 7449481563,
+              "memory_bytes_p95": 8970060168,
+              "samples": 226
+            },
+            "end": 1793553642.7845764,
+            "seconds": 906.622,
+            "start": 1793552736.162268,
+            "steps": 1
+          },
+          "gold": {
+            "cluster_usage": {
+              "cpu_cores_max": 3.646,
+              "cpu_cores_mean": 1.878,
+              "cpu_cores_p95": 3.646,
+              "memory_bytes_max": 7301532482,
+              "memory_bytes_mean": 6865247080,
+              "memory_bytes_p95": 7301532482,
+              "samples": 11
+            },
+            "end": 1793553764.7120967,
+            "seconds": 41.953,
+            "start": 1793553722.7590663,
+            "steps": 1
+          },
+          "silver": {
+            "cluster_usage": {
+              "cpu_cores_max": 4.294,
+              "cpu_cores_mean": 3.31,
+              "cpu_cores_p95": 4.258,
+              "memory_bytes_max": 8655692889,
+              "memory_bytes_mean": 7019732925,
+              "memory_bytes_p95": 8651058183,
+              "samples": 16
+            },
+            "end": 1793553715.0589397,
+            "seconds": 65.108,
+            "start": 1793553649.950989,
+            "steps": 1
+          }
+        },
+        "product": "inventory_reliability",
+        "run_id": "6b9228b2-e9ab-47ba-86f9-664515cb9a81",
+        "scale": 300000,
+        "seconds": 1035.72,
+        "start": 1793552730.211592,
+        "status": "SUCCESS",
+        "steps": [
+          {
+            "end": 1793553642.7845764,
+            "layer": "bronze",
+            "seconds": 906.622,
+            "start": 1793552736.162268,
+            "status": "SUCCESS",
+            "step": "erp_bronze_resources"
+          },
+          {
+            "end": 1793553715.0589397,
+            "layer": "silver",
+            "seconds": 65.108,
+            "start": 1793553649.950989,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__supply_chain__default_77995f20"
+          },
+          {
+            "end": 1793553764.7120967,
+            "layer": "gold",
+            "seconds": 41.953,
+            "start": 1793553722.7590663,
+            "status": "SUCCESS",
+            "step": "inventory_reliability_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": null,
+      "name": "initial_inventory_reliability",
+      "seconds": 1053.165,
+      "started_at": 1793552720.8140075,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "gold": {
+          "customer_health_gold.mart_churn_risk_by_segment": {
+            "checksum": "EC485817F28D948D",
+            "data_file_bytes": 1208,
+            "data_files": 1,
+            "rows": 6,
+            "snapshots": 4
+          },
+          "customer_health_gold.mart_customer_health_score": {
+            "checksum": "70F77CA77E2BD834",
+            "data_file_bytes": 1805040,
+            "data_files": 3,
+            "rows": 2400000,
+            "snapshots": 4
+          },
+          "customer_health_gold.mart_support_sla_by_customer": {
+            "checksum": "A85B2BE8F7269054",
+            "data_file_bytes": 10359818,
+            "data_files": 3,
+            "rows": 3600000,
+            "snapshots": 4
+          },
+          "inventory_reliability_gold.mart_inventory_position": {
+            "checksum": "3D94BADCEEDF3285",
+            "data_file_bytes": 12972293,
+            "data_files": 2,
+            "rows": 2100000,
+            "snapshots": 4
+          },
+          "inventory_reliability_gold.mart_stockout_risk": {
+            "checksum": "DDDDEFB69BAE675D",
+            "data_file_bytes": 12608297,
+            "data_files": 2,
+            "rows": 2100000,
+            "snapshots": 4
+          },
+          "inventory_reliability_gold.mart_supplier_delivery_reliability": {
+            "checksum": "CF7A689BFA6B9FA9",
+            "data_file_bytes": 5374240,
+            "data_files": 2,
+            "rows": 1500000,
+            "snapshots": 4
+          },
+          "order_revenue_gold.mart_order_revenue_by_account_segment": {
+            "checksum": "00539E0C240034F8",
+            "data_file_bytes": 834,
+            "data_files": 1,
+            "rows": 6,
+            "snapshots": 5
+          },
+          "order_revenue_gold.mart_order_revenue_by_channel": {
+            "checksum": "78FED79C7F9CFB76",
+            "data_file_bytes": 1609,
+            "data_files": 1,
+            "rows": 11,
+            "snapshots": 5
+          },
+          "order_revenue_gold.mart_order_revenue_by_day": {
+            "checksum": "A1D095404CD87E59",
+            "data_file_bytes": 1591,
+            "data_files": 1,
+            "rows": 12,
+            "snapshots": 5
+          },
+          "order_revenue_gold.mart_order_revenue_margin_by_product": {
+            "checksum": "B623F11A61646D74",
+            "data_file_bytes": 8217925,
+            "data_files": 2,
+            "rows": 2400000,
+            "snapshots": 5
+          }
+        },
+        "scale": 300000,
+        "silver": {
+          "sales_silver.accounts": {
+            "checksum": "3E76259618D4FFC5",
+            "data_file_bytes": 2222062,
+            "data_files": 3,
+            "expected_rows": 2400000,
+            "rows": 2400000,
+            "snapshots": 9
+          },
+          "sales_silver.channels": {
+            "checksum": "D301E7F753EB0240",
+            "data_file_bytes": 901398,
+            "data_files": 1,
+            "expected_rows": 900000,
+            "rows": 900000,
+            "snapshots": 5
+          },
+          "sales_silver.nps_responses": {
+            "checksum": "069FAB814DF52E72",
+            "data_file_bytes": 5462978,
+            "data_files": 3,
+            "expected_rows": 3000000,
+            "rows": 3000000,
+            "snapshots": 4
+          },
+          "sales_silver.order_lines": {
+            "checksum": "93541C1E70BA2D66",
+            "data_file_bytes": 18404642,
+            "data_files": 7,
+            "expected_rows": 6300000,
+            "rows": 6300000,
+            "snapshots": 5
+          },
+          "sales_silver.orders": {
+            "checksum": "1C55E2D2E18C3B57",
+            "data_file_bytes": 12002103,
+            "data_files": 4,
+            "expected_rows": 3600000,
+            "rows": 3600000,
+            "snapshots": 5
+          },
+          "sales_silver.products": {
+            "checksum": "0A212E86FE28F7CF",
+            "data_file_bytes": 2227208,
+            "data_files": 3,
+            "expected_rows": 2400000,
+            "rows": 2400000,
+            "snapshots": 5
+          },
+          "sales_silver.promotions": {
+            "checksum": "C22FB6DF878E1F25",
+            "data_file_bytes": 1352838,
+            "data_files": 2,
+            "expected_rows": 1200000,
+            "rows": 1200000,
+            "snapshots": 5
+          },
+          "sales_silver.subscriptions": {
+            "checksum": "1A6C362B06CF72B2",
+            "data_file_bytes": 4331682,
+            "data_files": 3,
+            "expected_rows": 2400000,
+            "rows": 2400000,
+            "snapshots": 4
+          },
+          "sales_silver.support_tickets": {
+            "checksum": "6DB8B7A819237FF9",
+            "data_file_bytes": 6938381,
+            "data_files": 4,
+            "expected_rows": 3600000,
+            "rows": 3600000,
+            "snapshots": 4
+          },
+          "supply_chain_silver.inventory_snapshots": {
+            "checksum": "2746DC100836F82C",
+            "data_file_bytes": 14784291,
+            "data_files": 5,
+            "expected_rows": 4500000,
+            "rows": 4500000,
+            "snapshots": 4
+          },
+          "supply_chain_silver.purchase_orders": {
+            "checksum": "B0F96F97FACD690B",
+            "data_file_bytes": 10830741,
+            "data_files": 3,
+            "expected_rows": 3000000,
+            "rows": 3000000,
+            "snapshots": 4
+          },
+          "supply_chain_silver.shipments": {
+            "checksum": "2A14D8B1835ED4FD",
+            "data_file_bytes": 5605210,
+            "data_files": 3,
+            "expected_rows": 3000000,
+            "rows": 3000000,
+            "snapshots": 4
+          },
+          "supply_chain_silver.stockout_events": {
+            "checksum": "BC2D0905CF505F84",
+            "data_file_bytes": 6734973,
+            "data_files": 3,
+            "expected_rows": 2100000,
+            "rows": 2100000,
+            "snapshots": 4
+          },
+          "supply_chain_silver.suppliers": {
+            "checksum": "8CCEAC663D25D4EB",
+            "data_file_bytes": 1474885,
+            "data_files": 2,
+            "expected_rows": 1500000,
+            "rows": 1500000,
+            "snapshots": 4
+          },
+          "supply_chain_silver.warehouses": {
+            "checksum": "20F64F0EF3A7742C",
+            "data_file_bytes": 1383417,
+            "data_files": 2,
+            "expected_rows": 1500000,
+            "rows": 1500000,
+            "snapshots": 4
+          }
+        }
+      },
+      "error": null,
+      "name": "initial_tables",
+      "seconds": 253.902,
+      "started_at": 1793553773.9792476,
+      "status": "ok"
+    },
+    {
+      "detail": {
+        "end": 1793555155.140677,
+        "job": "order_revenue_pipeline",
+        "layers": {
+          "bronze": {
+            "end": 1793554999.6720145,
+            "seconds": 952.907,
+            "start": 1793554046.765038,
+            "steps": 1
+          },
+          "gold": {
+            "end": 1793555153.9673965,
+            "seconds": 78.772,
+            "start": 1793555075.1956036,
+            "steps": 1
+          },
+          "silver": {
+            "end": 1793555068.4686544,
+            "seconds": 61.186,
+            "start": 1793555007.2830048,
+            "steps": 1
+          }
+        },
+        "product": "order_revenue",
+        "run_id": "0a538d3d-c216-4475-9b6a-1133acb2e9da",
+        "scale": 300000,
+        "seconds": 1114.515,
+        "start": 1793554040.625626,
+        "status": "FAILURE",
+        "step_errors": {
+          "order_revenue_dbt_gold_assets": "dagster_dbt.errors.DagsterDbtCliRuntimeError: The dbt CLI process with command\n\n`dbt-ol build --select fqn:*`\n\nfailed with exit code `1`. Check the stdout in the Dagster compute logs for the full information about the error, or view the dbt debug log: /opt/openlakeforge/lakehouse_code/gold/order_revenue/dbt/target/order_revenue_dbt_gold_assets-0a538d3-3ede721/dbt.log.\n\nErrors parsed from dbt logs:\n\n2 of 4 ERROR creating sql table model order_revenue_gold.mart_order_revenue_by_channel  [\u001b[31mERROR\u001b[0m in 21.10s]\n\n\u001b[31mFailure in model mart_order_revenue_by_channel (models/gold/mart_order_revenue_by_channel.sql)\u001b[0m\n\n  Runtime Error in model mart_order_revenue_by_channel (models/gold/mart_order_revenue_by_channel.sql)\n  error 404: b'Error 404 Not Found: Query not found'"
+        },
+        "steps": [
+          {
+            "end": 1793554999.6720145,
+            "layer": "bronze",
+            "seconds": 952.907,
+            "start": 1793554046.765038,
+            "status": "SUCCESS",
+            "step": "crm_bronze_resources"
+          },
+          {
+            "end": 1793555068.4686544,
+            "layer": "silver",
+            "seconds": 61.186,
+            "start": 1793555007.2830048,
+            "status": "SUCCESS",
+            "step": "floe_openlakeforge__sales__default_6223f6dc"
+          },
+          {
+            "end": 1793555153.9673965,
+            "layer": "gold",
+            "seconds": 78.772,
+            "start": 1793555075.1956036,
+            "status": "FAILURE",
+            "step": "order_revenue_dbt_gold_assets"
+          }
+        ]
+      },
+      "error": "order_revenue_pipeline run 0a538d3d-c216-4475-9b6a-1133acb2e9da ended with FAILURE\n  order_revenue_dbt_gold_assets: dagster_dbt.errors.DagsterDbtCliRuntimeError: The dbt CLI process with command\n\n`dbt-ol build --select fqn:*`\n\nfailed with exit code `1`. Check the stdout in the Dagster compute logs for the full information about the error, or view the dbt debug log: /opt/openlakeforge/lakehouse_code/gold/order_revenue/dbt/target/order_revenue_dbt_gold_assets-0a538d3-3ede721/dbt.log.\n\nErrors parsed from dbt logs:\n\n2 of 4 ERROR creating sql table model order_revenue_gold.mart_order_revenue_by_channel  [\u001b[31mERROR\u001b[0m in 21.10s]\n\n\u001b[31mFailure in model mart_order_revenue_by_channel (models/gold/mart_order_revenue_by_channel.sql)\u001b[0m\n\n  Runtime Error in model mart_order_revenue_by_channel (models/gold/mart_order_revenue_by_channel.sql)\n  error 404: b'Error 404 Not Found: Query not found'\n  order_revenue_dbt_gold_assets: dagster_dbt.errors.DagsterDbtCliRuntimeError: The dbt CLI process with command\n\n`dbt-ol build --select fqn:*`\n\nfailed with exit code `1`. Check the stdout in the Dagster compute logs for the full information about the error, or view the dbt debug log: /opt/openlakeforge/lakehouse_code/gold/order_revenue/dbt/target/order_revenue_dbt_gold_assets-0a538d3-3ede721/dbt.log.\n\nErrors parsed from dbt logs:\n\n2 of 4 ERROR creating sql table model order_revenue_gold.mart_order_revenue_by_channel  [\u001b[31mERROR\u001b[0m in 21.10s]\n\n\u001b[31mFailure in model mart_order_revenue_by_channel (models/gold/mart_order_revenue_by_channel.sql)\u001b[0m\n\n  Runtime Error in model mart_order_revenue_by_channel (models/gold/mart_order_revenue_by_channel.sql)\n  error 404: b'Error 404 Not Found: Query not found'",
+      "name": "repeat_order_revenue",
+      "seconds": 1133.429,
+      "started_at": 1793554027.881125,
+      "status": "failed"
+    }
+  ],
+  "scenario": "etl-x300000",
+  "schema_version": 1,
+  "started_at": 1793550462.3724647,
+  "status": "failed"
+}
