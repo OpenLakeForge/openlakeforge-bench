@@ -7,7 +7,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
-from openlakeforge_domain import load_lakehouse_inventory
+from openlakeforge_core import load_lakehouse_inventory
 
 from olf_bench._many_tables import generate, plan
 
