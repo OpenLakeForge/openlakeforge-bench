@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import pytest
-from openlakeforge_domain.inventory import Source, Table
+from openlakeforge_core.inventory import Source, Table
 from typer.testing import CliRunner
 
 import olf_bench as bench

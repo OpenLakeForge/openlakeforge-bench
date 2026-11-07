@@ -19,7 +19,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import yaml
-from openlakeforge_domain import inventory_for
+from openlakeforge_core import inventory_for
 
 from olf_bench._record import BenchError
 

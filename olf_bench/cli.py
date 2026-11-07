@@ -112,7 +112,7 @@ def incremental_command(
     cluster_name: str = typer.Option("openlakeforge-local", "--cluster-name", help="Local kind cluster name."),
 ) -> None:
     """Scenario D: an external project's incremental product, run after run, killed, retried and refreshed."""
-    from openlakeforge_domain import FULL_REFRESH_SCOPES
+    from openlakeforge_core import FULL_REFRESH_SCOPES
 
     import olf_bench as bench
 
@@ -291,15 +291,16 @@ def _session(cluster_name: str, kubeconfig_path: Path):  # noqa: ANN202
             kubeconfig_path=str(kubeconfig_path),
             project_root=str(project_root),
         )
-        with applied_runtime_environment(context, env="local") as kube_context:
+        with applied_runtime_environment(context, env="local") as contract:
             yield prepare_config(
                 "local",
                 suite="smoke",
                 namespace=context.namespace,
                 shared_namespace=context.shared_namespace,
-                kube_context=kube_context,
+                kube_context=contract.kube_context,
                 repo_root=context.paths.repo_root,
                 distribution_root=context.paths.distribution_root,
+                environ=contract,
             )
 
     return session

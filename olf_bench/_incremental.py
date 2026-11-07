@@ -27,8 +27,8 @@ from typing import Any
 
 from olf.infra.e2e._shell import E2EConfig, kubectl
 from olf.infra.e2e._trino import stage_catalog_name
-from openlakeforge_domain import full_refresh_tags
-from openlakeforge_domain.inventory import Domain, Product, Source
+from openlakeforge_core import full_refresh_tags
+from openlakeforge_core.inventory import Domain, Product, Source
 
 from olf_bench import _pipeline, _resources
 from olf_bench._dagster import dagster_client

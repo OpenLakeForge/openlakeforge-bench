@@ -9,14 +9,14 @@ requires-python = ">=3.12"
 # environment instead (README, "Run"); this pin never decides what is measured.
 dependencies = [
   "openlakeforge",
-  "openlakeforge-domain-model",
+  "openlakeforge-core",
   "openlakeforge-lakehouse-services",
 ]
 
 [tool.uv.sources]
-openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "5a6496dbd7ec9058000f8079abafee19c19c1119", subdirectory = "tools/olf" }
-openlakeforge-domain-model = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "5a6496dbd7ec9058000f8079abafee19c19c1119", subdirectory = "packages/domain-model" }
-openlakeforge-lakehouse-services = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "5a6496dbd7ec9058000f8079abafee19c19c1119", subdirectory = "packages/lakehouse-services" }
+openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "a825272fc13e2b14b6dc03619323540fb65d6cc1", subdirectory = "tools/olf" }
+openlakeforge-core = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "a825272fc13e2b14b6dc03619323540fb65d6cc1", subdirectory = "packages/core" }
+openlakeforge-lakehouse-services = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "a825272fc13e2b14b6dc03619323540fb65d6cc1", subdirectory = "packages/lakehouse-services" }
 
 [project.scripts]
 olf-bench = "olf_bench.cli:main"
@@ -53,7 +53,7 @@ warn_unreachable = true
 # olf ships no py.typed marker; follow it anyway so the harness is checked
 # against olf's real signatures, without reporting olf's own errors here.
 [[tool.mypy.overrides]]
-module = ["olf", "olf.*", "openlakeforge_domain", "openlakeforge_domain.*", "openlakeforge_services", "openlakeforge_services.*"]
+module = ["olf", "olf.*", "openlakeforge_core", "openlakeforge_core.*", "openlakeforge_services", "openlakeforge_services.*"]
 follow_untyped_imports = true
 follow_imports = "silent"
 

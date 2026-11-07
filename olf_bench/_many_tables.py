@@ -411,7 +411,7 @@ from pathlib import Path
 from pkgutil import iter_modules
 
 from dagster import Definitions
-from openlakeforge_domain import LakehouseInventory, load_lakehouse_inventory
+from openlakeforge_core import LakehouseInventory, load_lakehouse_inventory
 
 import lakehouse_code.pipelines.dagster as dagster_pipelines
 from libs.product_dagster import SourceDefinitionSpec, build_silver_definitions, build_source_definitions
