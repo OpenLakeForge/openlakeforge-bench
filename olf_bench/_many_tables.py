@@ -192,34 +192,30 @@ spec:
     dev:
       enabled: true
   access:
-    issuer: none
+    tls: none
 """
 
 
 def _governance(domains: list[str]) -> str:
-    lines = ["apiVersion: openlakeforge.io/v1beta1", "kind: Governance", "domains:"]
+    lines = ["apiVersion: openlakeforge.io/v1beta2", "kind: Governance", "domains:"]
     for domain in domains:
         lines += [
             f"  - name: {domain}",
             f"    displayName: Synthetic {domain.removeprefix('synth_')}",
             "    description: Generated domain for the many-table benchmark.",
             "    status: active",
-        ]
-    lines.append("products:")
-    for domain in domains:
-        lines += [
-            f"  - id: {product_name(domain)}",
-            f"    domain: {domain}",
-            f"    displayName: Synthetic profile {domain.removeprefix('synth_')}",
-            "    description: Row count of every table in the domain.",
-            "    status: active",
+            "    products:",
+            f"      - id: {product_name(domain)}",
+            f"        displayName: Synthetic profile {domain.removeprefix('synth_')}",
+            "        description: Row count of every table in the domain.",
+            "        status: active",
         ]
     return "\n".join(lines) + "\n"
 
 
 def _source(source: str, tables: list[Table]) -> str:
     lines = [
-        "apiVersion: openlakeforge.io/v1alpha3",
+        "apiVersion: openlakeforge.io/v1beta1",
         "kind: Source",
         f"name: {source}",
         f"displayName: Synthetic feed {source.removeprefix('feed_')}",
