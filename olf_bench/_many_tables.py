@@ -236,7 +236,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from libs.bronze_csv import BronzeLoadResult, load_entities_to_bronze
+from openlakeforge_runtime.bronze_csv import BronzeLoadResult, load_entities_to_bronze
 
 ENTITIES = (
 {names})
@@ -382,7 +382,7 @@ def _pipeline(domain: str, product: str, tables: list[Table]) -> str:
     inputs = f"{product.upper()}_SILVER_INPUTS"
     return f'''from __future__ import annotations
 
-from libs.product_dagster import ProductDefinitionSpec, build_product_definitions
+from openlakeforge_runtime.product_dagster import ProductDefinitionSpec, build_product_definitions
 
 {inputs} = (
 {names})
@@ -413,7 +413,13 @@ from dagster import Definitions
 from openlakeforge_core import LakehouseInventory, load_lakehouse_inventory
 
 import lakehouse_code.pipelines.dagster as dagster_pipelines
-from libs.product_dagster import SourceDefinitionSpec, build_silver_definitions, build_source_definitions
+from openlakeforge_runtime.product_dagster import (
+    SourceDefinitionSpec,
+    build_gold_maintenance_definitions,
+    build_maintenance_definitions,
+    build_silver_definitions,
+    build_source_definitions,
+)
 
 _LAKEHOUSE_CODE_ROOT = Path(__file__).resolve().parent
 
@@ -449,5 +455,11 @@ def _source_definitions(inventory: LakehouseInventory) -> list[Definitions]:
 
 
 _inventory = load_lakehouse_inventory(_LAKEHOUSE_CODE_ROOT)
-defs = Definitions.merge(*_source_definitions(_inventory), build_silver_definitions(), *_product_definitions())
+defs = Definitions.merge(
+    *_source_definitions(_inventory),
+    build_silver_definitions(),
+    build_maintenance_definitions(),
+    build_gold_maintenance_definitions(),
+    *_product_definitions(),
+)
 '''
