@@ -148,7 +148,10 @@ def generate(output: Path, *, tables: int, domains: int, rows: int, seed: int = 
         gold = code / "gold" / product
         _write(gold / "__init__.py", "")
         _write(gold / "dbt" / "dbt_project.yml", _dbt_project(domain, product))
-        _write(gold / "dbt" / "packages.yml", "packages:\n  - local: ../../../../libs/dbt/openlakeforge_dbt\n")
+        _write(
+            gold / "dbt" / "packages.yml",
+            "packages:\n  - local: \"{{ env_var('OPENLAKEFORGE_DBT_PACKAGES_DIR') }}/openlakeforge_dbt\"\n",
+        )
         _write(gold / "dbt" / "models" / "sources.yml", _dbt_sources(domain, members))
         _write(gold / "dbt" / "models" / "gold" / "schema.yml", _DBT_SCHEMA)
         _write(gold / "dbt" / "models" / "gold" / "mart_table_rows.sql", _mart(members))
