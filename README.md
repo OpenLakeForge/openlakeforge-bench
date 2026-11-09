@@ -17,6 +17,7 @@ carry.
 | `etl --scale N [--delta D]` | B: end-to-end ETL | The CSV fixtures replicated N times through every product job, a no-change rerun, then a reload at N+D replicas: wall clock per run and per layer, cluster CPU/RAM per layer, rows, checksums, Iceberg data files, bytes and snapshots |
 | `many-tables --tables N` | C: many tables | A generated project of N tables over `--domains` product jobs, run twice: Floe Jobs started and their pod start and run times, per-layer times, cluster CPU/RAM, every table's rows, files and snapshots against `expected.json` |
 | `incremental --project P --product X` | D: incremental loads | An external project installed from its own profile, one product run `--runs` times, then a run killed `--kill-after-seconds` into Bronze and its retry, then a `--full-refresh`: per-run layer times as Silver and Gold grow, rows added per run, key uniqueness, Gold-to-Silver row parity |
+| `parquet --data F` | E: large Parquet | One Parquet file of NYC taxi trips, 1 GB and up, through Bronze, Silver and Gold: per-layer time and cluster CPU/RAM, the Floe Job's start, run time and exit code (an OOM kill is a result), the Silver table's rows against the file's footer, and Gold's totals against aggregates computed from the file |
 
 Each run writes `result.json`, plus one log per `olf` subprocess, under
 `--output` (default `<project-root>/.tmp/bench/<scenario>-<UTC time>`). A step
@@ -113,11 +114,42 @@ or more results: every step's status and time, the Dagster run time and
 per-layer split of each product job, peak cluster memory, and the first line of
 any error.
 
+## Scenario E: a large Parquet file
+
+The reference products load CSV. Real sources often hand over one large Parquet file, which has no text to parse and
+stresses other paths: a loader's per-file memory, Floe's read of a file bigger than its chunk, row groups and
+compression. `scripts/prepare_taxi_parquet.py` builds the input from the
+[NYC TLC yellow-taxi trip records](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), which are public and
+need no account: it downloads months until their rows reach `--size-gb` and writes them as ONE Parquet file, with
+twelve columns renamed and cast to fixed types. A month is about 50 MB and 3 million trips, so 1 GB is 16 months and
+about 54 million rows. Past 24 months of data (about 1.2 GB) the months repeat: the rows are real, but the file then
+holds each trip more than once, and the manifest says how many passes it took. Run it outside the OpenLakeForge
+environment, which has no pyarrow:
+
+```bash
+uv run --no-project scripts/prepare_taxi_parquet.py --size-gb 1 --output .tmp/taxi/trips.parquet
+```
+
+It writes `trips.json` beside the file: the row count, size, SHA-256, row groups and the aggregates (total amount and
+distance, and trips and amount per payment type) that Gold must reproduce. They are computed from the file while it
+is written, never from the platform.
+
+```bash
+PYTHONPATH=~/src/openlakeforge-bench uv run --project tools/olf --locked python -m olf_bench parquet --data .tmp/taxi/trips.parquet
+```
+
+`parquet-project` writes the project without running it. It has one Parquet source whose loader uploads the file as it
+is (the row count comes from the footer), one Floe contract with every column nullable so that no row is rejected, and
+one Gold product with two marts. The file ships in the project-code image, as scenario B ships its CSV fixtures. After
+each run, Silver must hold exactly the footer's rows, Gold's trip counts must match exactly, and its sums must match to
+a relative 1e-9 (Trino and the script add doubles in different orders). A gap is a failure, never a tolerance. Silver
+has no content checksum here: at tens of millions of rows the sums are the content check.
+
 ## Run on GitHub
 
 The [benchmark workflow](.github/workflows/benchmark.yml) runs scenarios A and
 B on one GitHub-hosted runner (4 vCPU, 16 GB, cgroup v2), the host the
-platform's local sizing is written for, and scenarios C and D on one
+platform's local sizing is written for, and scenarios C, D and E on one
 runner each. Start it from the Actions tab, or:
 
 ```bash
@@ -127,11 +159,14 @@ gh workflow run benchmark.yml -R OpenLakeForge/openlakeforge-bench -f openlakefo
 | Input | Default | Meaning |
 | --- | --- | --- |
 | `openlakeforge_ref` | `main` | OpenLakeForge branch, tag or commit to measure |
+| `openlakeforge_patch` | empty | A file in `patches/` applied to the OpenLakeForge checkout before it is measured, to measure a candidate fix without a branch in OpenLakeForge; pin `openlakeforge_ref` to the commit the patch was made against |
 | `etl_scales` | `100 10000` | Fixture replica counts for scenario B, run in order; each reloads at +10%. Empty skips scenario B |
 | `idle_seconds` | `300` | Scenario A's steady-state window |
 | `footprint_and_etl` | `true` | Run scenarios A and B |
-| `many_tables` | `100` | Table counts for scenario C, run in order on one cluster; empty skips scenario C |
+| `many_tables` | `100` | Table counts for scenario C, run in order on one cluster; `none` skips scenario C (the API turns an empty value into the default) |
 | `many_tables_domains` | `4` | Domains, and product jobs, each scenario C count is spread over. Keep a domain's share at about 50 tables or fewer: every product's `mart_table_rows` reads all of its domain's tables in one query, and at 75 tables Trino refuses it (`QUERY_HAS_TOO_MANY_STAGES`, 152 stages against its default maximum of 150) |
+| `parquet_sizes` | empty | Sizes in GB of the Parquet file scenario E loads, run in order on one cluster, such as `"1 2.5"`; empty skips scenario E. Each size is built on the runner from the NYC taxi records |
+| `parquet_compression` | `snappy` | Compression of that file: `snappy`, `zstd`, `gzip` or `none` |
 | `incremental_project` | empty | Project scenario D installs and loads, such as `OpenLakeForge/acme-lakehouse`; empty skips scenario D |
 | `incremental_project_ref` | `main` | Its branch, tag or commit |
 | `incremental_runs` | `5` | Scenario D's incremental runs of `rna_catalog` |
@@ -182,6 +217,7 @@ Docker version, and any kind-config or image override in effect.
 - Every Silver entity in the reference project uses `incremental_mode: none`
   with `overwrite`, so the delta step is a full reload at a larger size, not
   an incremental merge.
+- Scenario E's data is the NYC TLC trip records, not a seeded fixture. Past 24 months of data (about 1.2 GB) the months repeat, so a larger file holds each trip more than once. Its Silver contract has no primary key, and Silver has no content checksum, only row counts and Gold's sums.
 - CPU and memory are cluster totals per window, not per pod: a layer's peak
   includes everything else the cluster did at the same time.
 - Scenario D covers one kill-and-retry case, a run terminated during Bronze.

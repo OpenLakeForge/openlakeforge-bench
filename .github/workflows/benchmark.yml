@@ -12,6 +12,10 @@ on:
         description: OpenLakeForge branch, tag or commit to measure
         default: main
         required: true
+      openlakeforge_patch:
+        description: File name in patches/ to apply to the OpenLakeForge checkout before measuring it; empty applies none
+        default: ""
+        required: false
       etl_scales:
         description: Space-separated fixture replica counts for scenario B; empty skips it
         default: "100 10000"
@@ -30,12 +34,22 @@ on:
         options: [slim, full]
         default: slim
       many_tables:
-        description: Space-separated table counts for scenario C, run in order on one cluster; empty skips it
+        description: Space-separated table counts for scenario C, run in order on one cluster; none skips it (the API turns an empty value into the default)
         default: "100"
         required: false
       many_tables_domains:
         description: Domains, and product jobs, scenario C spreads each table count over
         default: "4"
+        required: false
+      parquet_sizes:
+        description: Space-separated sizes in GB of the Parquet file scenario E loads, run in order on one cluster; empty skips it
+        default: ""
+        required: false
+      parquet_compression:
+        description: Compression of scenario E's Parquet file (snappy, zstd, gzip or none)
+        type: choice
+        options: [snappy, zstd, gzip, none]
+        default: snappy
         required: false
       # Empty by default: the workflow API replaces an empty input with its
       # default, so a default here could not be switched off from the API.
@@ -84,6 +98,17 @@ jobs:
           repository: OpenLakeForge/openlakeforge
           ref: ${{ inputs.openlakeforge_ref }}
           path: openlakeforge
+
+      # A candidate fix measured on the same runner, without a branch in OpenLakeForge. The result's
+      # environment records the files this changes.
+      - name: Apply the OpenLakeForge patch
+        if: ${{ inputs.openlakeforge_patch != '' }}
+        env:
+          PATCH: ${{ inputs.openlakeforge_patch }}
+        run: |
+          [[ "$PATCH" =~ ^[A-Za-z0-9._-]+\.patch$ ]] || { echo "::error::not a patch file name: $PATCH"; exit 1; }
+          git apply --index "$GITHUB_WORKSPACE/bench/patches/$PATCH"
+          git diff --cached --stat
 
       # kind keeps a copy of every image in each of its three nodes: Slim alone
       # held about 20 GB, more than a fresh runner has free.
@@ -189,7 +214,7 @@ jobs:
   # its own DEV-only Slim profile; each further table count redeploys onto it.
   many_tables:
     name: Scenario C with ${{ inputs.many_tables }} tables over ${{ inputs.many_tables_domains }} domains
-    if: ${{ inputs.many_tables != '' }}
+    if: ${{ inputs.many_tables != '' && inputs.many_tables != 'none' }}
     runs-on: ubuntu-latest
     timeout-minutes: 300
     env:
@@ -211,6 +236,17 @@ jobs:
           repository: OpenLakeForge/openlakeforge
           ref: ${{ inputs.openlakeforge_ref }}
           path: openlakeforge
+
+      # A candidate fix measured on the same runner, without a branch in OpenLakeForge. The result's
+      # environment records the files this changes.
+      - name: Apply the OpenLakeForge patch
+        if: ${{ inputs.openlakeforge_patch != '' }}
+        env:
+          PATCH: ${{ inputs.openlakeforge_patch }}
+        run: |
+          [[ "$PATCH" =~ ^[A-Za-z0-9._-]+\.patch$ ]] || { echo "::error::not a patch file name: $PATCH"; exit 1; }
+          git apply --index "$GITHUB_WORKSPACE/bench/patches/$PATCH"
+          git diff --cached --stat
 
       - name: Free disk space
         working-directory: ${{ github.workspace }}
@@ -296,6 +332,140 @@ jobs:
           if-no-files-found: warn
           retention-days: 90
 
+  # Scenario E: one large Parquet file of NYC taxi trips (scripts/prepare_taxi_parquet.py) goes through Bronze,
+  # Silver and Gold. The first size installs the platform from the generated project's own DEV-only Slim
+  # profile; each further size redeploys onto it.
+  parquet:
+    name: Scenario E with ${{ inputs.parquet_sizes }} GB of Parquet
+    if: ${{ inputs.parquet_sizes != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      RESULTS: ${{ github.workspace }}/results
+      PYTHONPATH: ${{ github.workspace }}/bench
+    defaults:
+      run:
+        working-directory: openlakeforge
+
+    steps:
+      - name: Checkout the harness
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          path: bench
+
+      - name: Checkout OpenLakeForge
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          repository: OpenLakeForge/openlakeforge
+          ref: ${{ inputs.openlakeforge_ref }}
+          path: openlakeforge
+
+      # A candidate fix measured on the same runner, without a branch in OpenLakeForge. The result's
+      # environment records the files this changes.
+      - name: Apply the OpenLakeForge patch
+        if: ${{ inputs.openlakeforge_patch != '' }}
+        env:
+          PATCH: ${{ inputs.openlakeforge_patch }}
+        run: |
+          [[ "$PATCH" =~ ^[A-Za-z0-9._-]+\.patch$ ]] || { echo "::error::not a patch file name: $PATCH"; exit 1; }
+          git apply --index "$GITHUB_WORKSPACE/bench/patches/$PATCH"
+          git diff --cached --stat
+
+      - name: Free disk space
+        working-directory: ${{ github.workspace }}
+        run: |
+          df -h /
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL
+          docker system prune -af
+          df -h /
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
+
+      - name: Cache OpenLakeForge toolchain
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: ~/.openlakeforge
+          key: olf-toolchain-${{ hashFiles('openlakeforge/release/component-catalog.yaml') }}
+
+      - name: Provision OpenLakeForge toolchain
+        run: uv run --project tools/olf --locked olf toolchain install
+
+      - name: Validate inputs
+        env:
+          PARQUET_SIZES: ${{ inputs.parquet_sizes }}
+        run: |
+          for value in $PARQUET_SIZES; do
+            [[ "$value" =~ ^[0-9]+(\.[0-9]+)?$ ]] && [[ "$value" != 0 ]] || { echo "::error::not a size in GB: $value"; exit 1; }
+          done
+
+      # The first size installs the platform; later sizes redeploy onto it. A failed size is recorded and the
+      # next one still runs. The file is built outside the OpenLakeForge environment, which has no pyarrow, and
+      # is deleted after its size so the next one has the disk.
+      - name: "Scenario E: large Parquet"
+        env:
+          PARQUET_SIZES: ${{ inputs.parquet_sizes }}
+          PARQUET_COMPRESSION: ${{ inputs.parquet_compression }}
+        run: |
+          status=0
+          existing=()
+          for size in $PARQUET_SIZES; do
+            data="$RUNNER_TEMP/taxi/trips-${size}gb.parquet"
+            uv run --no-project "$GITHUB_WORKSPACE/bench/scripts/prepare_taxi_parquet.py" \
+              --size-gb "$size" --compression "$PARQUET_COMPRESSION" --output "$data" --cache-dir "$RUNNER_TEMP/taxi-cache" \
+              || { status=1; continue; }
+            mkdir -p "$RESULTS/parquet-${size}gb"
+            cp "${data%.parquet}.json" "$RESULTS/parquet-${size}gb/input.json"
+            uv run --project tools/olf --locked python -m olf_bench parquet \
+              --data "$data" --label "${size}gb" "${existing[@]}" \
+              --output "$RESULTS/parquet-${size}gb" || status=1
+            existing=(--existing)
+            rm -f "$data"
+            rm -rf "$RESULTS/parquet-${size}gb/project-${size}gb"
+            df -h / | tail -1
+          done
+          exit "$status"
+
+      - name: Summarize
+        if: ${{ always() }}
+        run: |
+          shopt -s nullglob
+          files=("$RESULTS"/*/result.json)
+          if (( ${#files[@]} )); then
+            uv run --project tools/olf --locked python -m olf_bench summarize "${files[@]}" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No benchmark result was written." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # olf writes a local cluster's kubeconfig under the deployed project's
+      # .tmp/kubeconfigs/, which for scenarios C and D is not this checkout.
+      - name: Collect kind diagnostics
+        if: ${{ failure() }}
+        run: |
+          KUBECONFIG=$(find "$RESULTS" ./.tmp -path '*/.tmp/kubeconfigs/*.yaml' -print -quit 2>/dev/null || true)
+          export KUBECONFIG
+          echo "kubeconfig: ${KUBECONFIG:-none found}"
+          uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics"
+          # Trino, Polaris and SeaweedFS run in the shared namespace; a Gold or catalog
+          # failure is explained only by their logs.
+          uv run --project tools/olf --locked olf infra diagnostics collect "$RESULTS/diagnostics-olf-system" --namespace olf-system
+
+      - name: Upload results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: benchmark-parquet-${{ github.run_id }}
+          path: |
+            results
+            !results/**/*.parquet
+          if-no-files-found: warn
+          retention-days: 90
+
   # Scenario D: the external project's own profile installs the platform, its
   # stage binds the sources from the variables below, and one product is run
   # again and again. RNAcentral's public read-only login is kept as two
@@ -331,6 +501,17 @@ jobs:
           repository: OpenLakeForge/openlakeforge
           ref: ${{ inputs.openlakeforge_ref }}
           path: openlakeforge
+
+      # A candidate fix measured on the same runner, without a branch in OpenLakeForge. The result's
+      # environment records the files this changes.
+      - name: Apply the OpenLakeForge patch
+        if: ${{ inputs.openlakeforge_patch != '' }}
+        env:
+          PATCH: ${{ inputs.openlakeforge_patch }}
+        run: |
+          [[ "$PATCH" =~ ^[A-Za-z0-9._-]+\.patch$ ]] || { echo "::error::not a patch file name: $PATCH"; exit 1; }
+          git apply --index "$GITHUB_WORKSPACE/bench/patches/$PATCH"
+          git diff --cached --stat
 
       # kind keeps a copy of every image in each of its three nodes: Slim alone
       # held about 20 GB, more than a fresh runner has free.
