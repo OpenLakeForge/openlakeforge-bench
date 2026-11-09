@@ -49,7 +49,7 @@ def _one(path: Path, document: Mapping[str, Any]) -> str:
             )
             + " |"
         )
-    return "\n".join(lines + _breakdown(document)) + "\n"
+    return "\n".join(lines + _breakdown(document) + _postgres(document)) + "\n"
 
 
 def _breakdown(document: Mapping[str, Any]) -> list[str]:
@@ -77,6 +77,49 @@ def _breakdown(document: Mapping[str, Any]) -> list[str]:
         "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
         *rows,
     ]
+
+
+def _postgres(document: Mapping[str, Any]) -> list[str]:
+    """What the metadata PostgreSQL did during each run: fsync latency against CPU starvation."""
+    rows = []
+    for item in document.get("measurements", []):
+        stats = item.get("detail", {}).get("postgres")
+        if not isinstance(stats, Mapping):
+            continue
+        derived = stats.get("derived") or {}
+        cells = [
+            _plain(derived.get("commits_per_second")),
+            _plain(derived.get("wal_syncs_per_second")),
+            _plain(derived.get("mean_wal_sync_ms")),
+            _plain(derived.get("cpu_cores_used")),
+            _percent(derived.get("cpu_pressure_share")),
+            _percent(derived.get("io_pressure_share")),
+            _percent(derived.get("throttled_share")),
+            str(stats.get("synchronous_commit") or ""),
+            _cell(str(stats.get("error") or "")),
+        ]
+        rows.append(f"| {item.get('name', '')} | " + " | ".join(cells) + " |")
+    if not rows:
+        return []
+    return [
+        "",
+        "Metadata PostgreSQL during the run (the Dagster database and the pod's cgroup). Mean WAL fsync needs"
+        " `track_wal_io_timing`. Pressure is the share of the run in which a task waited for CPU or I/O; the pod has no"
+        " CPU limit, so throttling stays 0.",
+        "",
+        "| Run | Commits/s | WAL fsyncs/s | Mean fsync (ms) | CPU cores | CPU pressure | I/O pressure | Throttled"
+        " | synchronous_commit | Error |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |",
+        *rows,
+    ]
+
+
+def _plain(value: float | None) -> str:
+    return "" if value is None else f"{value:g}"
+
+
+def _percent(value: float | None) -> str:
+    return "" if value is None else f"{value * 100:.1f}%"
 
 
 def _whole(value: float | None) -> str:

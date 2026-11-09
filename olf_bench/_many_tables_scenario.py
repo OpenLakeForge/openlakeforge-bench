@@ -28,6 +28,8 @@ from olf.infra.e2e._trino import stage_catalog_name, trino_query
 from olf_bench import _pipeline, _resources
 from olf_bench._dagster import dagster_client
 from olf_bench._many_tables import generate
+from olf_bench._postgres_stats import record_postgres
+from olf_bench._postgres_stats import snapshot as postgres_snapshot
 from olf_bench._record import BenchError, BenchRecord
 from olf_bench._scenarios import DEPLOY_PHASES, Session, Target, _query, olf_command
 from olf_bench._silver_breakdown import FLOE_APP_LABEL, FLOE_RUN_LABEL, record_silver_breakdown
@@ -60,6 +62,7 @@ def many_tables(
         for run in range(1, runs + 1):
             for product in cfg.inventory.products:
                 with record.timed(f"run_{run}_{product.id}", product=product.id) as detail:
+                    postgres_before = postgres_snapshot(cfg)
                     try:
                         with dagster_client(cfg) as client:
                             _pipeline.run_job(
@@ -67,6 +70,7 @@ def many_tables(
                             )
                     finally:
                         # A failed run is where the Floe Jobs matter most: record them before the error propagates.
+                        record_postgres(cfg, detail, postgres_before)
                         _record_run(cfg, sampler, detail)
             with record.timed(f"run_{run}_tables", tables=tables) as detail:
                 detail.update(_check_tables(cfg, expected))

@@ -1,0 +1,12 @@
+usage_usec 52000000
+user_usec 40000000
+system_usec 12000000
+nr_periods 0
+nr_throttled 0
+throttled_usec 0
+nr_bursts 0
+burst_usec 0
+some avg10=3.10 avg60=1.00 avg300=0.20 total=8000000
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=9.10 avg60=4.00 avg300=1.20 total=12000000
+full avg10=2.00 avg60=1.00 avg300=0.20 total=3000000
