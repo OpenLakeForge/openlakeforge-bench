@@ -1,0 +1,38 @@
+diff --git a/images/project-code/Dockerfile b/images/project-code/Dockerfile
+index 1b3533d..ead53fd 100644
+--- a/images/project-code/Dockerfile
++++ b/images/project-code/Dockerfile
+@@ -14,6 +14,8 @@ COPY packages/core ./packages/core
+ # The lock contains the complete transitive set.  Avoid resolver re-evaluation
+ # of upstream metadata ranges (for example SQLAlchemy's greenlet constraint).
+ RUN pip install --no-cache-dir --require-hashes --no-deps -r requirements.lock
++COPY images/project-code/patch_dagster_floe_1211.py /tmp/patch_dagster_floe_1211.py
++RUN python /tmp/patch_dagster_floe_1211.py && rm /tmp/patch_dagster_floe_1211.py
+ RUN pip install --no-cache-dir --no-build-isolation --no-deps ./packages/core
+ 
+ # The optional project layer (lakehouse_code/requirements.txt) goes on top of the
+diff --git a/images/project-code/patch_dagster_floe_1211.py b/images/project-code/patch_dagster_floe_1211.py
+new file mode 100644
+index 0000000..cdb43e2
+--- /dev/null
++++ b/images/project-code/patch_dagster_floe_1211.py
+@@ -0,0 +1,19 @@
++"""Benchmark-only: apply OpenLakeForge/floe#1211 to the installed dagster-floe 0.5.0.
++
++A finished run's Floe output becomes one Dagster log event instead of one per line.
++"""
++
++import importlib.util
++from pathlib import Path
++
++spec = importlib.util.find_spec("floe_dagster")
++assert spec and spec.submodule_search_locations
++path = Path(next(iter(spec.submodule_search_locations))) / "assets.py"
++source = path.read_text()
++old_head = "        for event in events\n    }\n    for line in stdout.splitlines():"
++new_head = "        for event in events\n    }\n    lines: list[str] = []\n    for line in stdout.splitlines():"
++old_tail = '        context.log.info(rendered or f"floe stdout | {stripped}")'
++new_tail = '        lines.append(rendered or f"floe stdout | {stripped}")\n    if lines:\n        context.log.info("\\n".join(lines))'
++assert source.count(old_head) == 1 and source.count(old_tail) == 1, "dagster-floe assets.py is not the 0.5.0 shape"
++path.write_text(source.replace(old_head, new_head).replace(old_tail, new_tail))
++print(f"patched {path}")
