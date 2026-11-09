@@ -27,6 +27,8 @@ from olf_bench import _pipeline, _resources
 from olf_bench._dagster import dagster_client
 from olf_bench._many_tables_scenario import _record_run
 from olf_bench._parquet_project import GOLD_SCHEMA, SILVER_TABLE, generate
+from olf_bench._postgres_stats import record_postgres
+from olf_bench._postgres_stats import snapshot as postgres_snapshot
 from olf_bench._record import BenchError, BenchRecord
 from olf_bench._scenarios import DEPLOY_PHASES, Session, Target, _query, olf_command
 
@@ -72,12 +74,14 @@ def parquet(
         for run in range(1, runs + 1):
             for product in cfg.inventory.products:
                 with record.timed(f"run_{run}_{product.id}", product=product.id) as detail:
+                    postgres_before = postgres_snapshot(cfg)
                     try:
                         with dagster_client(cfg) as client:
                             _pipeline.run_job(
                                 client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds
                             )
                     finally:
+                        record_postgres(cfg, detail, postgres_before)
                         _record_run(cfg, sampler, detail)
             with record.timed(f"run_{run}_tables", rows=aggregates["rows"]) as detail:
                 detail.update(_check_tables(cfg, expected))

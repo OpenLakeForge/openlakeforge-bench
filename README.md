@@ -28,6 +28,17 @@ complete to step end (Dagster polling, log and report reading, event writing).
 Kubernetes timestamps have 1 s resolution, so each segment is good to about
 +/-1 s; a Job or pod that is gone is recorded as null. `summary` prints it.
 
+Every product run also records `postgres`: the deltas, over the run, of the
+metadata PostgreSQL's `pg_stat_wal`, the stage's Dagster database in
+`pg_stat_database` and the container's cgroup v2 `cpu.stat`, `cpu.pressure` and
+`io.pressure`, read with `kubectl exec` into `statefulset/postgresql` of the
+platform namespace, and derived commits/s, WAL fsyncs/s, mean fsync time, CPU
+cores used and the share of the run spent in CPU pressure, I/O pressure and
+throttling. WAL and block times are null unless the server has
+`track_wal_io_timing` and `track_io_timing` on; the harness does not switch
+them on. A reading that fails is recorded as `postgres.error`, never as a
+failed run. `summary` prints it.
+
 Each run writes `result.json`, plus one log per `olf` subprocess, under
 `--output` (default `<project-root>/.tmp/bench/<scenario>-<UTC time>`). A step
 that fails is recorded with its elapsed time and error, the result's `status`
