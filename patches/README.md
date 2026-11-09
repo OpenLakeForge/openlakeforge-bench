@@ -6,4 +6,4 @@ same runner without a branch in OpenLakeForge. Start the workflow with `-f openl
 
 | File | Made against | What it changes |
 | --- | --- | --- |
-| `in-process-executor.patch` | `0639f85` (also applies to `b7a4003`) | Runs a product job's steps in the run's own process instead of one new Python process per step, so the code location is imported once per run, not once per step. |
+| `in-process-executor.patch` | `0639f85` | Runs a product job's steps in the run's own process instead of one new Python process per step, so the code location is imported once per run, not once per step. |
