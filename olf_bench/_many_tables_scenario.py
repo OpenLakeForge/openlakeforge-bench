@@ -30,10 +30,7 @@ from olf_bench._dagster import dagster_client
 from olf_bench._many_tables import generate
 from olf_bench._record import BenchError, BenchRecord
 from olf_bench._scenarios import DEPLOY_PHASES, Session, Target, _query, olf_command
-
-# Floe's kubernetes_job runner labels every Job and pod it starts with these.
-FLOE_APP_LABEL = "app=floe-runner"
-FLOE_RUN_LABEL = "dagster/run-id"
+from olf_bench._silver_breakdown import FLOE_APP_LABEL, FLOE_RUN_LABEL, record_silver_breakdown
 
 
 def many_tables(
@@ -81,6 +78,7 @@ def _record_run(cfg: E2EConfig, sampler: _resources.Sampler, detail: dict[str, A
             layer["cluster_usage"] = sampler.window(layer["start"], layer["end"])
     if "run_id" not in detail:
         return
+    record_silver_breakdown(cfg, detail)
     try:
         pods = _floe_pods(cfg, detail["run_id"])
         detail["floe_jobs"] = floe_jobs(pods)

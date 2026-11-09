@@ -1,0 +1,96 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "name": "floe-sales-aaaa",
+        "namespace": "openlakeforge-dev",
+        "creationTimestamp": "2026-11-08T10:00:03Z",
+        "uid": "u",
+        "labels": {
+          "app": "floe-runner",
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
+          "floe-job": "floe-sales"
+        }
+      },
+      "spec": {
+        "backoffLimit": 1,
+        "ttlSecondsAfterFinished": 3600
+      },
+      "status": {
+        "succeeded": 1,
+        "startTime": "2026-11-08T10:00:03Z",
+        "conditions": [
+          {
+            "type": "Complete",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:15Z"
+          }
+        ],
+        "completionTime": "2026-11-08T10:00:15Z"
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "name": "floe-supply-chain-bbbb",
+        "namespace": "openlakeforge-dev",
+        "creationTimestamp": "2026-11-08T10:00:04Z",
+        "uid": "u",
+        "labels": {
+          "app": "floe-runner",
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
+          "floe-job": "floe-supply-chain"
+        }
+      },
+      "spec": {
+        "backoffLimit": 1,
+        "ttlSecondsAfterFinished": 3600
+      },
+      "status": {
+        "succeeded": 1,
+        "startTime": "2026-11-08T10:00:04Z",
+        "conditions": [
+          {
+            "type": "Complete",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:27Z"
+          }
+        ],
+        "completionTime": "2026-11-08T10:00:27Z"
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "name": "floe-gone-cccc",
+        "namespace": "openlakeforge-dev",
+        "creationTimestamp": "2026-11-08T10:00:05Z",
+        "uid": "u",
+        "labels": {
+          "app": "floe-runner",
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
+          "floe-job": "floe-gone"
+        }
+      },
+      "spec": {
+        "backoffLimit": 1,
+        "ttlSecondsAfterFinished": 3600
+      },
+      "status": {
+        "failed": 1,
+        "conditions": [
+          {
+            "type": "Failed",
+            "status": "True"
+          }
+        ]
+      }
+    }
+  ]
+}
