@@ -219,6 +219,75 @@ def many_tables_project_command(
     log.info(f"{len(expected['tables'])} tables in {expected['domains']} domains written to {output}")
 
 
+@app.command("parquet")
+def parquet_command(
+    data: Path = typer.Option(..., "--data", help="The Parquet file from scripts/prepare_taxi_parquet.py."),  # noqa: B008
+    manifest: Path | None = typer.Option(  # noqa: B008
+        None, "--manifest", help="The file's manifest; defaults to the data file with a .json suffix."
+    ),
+    label: str = typer.Option("", "--label", help="Names the result and project; defaults to the file's size in GB."),
+    runs: int = typer.Option(2, "--runs", min=1, help="Runs of the product job: the first is cold."),
+    existing: bool = typer.Option(
+        False, "--existing", help="Deploy onto the running DEV-only Slim platform instead of installing one."
+    ),
+    sample_interval: float = typer.Option(2.0, "--sample-interval", help="Seconds between node usage samples."),
+    job_timeout_seconds: int = typer.Option(7200, "--job-timeout-seconds", help="Limit for one product job."),
+    output: str = typer.Option("", "--output", help=_OUTPUT_HELP),
+    project_root: str = typer.Option("", "--project-root", help="Project root; defaults to the current directory."),
+    cluster_name: str = typer.Option("openlakeforge-local", "--cluster-name", help="Local kind cluster name."),
+) -> None:
+    """Scenario E: one large Parquet file loaded through Bronze, Silver and Gold; per-layer time, memory and checks."""
+    import json
+
+    import olf_bench as bench
+
+    manifest_path = manifest or data.with_suffix(".json")
+    if not data.is_file() or not manifest_path.is_file():
+        raise typer.Exit(
+            code=fail(f"need both {data} and {manifest_path}; scripts/prepare_taxi_parquet.py writes them.")
+        )
+    facts = json.loads(manifest_path.read_text(encoding="utf-8"))
+    name = label or f"{facts['file_bytes'] / 1e9:.1f}gb"
+    _run(
+        f"parquet-{name}",
+        project_root,
+        cluster_name,
+        output,
+        lambda record, target, session: bench.parquet(
+            record,
+            target,
+            session=session,
+            data=data.resolve(),
+            manifest=facts,
+            label=name,
+            runs=runs,
+            sample_interval=sample_interval,
+            install=not existing,
+        ),
+        job_timeout_seconds=job_timeout_seconds,
+        file_bytes=facts["file_bytes"],
+        rows=facts["aggregates"]["rows"],
+        runs=runs,
+        existing=existing,
+    )
+
+
+@app.command("parquet-project")
+def parquet_project_command(
+    data: Path = typer.Option(..., "--data", help="The Parquet file from scripts/prepare_taxi_parquet.py."),  # noqa: B008
+    output: Path = typer.Option(..., "--output", help="Project root to write; replaced if it exists."),  # noqa: B008
+    manifest: Path | None = typer.Option(None, "--manifest", help="Defaults to the data file with a .json suffix."),  # noqa: B008
+) -> None:
+    """Write scenario E's project around a Parquet file, with expected.json to validate it against."""
+    import json
+
+    from olf_bench._parquet_project import generate
+
+    manifest_path = manifest or data.with_suffix(".json")
+    expected = generate(output, data=data, manifest=json.loads(manifest_path.read_text(encoding="utf-8")))
+    log.info(f"{expected['silver']} written to {output}")
+
+
 @app.command("summarize")
 def summarize_command(
     results: list[Path] = typer.Argument(..., help="result.json files, in the order to show them."),  # noqa: B008

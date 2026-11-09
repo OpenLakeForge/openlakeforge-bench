@@ -11,7 +11,18 @@ from __future__ import annotations
 
 from olf_bench._incremental import incremental
 from olf_bench._many_tables_scenario import many_tables
+from olf_bench._parquet_scenario import parquet
 from olf_bench._record import BenchError, BenchRecord, environment
 from olf_bench._scenarios import Target, etl, footprint
 
-__all__ = ["BenchError", "BenchRecord", "Target", "environment", "etl", "footprint", "incremental", "many_tables"]
+__all__ = [
+    "BenchError",
+    "BenchRecord",
+    "Target",
+    "environment",
+    "etl",
+    "footprint",
+    "incremental",
+    "many_tables",
+    "parquet",
+]
