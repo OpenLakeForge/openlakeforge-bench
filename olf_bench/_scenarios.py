@@ -24,6 +24,7 @@ from olf.infra.e2e._trino import stage_catalog_name, trino_query
 from olf_bench import _dataset, _pipeline, _resources
 from olf_bench._dagster import dagster_client
 from olf_bench._record import BenchError, BenchRecord
+from olf_bench._silver_breakdown import record_silver_breakdown
 
 DEPLOY_PHASES = ("foundation", "prefetch", "platform", "artifacts")
 FIRST_QUERY_TIMEOUT_SECONDS = 600
@@ -113,8 +114,11 @@ def footprint(
             product = cfg.inventory.default_product
             with record.timed("first_pipeline", product=product.id) as detail:
                 start = time.time()
-                with dagster_client(cfg) as client:
-                    _pipeline.run_job(client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds)
+                try:
+                    with dagster_client(cfg) as client:
+                        _pipeline.run_job(client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds)
+                finally:
+                    record_silver_breakdown(cfg, detail)
                 detail["cluster_usage"] = sampler.window(start, time.time())
             # Reading the tables back through Trino is verification, not pipeline time.
             with record.timed("first_pipeline_tables", product=product.id) as detail:
@@ -175,8 +179,14 @@ def _cycle(
         for run in runs:
             for product in cfg.inventory.products:
                 with record.timed(f"{run}_{product.id}", scale=scale, product=product.id) as detail:
-                    with dagster_client(cfg) as client:
-                        _pipeline.run_job(client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds)
+                    try:
+                        with dagster_client(cfg) as client:
+                            _pipeline.run_job(
+                                client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds
+                            )
+                    finally:
+                        # The Floe Jobs are TTL-deleted after an hour: read them now, failed run or not.
+                        record_silver_breakdown(cfg, detail)
                     for layer in detail.get("layers", {}).values():
                         if layer.get("end") is not None:
                             layer["cluster_usage"] = sampler.window(layer["start"], layer["end"])

@@ -1,0 +1,177 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "floe-sales-1a2b3c4d-x1",
+        "namespace": "openlakeforge-dev",
+        "creationTimestamp": "2026-11-08T10:00:03Z",
+        "labels": {
+          "app": "floe-runner",
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
+          "floe-job": "floe-sales-1a2b3c4d",
+          "job-name": "floe-sales-1a2b3c4d",
+          "batch.kubernetes.io/job-name": "floe-sales-1a2b3c4d"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "batch/v1",
+            "kind": "Job",
+            "name": "floe-sales-1a2b3c4d",
+            "controller": true
+          }
+        ]
+      },
+      "status": {
+        "phase": "Succeeded",
+        "conditions": [
+          {
+            "type": "PodReadyToStartContainers",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:09Z"
+          },
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:03Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:03Z"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "name": "floe",
+            "state": {
+              "terminated": {
+                "startedAt": "2026-11-08T10:00:09Z",
+                "finishedAt": "2026-11-08T10:00:14Z",
+                "exitCode": 0,
+                "reason": "Completed"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "floe-supply-chain-5e6f7a8b-r1",
+        "namespace": "openlakeforge-dev",
+        "creationTimestamp": "2026-11-08T10:00:04Z",
+        "labels": {
+          "app": "floe-runner",
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
+          "floe-job": "floe-supply-chain-5e6f7a8b",
+          "job-name": "floe-supply-chain-5e6f7a8b",
+          "batch.kubernetes.io/job-name": "floe-supply-chain-5e6f7a8b"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "batch/v1",
+            "kind": "Job",
+            "name": "floe-supply-chain-5e6f7a8b",
+            "controller": true
+          }
+        ]
+      },
+      "status": {
+        "phase": "Failed",
+        "conditions": [
+          {
+            "type": "PodReadyToStartContainers",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:08Z"
+          },
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:04Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:04Z"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "name": "floe",
+            "state": {
+              "terminated": {
+                "startedAt": "2026-11-08T10:00:08Z",
+                "finishedAt": "2026-11-08T10:00:10Z",
+                "exitCode": 1,
+                "reason": "Error"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "floe-supply-chain-5e6f7a8b-r2",
+        "namespace": "openlakeforge-dev",
+        "creationTimestamp": "2026-11-08T10:00:12Z",
+        "labels": {
+          "app": "floe-runner",
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
+          "floe-job": "floe-supply-chain-5e6f7a8b",
+          "job-name": "floe-supply-chain-5e6f7a8b",
+          "batch.kubernetes.io/job-name": "floe-supply-chain-5e6f7a8b"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "batch/v1",
+            "kind": "Job",
+            "name": "floe-supply-chain-5e6f7a8b",
+            "controller": true
+          }
+        ]
+      },
+      "status": {
+        "phase": "Succeeded",
+        "conditions": [
+          {
+            "type": "PodReadyToStartContainers",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:19Z"
+          },
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:13Z"
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastTransitionTime": "2026-11-08T10:00:13Z"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "name": "floe",
+            "state": {
+              "terminated": {
+                "startedAt": "2026-11-08T10:00:19Z",
+                "finishedAt": "2026-11-08T10:00:26Z",
+                "exitCode": 0,
+                "reason": "Completed"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

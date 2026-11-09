@@ -7,7 +7,10 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 from typing import Any
 
+from olf_bench._silver_breakdown import SEGMENTS
+
 LAYERS = ("bronze", "silver", "gold")
+SEGMENT_COLUMNS = SEGMENTS
 _GIB = 1024**3
 
 
@@ -46,7 +49,38 @@ def _one(path: Path, document: Mapping[str, Any]) -> str:
             )
             + " |"
         )
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines + _breakdown(document)) + "\n"
+
+
+def _breakdown(document: Mapping[str, Any]) -> list[str]:
+    """Where a Silver step's time goes around its Floe Job, for each run that recorded it."""
+    rows = []
+    for item in document.get("measurements", []):
+        breakdown = item.get("detail", {}).get("silver_breakdown")
+        if not isinstance(breakdown, Mapping) or not any(job["segments"] for job in breakdown.get("jobs", [])):
+            continue
+        segments = breakdown["segments"]
+        cells = [
+            f"{_whole(segments[name]['median'])} ({_whole(segments[name]['max'])})" if segments[name]["count"] else ""
+            for name in SEGMENT_COLUMNS
+        ]
+        rows.append(f"| {item.get('name', '')} | {len(breakdown['jobs'])} | " + " | ".join(cells) + " |")
+    if not rows:
+        return []
+    return [
+        "",
+        "Silver step breakdown, median (max) over the run's Floe Jobs. Kubernetes timestamps have 1 s resolution,"
+        " so each figure is good to about +/-1 s.",
+        "",
+        "| Run | Jobs | Step start to Job created | Job created to pod scheduled | Scheduled to container started"
+        " | Container run | Container finished to Job complete | Job complete to step end |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        *rows,
+    ]
+
+
+def _whole(value: float | None) -> str:
+    return "" if value is None else f"{value:.0f} s"
 
 
 def _peak_memory(detail: Mapping[str, Any]) -> int | None:

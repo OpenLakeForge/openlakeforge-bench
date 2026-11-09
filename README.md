@@ -19,6 +19,15 @@ carry.
 | `incremental --project P --product X` | D: incremental loads | An external project installed from its own profile, one product run `--runs` times, then a run killed `--kill-after-seconds` into Bronze and its retry, then a `--full-refresh`: per-run layer times as Silver and Gold grow, rows added per run, key uniqueness, Gold-to-Silver row parity |
 | `parquet --data F` | E: large Parquet | One Parquet file of NYC taxi trips, 1 GB and up, through Bronze, Silver and Gold: per-layer time and cluster CPU/RAM, the Floe Job's start, run time and exit code (an OOM kill is a result), the Silver table's rows against the file's footer, and Gold's totals against aggregates computed from the file |
 
+Every product run also records `silver_breakdown`: for each Floe Kubernetes Job
+of the run (read from the Kubernetes API right after the run, before the 3600 s
+TTL deletes it), the Job, pod and container timestamps and the Silver step split
+into step start to Job created, Job created to pod scheduled, scheduled to
+container started, container run, container finished to Job complete, and Job
+complete to step end (Dagster polling, log and report reading, event writing).
+Kubernetes timestamps have 1 s resolution, so each segment is good to about
++/-1 s; a Job or pod that is gone is recorded as null. `summary` prints it.
+
 Each run writes `result.json`, plus one log per `olf` subprocess, under
 `--output` (default `<project-root>/.tmp/bench/<scenario>-<UTC time>`). A step
 that fails is recorded with its elapsed time and error, the result's `status`

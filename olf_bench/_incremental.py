@@ -34,6 +34,7 @@ from olf_bench import _pipeline, _resources
 from olf_bench._dagster import dagster_client
 from olf_bench._record import BenchError, BenchRecord, _output
 from olf_bench._scenarios import DEPLOY_PHASES, Session, Target, _gold_facts, _query, olf_command
+from olf_bench._silver_breakdown import record_silver_breakdown
 
 TERMINAL_STATUSES = frozenset({"SUCCESS", "FAILURE", "CANCELED"})
 KILL_POLL_SECONDS = 2.0
@@ -237,8 +238,13 @@ def _run(
     tags: Mapping[str, str] | None = None,
 ) -> None:
     with record.timed(name, product=product.id) as detail:
-        with dagster_client(cfg) as client:
-            _pipeline.run_job(client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds, tags=tags)
+        try:
+            with dagster_client(cfg) as client:
+                _pipeline.run_job(
+                    client, product.job_name, detail, timeout_seconds=target.job_timeout_seconds, tags=tags
+                )
+        finally:
+            record_silver_breakdown(cfg, detail)
         for layer in detail.get("layers", {}).values():
             if layer.get("end") is not None:
                 layer["cluster_usage"] = sampler.window(layer["start"], layer["end"])
