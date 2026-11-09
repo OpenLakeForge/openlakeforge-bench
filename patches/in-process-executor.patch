@@ -1,0 +1,41 @@
+diff --git a/packages/runtime/openlakeforge_runtime/product_dagster.py b/packages/runtime/openlakeforge_runtime/product_dagster.py
+index 465d5ed..9dbc469 100644
+--- a/packages/runtime/openlakeforge_runtime/product_dagster.py
++++ b/packages/runtime/openlakeforge_runtime/product_dagster.py
+@@ -20,6 +20,7 @@ from dagster import (
+     Output,
+     ScheduleDefinition,
+     define_asset_job,
++    in_process_executor,
+     job,
+     multi_asset,
+     op,
+@@ -439,6 +440,16 @@ def build_product_definitions(spec: ProductDefinitionSpec) -> Definitions:
+         dagster_dbt_translator=ProductDbtTranslator(),
+     )(_dbt_gold_assets)
+ 
++    # The steps run one after another (Bronze, Silver, Gold). The default multiprocess executor starts a fresh
++    # Python process for each, and each one re-imports the whole code location (dagster-dbt, dlt, dbt and the
++    # project, about 5 s) before its first line runs. Silver's heavy work is a separate Kubernetes Job and
++    # Gold's is dbt's, so nothing here gains from a process of its own. The manifest's concurrency limit is a
++    # multiprocess setting; with one Floe Job per domain it has no step to limit, and the in-process executor
++    # rejects it.
++    run_config = build_job_run_config_from_manifest(
++        config_path=str(FLOE_PROJECT), profile_path=_floe_profile(), manifest_name=_FLOE_MANIFEST_NAME
++    )
++    run_config = {key: value for key, value in (run_config or {}).items() if key != "execution"} or None
+     product_pipeline = define_asset_job(
+         name=spec.job_name,
+         selection=(
+@@ -448,9 +459,8 @@ def build_product_definitions(spec: ProductDefinitionSpec) -> Definitions:
+                 *[AssetKey([spec.product, asset_name]) for asset_name in inputs.gold_assets],
+             ).required_multi_asset_neighbors()
+         ),
+-        config=build_job_run_config_from_manifest(
+-            config_path=str(FLOE_PROJECT), profile_path=_floe_profile(), manifest_name=_FLOE_MANIFEST_NAME
+-        ),
++        config=run_config,
++        executor_def=in_process_executor,
+         tags=_bronze_source_binding_tags(inputs) or None,
+     )
+ 

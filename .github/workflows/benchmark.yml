@@ -12,6 +12,10 @@ on:
         description: OpenLakeForge branch, tag or commit to measure
         default: main
         required: true
+      openlakeforge_patch:
+        description: File name in patches/ to apply to the OpenLakeForge checkout before measuring it; empty applies none
+        default: ""
+        required: false
       etl_scales:
         description: Space-separated fixture replica counts for scenario B; empty skips it
         default: "100 10000"
@@ -84,6 +88,17 @@ jobs:
           repository: OpenLakeForge/openlakeforge
           ref: ${{ inputs.openlakeforge_ref }}
           path: openlakeforge
+
+      # A candidate fix measured on the same runner, without a branch in OpenLakeForge. The result's
+      # environment records the files this changes.
+      - name: Apply the OpenLakeForge patch
+        if: ${{ inputs.openlakeforge_patch != '' }}
+        env:
+          PATCH: ${{ inputs.openlakeforge_patch }}
+        run: |
+          [[ "$PATCH" =~ ^[A-Za-z0-9._-]+\.patch$ ]] || { echo "::error::not a patch file name: $PATCH"; exit 1; }
+          git apply --index "$GITHUB_WORKSPACE/bench/patches/$PATCH"
+          git diff --cached --stat
 
       # kind keeps a copy of every image in each of its three nodes: Slim alone
       # held about 20 GB, more than a fresh runner has free.
@@ -212,6 +227,17 @@ jobs:
           ref: ${{ inputs.openlakeforge_ref }}
           path: openlakeforge
 
+      # A candidate fix measured on the same runner, without a branch in OpenLakeForge. The result's
+      # environment records the files this changes.
+      - name: Apply the OpenLakeForge patch
+        if: ${{ inputs.openlakeforge_patch != '' }}
+        env:
+          PATCH: ${{ inputs.openlakeforge_patch }}
+        run: |
+          [[ "$PATCH" =~ ^[A-Za-z0-9._-]+\.patch$ ]] || { echo "::error::not a patch file name: $PATCH"; exit 1; }
+          git apply --index "$GITHUB_WORKSPACE/bench/patches/$PATCH"
+          git diff --cached --stat
+
       - name: Free disk space
         working-directory: ${{ github.workspace }}
         run: |
@@ -331,6 +357,17 @@ jobs:
           repository: OpenLakeForge/openlakeforge
           ref: ${{ inputs.openlakeforge_ref }}
           path: openlakeforge
+
+      # A candidate fix measured on the same runner, without a branch in OpenLakeForge. The result's
+      # environment records the files this changes.
+      - name: Apply the OpenLakeForge patch
+        if: ${{ inputs.openlakeforge_patch != '' }}
+        env:
+          PATCH: ${{ inputs.openlakeforge_patch }}
+        run: |
+          [[ "$PATCH" =~ ^[A-Za-z0-9._-]+\.patch$ ]] || { echo "::error::not a patch file name: $PATCH"; exit 1; }
+          git apply --index "$GITHUB_WORKSPACE/bench/patches/$PATCH"
+          git diff --cached --stat
 
       # kind keeps a copy of every image in each of its three nodes: Slim alone
       # held about 20 GB, more than a fresh runner has free.
