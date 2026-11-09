@@ -148,7 +148,10 @@ def generate(output: Path, *, tables: int, domains: int, rows: int, seed: int = 
         gold = code / "gold" / product
         _write(gold / "__init__.py", "")
         _write(gold / "dbt" / "dbt_project.yml", _dbt_project(domain, product))
-        _write(gold / "dbt" / "packages.yml", "packages:\n  - local: ../../../../libs/dbt/openlakeforge_dbt\n")
+        _write(
+            gold / "dbt" / "packages.yml",
+            "packages:\n  - local: \"{{ env_var('OPENLAKEFORGE_DBT_PACKAGES_DIR') }}/openlakeforge_dbt\"\n",
+        )
         _write(gold / "dbt" / "models" / "sources.yml", _dbt_sources(domain, members))
         _write(gold / "dbt" / "models" / "gold" / "schema.yml", _DBT_SCHEMA)
         _write(gold / "dbt" / "models" / "gold" / "mart_table_rows.sql", _mart(members))
@@ -189,34 +192,30 @@ spec:
     dev:
       enabled: true
   access:
-    issuer: none
+    tls: none
 """
 
 
 def _governance(domains: list[str]) -> str:
-    lines = ["apiVersion: openlakeforge.io/v1beta1", "kind: Governance", "domains:"]
+    lines = ["apiVersion: openlakeforge.io/v1beta2", "kind: Governance", "domains:"]
     for domain in domains:
         lines += [
             f"  - name: {domain}",
             f"    displayName: Synthetic {domain.removeprefix('synth_')}",
             "    description: Generated domain for the many-table benchmark.",
             "    status: active",
-        ]
-    lines.append("products:")
-    for domain in domains:
-        lines += [
-            f"  - id: {product_name(domain)}",
-            f"    domain: {domain}",
-            f"    displayName: Synthetic profile {domain.removeprefix('synth_')}",
-            "    description: Row count of every table in the domain.",
-            "    status: active",
+            "    products:",
+            f"      - id: {product_name(domain)}",
+            f"        displayName: Synthetic profile {domain.removeprefix('synth_')}",
+            "        description: Row count of every table in the domain.",
+            "        status: active",
         ]
     return "\n".join(lines) + "\n"
 
 
 def _source(source: str, tables: list[Table]) -> str:
     lines = [
-        "apiVersion: openlakeforge.io/v1alpha3",
+        "apiVersion: openlakeforge.io/v1beta1",
         "kind: Source",
         f"name: {source}",
         f"displayName: Synthetic feed {source.removeprefix('feed_')}",
@@ -237,7 +236,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from libs.bronze_csv import BronzeLoadResult, load_entities_to_bronze
+from openlakeforge_runtime.bronze_csv import BronzeLoadResult, load_entities_to_bronze
 
 ENTITIES = (
 {names})
@@ -383,7 +382,7 @@ def _pipeline(domain: str, product: str, tables: list[Table]) -> str:
     inputs = f"{product.upper()}_SILVER_INPUTS"
     return f'''from __future__ import annotations
 
-from libs.product_dagster import ProductDefinitionSpec, build_product_definitions
+from openlakeforge_runtime.product_dagster import ProductDefinitionSpec, build_product_definitions
 
 {inputs} = (
 {names})
@@ -414,7 +413,13 @@ from dagster import Definitions
 from openlakeforge_core import LakehouseInventory, load_lakehouse_inventory
 
 import lakehouse_code.pipelines.dagster as dagster_pipelines
-from libs.product_dagster import SourceDefinitionSpec, build_silver_definitions, build_source_definitions
+from openlakeforge_runtime.product_dagster import (
+    SourceDefinitionSpec,
+    build_gold_maintenance_definitions,
+    build_maintenance_definitions,
+    build_silver_definitions,
+    build_source_definitions,
+)
 
 _LAKEHOUSE_CODE_ROOT = Path(__file__).resolve().parent
 
@@ -450,5 +455,11 @@ def _source_definitions(inventory: LakehouseInventory) -> list[Definitions]:
 
 
 _inventory = load_lakehouse_inventory(_LAKEHOUSE_CODE_ROOT)
-defs = Definitions.merge(*_source_definitions(_inventory), build_silver_definitions(), *_product_definitions())
+defs = Definitions.merge(
+    *_source_definitions(_inventory),
+    build_silver_definitions(),
+    build_maintenance_definitions(),
+    build_gold_maintenance_definitions(),
+    *_product_definitions(),
+)
 '''

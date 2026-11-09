@@ -14,9 +14,9 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "a825272fc13e2b14b6dc03619323540fb65d6cc1", subdirectory = "tools/olf" }
-openlakeforge-core = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "a825272fc13e2b14b6dc03619323540fb65d6cc1", subdirectory = "packages/core" }
-openlakeforge-lakehouse-services = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "a825272fc13e2b14b6dc03619323540fb65d6cc1", subdirectory = "packages/lakehouse-services" }
+openlakeforge = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "0639f85361e890ab80c3ceae5e77710f71c1f1fa", subdirectory = "tools/olf" }
+openlakeforge-core = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "0639f85361e890ab80c3ceae5e77710f71c1f1fa", subdirectory = "packages/core" }
+openlakeforge-lakehouse-services = { git = "https://github.com/OpenLakeForge/openlakeforge", rev = "0639f85361e890ab80c3ceae5e77710f71c1f1fa", subdirectory = "packages/lakehouse-services" }
 
 [project.scripts]
 olf-bench = "olf_bench.cli:main"
