@@ -1,8 +1,8 @@
 """The Silver step breakdown, derived from recorded Kubernetes Job and pod JSON.
 
 `fixtures/k8s` is shaped like `kubectl get jobs|pods -l app=floe-runner,dagster/run-id=<id> -o json`
-for one run of two domains: `floe-sales` ran once, `floe-supply-chain` failed once and was retried,
-and `floe-gone` has no pod left.
+for one run of two domains: `floe-sales-*` ran once, `floe-supply-chain-*` failed once and was retried,
+and `floe-gone-*` has no pod left.
 """
 
 from __future__ import annotations
@@ -43,7 +43,7 @@ def _by_job(result: dict[str, Any]) -> dict[str, dict[str, Any]]:
 def test_a_single_pod_job_is_split_into_the_steps_segments() -> None:
     result = breakdown.silver_breakdown(STEPS, _load("floe-jobs.json"), _load("floe-pods.json"))
 
-    sales = _by_job(result)["floe-sales"]
+    sales = _by_job(result)["floe-sales-1a2b3c4d"]
 
     assert sales["step"] == "floe_proj__sales__default_ab12"
     assert sales["segments"] == {
@@ -64,11 +64,11 @@ def test_a_single_pod_job_is_split_into_the_steps_segments() -> None:
 
 def test_a_retried_job_is_measured_on_its_last_pod() -> None:
     supply = _by_job(breakdown.silver_breakdown(STEPS, _load("floe-jobs.json"), _load("floe-pods.json")))[
-        "floe-supply-chain"
+        "floe-supply-chain-5e6f7a8b"
     ]
 
     assert supply["pods"] == 2
-    assert supply["pod_name"] == "floe-supply-chain-bbbb-r2"
+    assert supply["pod_name"] == "floe-supply-chain-5e6f7a8b-r2"
     # Created 10:00:04, rescheduled 10:00:13, started 10:00:19, finished 10:00:26, Job complete 10:00:27.
     assert supply["segments"]["job_to_pod_scheduled"] == 9.0
     assert supply["segments"]["scheduled_to_container_started"] == 6.0
@@ -80,8 +80,8 @@ def test_concurrent_steps_are_told_apart_by_the_domain_in_the_step_key() -> None
     result = breakdown.silver_breakdown(STEPS, _load("floe-jobs.json"), _load("floe-pods.json"))
 
     # Both steps were running when each Job was created; the names decide, so neither is ambiguous.
-    assert [job["step_ambiguous"] for job in result["jobs"] if job["job"] != "floe-gone"] == [False, False]
-    assert _by_job(result)["floe-supply-chain"]["step"] == "floe_proj__supply_chain__default_cd34"
+    assert [job["step_ambiguous"] for job in result["jobs"] if job["job"] != "floe-gone-9c0d1e2f"] == [False, False]
+    assert _by_job(result)["floe-supply-chain-5e6f7a8b"]["step"] == "floe_proj__supply_chain__default_cd34"
 
 
 def test_concurrent_steps_that_the_names_cannot_separate_are_flagged() -> None:
@@ -89,12 +89,14 @@ def test_concurrent_steps_that_the_names_cannot_separate_are_flagged() -> None:
 
     result = breakdown.silver_breakdown(steps, _load("floe-jobs.json"), _load("floe-pods.json"))
 
-    assert _by_job(result)["floe-sales"]["step"] == "floe_b"  # the later start
-    assert _by_job(result)["floe-sales"]["step_ambiguous"] is True
+    assert _by_job(result)["floe-sales-1a2b3c4d"]["step"] == "floe_b"  # the later start
+    assert _by_job(result)["floe-sales-1a2b3c4d"]["step_ambiguous"] is True
 
 
 def test_a_job_whose_pod_and_completion_are_gone_records_null_not_an_error() -> None:
-    gone = _by_job(breakdown.silver_breakdown(STEPS, _load("floe-jobs.json"), _load("floe-pods.json")))["floe-gone"]
+    gone = _by_job(breakdown.silver_breakdown(STEPS, _load("floe-jobs.json"), _load("floe-pods.json")))[
+        "floe-gone-9c0d1e2f"
+    ]
 
     assert gone["pods"] == 0
     assert gone["pod_name"] is None
@@ -118,9 +120,9 @@ def test_a_run_with_no_jobs_or_no_silver_step_still_derives() -> None:
     assert empty["segments"]["container_run"]["count"] == 0
 
     stepless = breakdown.silver_breakdown([], _load("floe-jobs.json"), _load("floe-pods.json"))
-    assert _by_job(stepless)["floe-sales"]["step"] is None
-    assert _by_job(stepless)["floe-sales"]["segments"]["step_to_job_created"] is None
-    assert _by_job(stepless)["floe-sales"]["segments"]["container_run"] == 5.0
+    assert _by_job(stepless)["floe-sales-1a2b3c4d"]["step"] is None
+    assert _by_job(stepless)["floe-sales-1a2b3c4d"]["segments"]["step_to_job_created"] is None
+    assert _by_job(stepless)["floe-sales-1a2b3c4d"]["segments"]["container_run"] == 5.0
 
 
 def test_recording_stores_the_breakdown_or_the_error(monkeypatch: pytest.MonkeyPatch) -> None:

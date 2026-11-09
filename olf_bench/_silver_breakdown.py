@@ -28,6 +28,7 @@ not carry, is recorded as null and never fails the benchmark.
 from __future__ import annotations
 
 import json
+import re
 import statistics
 from collections.abc import Iterable, Mapping, Sequence
 from datetime import datetime
@@ -74,7 +75,7 @@ def silver_breakdown(
     silver = [step for step in steps if step.get("layer") == "silver" and step.get("start") is not None]
     pods_by_job = _pods_by_job(pods)
     rows = [_job_row(job, pods_by_job.get(job["metadata"]["name"], []), silver) for job in _items(jobs)]
-    rows.sort(key=lambda row: (row["job"] or "", row["job_name"] or ""))
+    rows.sort(key=lambda row: row["job"] or "")
     return {
         "resolution_seconds": RESOLUTION_SECONDS,
         "jobs": rows,
@@ -97,7 +98,7 @@ def _job_row(
     scheduled: Mapping[str, Any] = next(
         (c for c in status.get("conditions") or [] if c.get("type") == "PodScheduled" and c.get("status") == "True"), {}
     )
-    step, ambiguous = _owning_step(silver, created, (metadata.get("labels") or {}).get("floe-job"))
+    step, ambiguous = _owning_step(silver, created, metadata.get("name"))
     times: dict[str, float | None] = {
         "step_start": step.get("start") if step else None,
         "job_created": created,
@@ -110,8 +111,8 @@ def _job_row(
     times["step_end"] = step.get("end") if step else None
     segments = dict(zip(SEGMENTS, (_span(times[a], times[b]) for a, b in gaps), strict=True))
     return {
-        "job": (metadata.get("labels") or {}).get("floe-job"),
-        "job_name": metadata.get("name"),
+        # The Job carries no `floe-job` label (only its pod template does); its name is `floe-<entity>-<uuid8>`.
+        "job": metadata.get("name"),
         "pod_name": pod_metadata.get("name"),
         "pods": len(pods),
         "step": step.get("step") if step else None,
@@ -131,7 +132,7 @@ def _job_row(
 
 
 def _owning_step(
-    silver: Sequence[Mapping[str, Any]], created: float | None, floe_job: str | None
+    silver: Sequence[Mapping[str, Any]], created: float | None, job_name: str | None
 ) -> tuple[Mapping[str, Any] | None, bool]:
     """The Silver step running when the Job was created; truncation can put the Job up to 1 s before it."""
     if created is None or not silver:
@@ -142,9 +143,9 @@ def _owning_step(
         for step in silver
         if step["start"] - RESOLUTION_SECONDS < created and (step.get("end") is None or created <= step["end"])
     ]
-    if len(running) > 1 and floe_job:
-        # Concurrent steps: a step key names its domain (`floe_<project>__<domain>__...`), as the Job's label does.
-        domain = floe_job.removeprefix("floe-").replace("-", "_")
+    if len(running) > 1 and job_name:
+        # Concurrent steps: a step key names its domain (`floe_<project>__<domain>__...`), as the Job's name does.
+        domain = re.sub(r"-[0-9a-f]{8}$", "", job_name.removeprefix("floe-")).replace("-", "_")
         named = [step for step in running if domain in str(step.get("step", "")).replace("-", "_")]
         if len(named) == 1:
             return named[0], False

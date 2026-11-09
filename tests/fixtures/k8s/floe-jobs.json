@@ -6,14 +6,13 @@
       "apiVersion": "batch/v1",
       "kind": "Job",
       "metadata": {
-        "name": "floe-sales-aaaa",
+        "name": "floe-sales-1a2b3c4d",
         "namespace": "openlakeforge-dev",
         "creationTimestamp": "2026-11-08T10:00:03Z",
         "uid": "u",
         "labels": {
           "app": "floe-runner",
-          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
-          "floe-job": "floe-sales"
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001"
         }
       },
       "spec": {
@@ -37,14 +36,13 @@
       "apiVersion": "batch/v1",
       "kind": "Job",
       "metadata": {
-        "name": "floe-supply-chain-bbbb",
+        "name": "floe-supply-chain-5e6f7a8b",
         "namespace": "openlakeforge-dev",
         "creationTimestamp": "2026-11-08T10:00:04Z",
         "uid": "u",
         "labels": {
           "app": "floe-runner",
-          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
-          "floe-job": "floe-supply-chain"
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001"
         }
       },
       "spec": {
@@ -68,14 +66,13 @@
       "apiVersion": "batch/v1",
       "kind": "Job",
       "metadata": {
-        "name": "floe-gone-cccc",
+        "name": "floe-gone-9c0d1e2f",
         "namespace": "openlakeforge-dev",
         "creationTimestamp": "2026-11-08T10:00:05Z",
         "uid": "u",
         "labels": {
           "app": "floe-runner",
-          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001",
-          "floe-job": "floe-gone"
+          "dagster/run-id": "4f1c9e2a-0000-4000-8000-000000000001"
         }
       },
       "spec": {
